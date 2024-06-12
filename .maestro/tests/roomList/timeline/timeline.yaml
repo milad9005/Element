@@ -1,0 +1,10 @@
+appId: ${MAESTRO_APP_ID}
+---
+# This is the name of one room
+- tapOn: ${MAESTRO_ROOM_NAME}
+- takeScreenshot: build/maestro/500-Timeline
+- runFlow: messages/text.yaml
+- runFlow: messages/location.yaml
+- runFlow: messages/poll.yaml
+- back
+- runFlow: ../../assertions/assertHomeDisplayed.yaml
