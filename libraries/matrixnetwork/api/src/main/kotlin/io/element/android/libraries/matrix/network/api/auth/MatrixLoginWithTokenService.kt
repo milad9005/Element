@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 New Vector Ltd
+ * Copyright (c) 2024 New Vector Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-package io.element.android.appconfig
+package io.element.android.libraries.matrix.network.api.auth
 
-object AuthenticationConfig {
-    const val MATRIX_ORG_URL = "https://matrix.org"
-    const val VERO_CHAT_URL = "https://chat.metapolitan.io"
+interface MatrixLoginWithTokenService {
 
-    const val DEFAULT_HOMESERVER_URL = VERO_CHAT_URL
-    const val SLIDING_SYNC_READ_MORE_URL = "https://github.com/matrix-org/sliding-sync/blob/main/docs/Landing.md"
+    suspend fun login(token: String): Result<MatrixUserLoginWithToken>
+
 }

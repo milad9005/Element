@@ -38,6 +38,7 @@ interface MatrixAuthenticationService {
     fun getHomeserverDetails(): StateFlow<MatrixHomeServerDetails?>
     suspend fun setHomeserver(homeserver: String): Result<Unit>
     suspend fun login(username: String, password: String): Result<SessionId>
+    suspend fun loginWithToken(token: String): Result<SessionId>
 
     /*
      * OIDC part.

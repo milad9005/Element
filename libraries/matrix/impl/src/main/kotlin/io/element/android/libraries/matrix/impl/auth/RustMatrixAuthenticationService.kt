@@ -37,10 +37,13 @@ import io.element.android.libraries.matrix.impl.exception.mapClientException
 import io.element.android.libraries.matrix.impl.keys.PassphraseGenerator
 import io.element.android.libraries.matrix.impl.mapper.toSessionData
 import io.element.android.libraries.matrix.impl.proxy.ProxyProvider
+import io.element.android.libraries.matrix.network.api.auth.MatrixLoginWithTokenService
 import io.element.android.libraries.network.useragent.UserAgentProvider
 import io.element.android.libraries.sessionstorage.api.LoggedInState
 import io.element.android.libraries.sessionstorage.api.LoginType
+import io.element.android.libraries.sessionstorage.api.SessionData
 import io.element.android.libraries.sessionstorage.api.SessionStore
+import io.element.android.libraries.vero.api.auth.VeroAuthenticationService
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -54,6 +57,7 @@ import org.matrix.rustcomponents.sdk.QrLoginProgressListener
 import org.matrix.rustcomponents.sdk.use
 import timber.log.Timber
 import java.io.File
+import java.util.Date
 import java.util.UUID
 import javax.inject.Inject
 import org.matrix.rustcomponents.sdk.AuthenticationService as RustAuthenticationService
@@ -70,6 +74,8 @@ class RustMatrixAuthenticationService @Inject constructor(
     userCertificatesProvider: UserCertificatesProvider,
     proxyProvider: ProxyProvider,
     private val oidcConfigurationProvider: OidcConfigurationProvider,
+    private val veroAuthenticationService: VeroAuthenticationService,
+    private val matrixLoginWithTokenService: MatrixLoginWithTokenService,
 ) : MatrixAuthenticationService {
     // Passphrase which will be used for new sessions. Existing sessions will use the passphrase
     // stored in the SessionData.
@@ -154,6 +160,32 @@ class RustMatrixAuthenticationService @Inject constructor(
                         sessionPath = sessionPath,
                     )
                 }
+                sessionStore.storeData(sessionData)
+                SessionId(sessionData.userId)
+            }.mapFailure { failure ->
+                failure.mapAuthenticationException()
+            }
+        }
+
+    override suspend fun loginWithToken(token: String): Result<SessionId> =
+        withContext(coroutineDispatchers.io) {
+            runCatching {
+                val matrixUserLoginWithToken = matrixLoginWithTokenService.login(token).getOrThrow()
+                val sessionData = SessionData(
+                    userId = matrixUserLoginWithToken.userId,
+                    deviceId = matrixUserLoginWithToken.deviceId,
+                    accessToken = matrixUserLoginWithToken.token,
+                    refreshToken = null,
+                    homeserverUrl = "https://${matrixUserLoginWithToken.homeServer}",
+                    oidcData = null,
+                    slidingSyncProxy = null,
+                    loginTimestamp = Date(),
+                    isTokenValid = true,
+                    loginType = LoginType.DIRECT,
+                    passphrase = null,
+                    sessionPath = sessionPath
+                )
+                rustMatrixClientFactory.create(sessionData)
                 sessionStore.storeData(sessionData)
                 SessionId(sessionData.userId)
             }.mapFailure { failure ->
@@ -251,5 +283,5 @@ class RustMatrixAuthenticationService @Inject constructor(
                 }
                 Timber.e(throwable, "Failed to login with QR code")
             }
-    }
+        }
 }

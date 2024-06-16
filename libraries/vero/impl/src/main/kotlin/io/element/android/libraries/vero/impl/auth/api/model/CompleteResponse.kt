@@ -16,21 +16,22 @@
 
 package io.element.android.libraries.vero.impl.auth.api.model
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
- data class CompleteResponse(
-    val userId: String,
-    val serverProof: String,
-    val veroPass: VeroToken
+data class CompleteResponse(
+    @SerialName("userId") val userId: String,
+    @SerialName("serverProof") val serverProof: String,
+    @SerialName("veroPass") val veroPass: VeroToken
 )
 
 @Serializable
- data class VeroToken(val jwt: String,val refresh: VeroRefreshToken)
+data class VeroToken(@SerialName("jwt") val jwt: String, @SerialName("refresh") val refresh: VeroRefreshToken)
 
 @Serializable
- data class VeroRefreshToken(
-    val tok: String,
-    val exp: String,
-    val did: String
+data class VeroRefreshToken(
+    @SerialName("tok") val tok: String,
+    @SerialName("exp") val exp: Long,
+    @SerialName("did") val did: String
 )
