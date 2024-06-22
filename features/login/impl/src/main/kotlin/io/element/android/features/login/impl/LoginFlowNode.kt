@@ -137,7 +137,7 @@ class LoginFlowNode @AssistedInject constructor(
                 if (inputs.flowType == LoginFlowType.SIGN_IN_QR_CODE) {
                     createNode<QrCodeLoginFlowNode>(buildContext)
                 } else {
-                    resolve(NavTarget.ConfirmAccountProvider, buildContext)
+                    resolve(NavTarget.LoginPassword, buildContext)
                 }
             }
             NavTarget.ConfirmAccountProvider -> {
