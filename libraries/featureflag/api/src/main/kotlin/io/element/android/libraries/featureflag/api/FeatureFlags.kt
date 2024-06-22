@@ -93,7 +93,7 @@ enum class FeatureFlags(
         key = "feature.qrCodeLogin",
         title = "Enable login using QR code",
         description = "Allow the user to login using the QR code flow",
-        defaultValue = true,
+        defaultValue = false,
         isFinished = false,
     ),
     IncomingShare(
