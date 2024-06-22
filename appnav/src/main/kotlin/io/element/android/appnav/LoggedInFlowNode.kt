@@ -140,7 +140,7 @@ class LoggedInFlowNode @AssistedInject constructor(
                     .onEach { ftueState ->
                         when (ftueState) {
                             is FtueState.Unknown -> Unit // Nothing to do
-                            is FtueState.Incomplete -> backstack.safeRoot(NavTarget.Ftue)
+                            is FtueState.Incomplete -> backstack.safeRoot(NavTarget.RoomList)
                             is FtueState.Complete -> backstack.safeRoot(NavTarget.RoomList)
                         }
                     }
