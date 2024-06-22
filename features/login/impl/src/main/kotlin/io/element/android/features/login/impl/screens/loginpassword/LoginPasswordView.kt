@@ -41,6 +41,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.autofill.AutofillType
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
@@ -120,13 +121,14 @@ fun LoginPasswordView(
         ) {
             // Title
             IconTitleSubtitleMolecule(
-                modifier = Modifier.padding(top = 20.dp, start = 16.dp, end = 16.dp),
+                modifier = Modifier
+                    .padding(top = 20.dp, start = 16.dp, end = 16.dp),
                 iconImageVector = Icons.Filled.AccountCircle,
                 title = stringResource(
                     id = R.string.screen_account_provider_signin_title,
                     state.accountProvider.title
                 ),
-                subTitle = stringResource(id = R.string.screen_login_subtitle)
+                subTitle = ""
             )
             Spacer(Modifier.height(40.dp))
             LoginForm(

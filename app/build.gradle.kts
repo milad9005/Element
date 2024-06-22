@@ -46,7 +46,7 @@ android {
     namespace = "io.element.android.x"
 
     defaultConfig {
-        applicationId = "io.element.android.x"
+        applicationId = "io.metapolitan.chat"
         targetSdk = Versions.targetSdk
         versionCode = Versions.versionCode
         versionName = Versions.versionName
@@ -107,7 +107,7 @@ android {
         }
 
         getByName("release") {
-            resValue("string", "app_name", "Element X")
+            resValue("string", "app_name", "Vero chat")
             signingConfig = signingConfigs.getByName("debug")
 
             postprocessing {
