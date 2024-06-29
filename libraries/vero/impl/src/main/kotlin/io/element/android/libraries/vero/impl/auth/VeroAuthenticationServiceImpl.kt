@@ -1,13 +1,11 @@
 package io.element.android.libraries.vero.impl.auth
 
 import com.squareup.anvil.annotations.ContributesBinding
-import io.element.android.appconfig.AuthenticationConfig
-import io.element.android.appconfig.VeroConfiguration
 import io.element.android.libraries.core.extensions.mapFailure
 import io.element.android.libraries.di.AppScope
 import io.element.android.libraries.vero.api.auth.VeroAuthenticationService
 import io.element.android.libraries.vero.api.auth.VeroUser
-import io.element.android.libraries.vero.impl.auth.api.PushGatewayApiFactory
+import io.element.android.libraries.vero.impl.auth.api.VeroAuthenticationAPI
 import io.element.android.libraries.vero.impl.auth.api.model.ChallengeRequest
 import io.element.android.libraries.vero.impl.auth.api.model.ChallengeResponse
 import io.element.android.libraries.vero.impl.auth.api.model.CompleteRequest
@@ -18,11 +16,9 @@ import javax.inject.Inject
 
 @ContributesBinding(AppScope::class)
 class VeroAuthenticationServiceImpl @Inject constructor(
-    private val factory: PushGatewayApiFactory,
+    private val api: VeroAuthenticationAPI,
     private val manager: ClientSecurityManager
 ) : VeroAuthenticationService {
-
-    private val api = factory.create(VeroConfiguration.VERO_AUTH_URL)
 
     /*
      *  todo ->
