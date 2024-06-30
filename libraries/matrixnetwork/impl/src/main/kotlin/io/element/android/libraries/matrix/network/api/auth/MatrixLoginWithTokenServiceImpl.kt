@@ -26,7 +26,7 @@ class MatrixLoginWithTokenServiceImpl @Inject constructor(
     factory: MatrixLoginWithTokenApiFactory
 ) : MatrixLoginWithTokenService {
 
-    private val api = factory.create(AuthenticationConfig.DEFAULT_HOMESERVER_URL)
+    private val api = factory.create(AuthenticationConfig.VERO_CHAT_URL)
 
     override suspend fun login(token: String): Result<MatrixUserLoginWithToken> {
         return runCatching {

@@ -19,13 +19,14 @@ package io.element.android.libraries.usersearch.impl
 import com.squareup.anvil.annotations.ContributesBinding
 import io.element.android.libraries.di.SessionScope
 import io.element.android.libraries.matrix.api.MatrixClient
-import io.element.android.libraries.matrix.api.core.MatrixPatterns
 import io.element.android.libraries.matrix.api.core.UserId
 import io.element.android.libraries.matrix.api.user.MatrixUser
 import io.element.android.libraries.usersearch.api.UserListDataSource
 import io.element.android.libraries.usersearch.api.UserRepository
 import io.element.android.libraries.usersearch.api.UserSearchResult
 import io.element.android.libraries.usersearch.api.UserSearchResultState
+import io.element.android.libraries.vero.api.contact.VeroContact
+import io.element.android.libraries.vero.api.contact.VeroContactService
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -34,24 +35,12 @@ import javax.inject.Inject
 @ContributesBinding(SessionScope::class)
 class MatrixUserRepository @Inject constructor(
     private val client: MatrixClient,
-    private val dataSource: UserListDataSource
+    private val dataSource: UserListDataSource,
+    private val veroContactService: VeroContactService
 ) : UserRepository {
     override fun search(query: String): Flow<UserSearchResultState> = flow {
-        val shouldQueryProfile = MatrixPatterns.isUserId(query) && !client.isMe(UserId(query))
-        val shouldFetchSearchResults = query.length >= MINIMUM_SEARCH_LENGTH
-        // If the search term is a MXID that's not ours, we'll show a 'fake' result for that user, then update it when we get search results.
-        val fakeSearchResult = if (shouldQueryProfile) {
-            UserSearchResult(MatrixUser(UserId(query)))
-        } else {
-            null
-        }
-        if (shouldQueryProfile || shouldFetchSearchResults) {
-            emit(UserSearchResultState(isSearching = shouldFetchSearchResults, results = listOfNotNull(fakeSearchResult)))
-        }
-        if (shouldFetchSearchResults) {
-            val results = fetchSearchResults(query, shouldQueryProfile)
-            emit(results)
-        }
+        val users = veroContactService.getContact(query).map { it.toUserSearchResult() }
+        emit(UserSearchResultState(isSearching = false, results = users))
     }
 
     private suspend fun fetchSearchResults(query: String, shouldQueryProfile: Boolean): UserSearchResultState {
@@ -78,7 +67,17 @@ class MatrixUserRepository @Inject constructor(
 
     companion object {
         private const val DEBOUNCE_TIME_MILLIS = 250L
-        private const val MINIMUM_SEARCH_LENGTH = 3
+        private const val MINIMUM_SEARCH_LENGTH = 0
         private const val MAXIMUM_SEARCH_RESULTS = 10L
     }
+}
+
+private fun VeroContact.toUserSearchResult(): UserSearchResult {
+    return UserSearchResult(
+        MatrixUser(
+            userId = UserId("@$id:matrix.metapolitan.io"),
+            displayName = "$firstname $lastname",
+            avatarUrl = picture
+        )
+    )
 }

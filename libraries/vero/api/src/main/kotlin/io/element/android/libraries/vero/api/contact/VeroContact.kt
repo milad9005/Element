@@ -14,20 +14,15 @@
  * limitations under the License.
  */
 
-package io.element.android.libraries.vero.api.relation
+package io.element.android.libraries.vero.api.contact
 
-/**
- * Vero Contact service
- *
- */
-interface VeroContactService {
+typealias VeroContacts = Collection<VeroContact>
 
-    /**
-     * Get list of vero user contacts aka connections
-     *
-     * @param token vero token from [io.element.android.libraries.vero.api.auth.VeroAuthenticationService.login]
-     * @return list of vero user contacts
-     */
-    suspend fun getContact(token: String): Result<VeroContacts>
-
+interface VeroContact {
+    val id: String
+    val firstname: String
+    val lastname: String
+    val username: String
+    //val loop: String
+    val picture: String?
 }

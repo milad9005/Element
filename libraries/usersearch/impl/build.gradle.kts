@@ -35,6 +35,7 @@ dependencies {
     implementation(projects.libraries.matrix.api)
     api(projects.libraries.usersearch.api)
     implementation(libs.kotlinx.collections.immutable)
+    implementation(project(":libraries:vero:api"))
 
     testImplementation(libs.test.junit)
     testImplementation(libs.coroutines.test)

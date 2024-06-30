@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package io.element.android.libraries.vero.impl.relation.api
+package io.element.android.libraries.vero.impl.contact.api
 
-import io.element.android.libraries.vero.api.relation.VeroContact
+import io.element.android.libraries.vero.api.contact.VeroContact
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

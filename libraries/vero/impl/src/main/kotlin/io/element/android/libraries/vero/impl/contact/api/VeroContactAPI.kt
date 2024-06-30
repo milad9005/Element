@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package io.element.android.libraries.vero.api.relation
+package io.element.android.libraries.vero.impl.contact.api
 
-typealias VeroContacts = Collection<VeroContact>
+import retrofit2.Response
+import retrofit2.http.GET
+import retrofit2.http.Header
 
-interface VeroContact {
-    val id: String
-    val firstname: String
-    val lastname: String
-    val username: String
-    //val loop: String
-    val picture: String?
+interface VeroContactAPI {
+
+    @GET("api/relations/contacts")
+    suspend fun getContact(@Header("Authorization") token: String): Response<List<SerializedVeroContact>>
+
 }

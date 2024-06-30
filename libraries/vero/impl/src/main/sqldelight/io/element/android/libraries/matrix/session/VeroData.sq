@@ -1,0 +1,19 @@
+CREATE TABLE VeroContact (
+    id TEXT NOT NULL PRIMARY KEY,
+    firstname TEXT NOT NULL,
+    lastname TEXT NOT NULL,
+    username TEXT NOT NULL,
+    picture TEXT
+);
+
+selectAll:
+SELECT * FROM VeroContact;
+
+select:
+SELECT * FROM VeroContact WHERE firstname LIKE ?;
+
+insertVeroContact:
+INSERT INTO VeroContact VALUES ?;
+
+deleteAll:
+DELETE FROM VeroContact;

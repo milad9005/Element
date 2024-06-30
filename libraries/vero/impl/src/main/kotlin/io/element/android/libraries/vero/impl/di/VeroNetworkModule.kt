@@ -22,11 +22,11 @@ import dagger.Provides
 import io.element.android.libraries.di.AppScope
 import io.element.android.libraries.vero.impl.auth.api.VeroAuthenticationAPI
 import io.element.android.libraries.vero.impl.network.VeroRetrofit
-import io.element.android.libraries.vero.impl.relation.api.VeroContactAPI
+import io.element.android.libraries.vero.impl.contact.api.VeroContactAPI
 
 @Module
 @ContributesTo(AppScope::class)
-object VeroModule {
+object VeroNetworkModule {
 
     @Provides
     fun providesVeroContactAPI(veroRetrofit: VeroRetrofit): VeroContactAPI {

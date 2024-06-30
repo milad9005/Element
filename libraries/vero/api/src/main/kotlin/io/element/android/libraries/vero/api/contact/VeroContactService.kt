@@ -14,15 +14,13 @@
  * limitations under the License.
  */
 
-package io.element.android.libraries.vero.impl.relation.api
+package io.element.android.libraries.vero.api.contact
 
-import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Header
-
-interface VeroContactAPI {
-
-    @GET("api/relations/contacts")
-    suspend fun getContact(@Header("Authorization") token: String): Response<List<SerializedVeroContact>>
-
+/**
+ * Vero Contact service
+ *
+ */
+interface VeroContactService {
+    suspend fun syncContact(token: String)
+    suspend fun getContact(query: String?): VeroContacts
 }
