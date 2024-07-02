@@ -49,6 +49,7 @@ import io.element.android.libraries.designsystem.theme.aliasScreenTitle
 import io.element.android.libraries.designsystem.theme.components.Icon
 import io.element.android.libraries.designsystem.theme.components.ListSectionHeader
 import io.element.android.libraries.designsystem.theme.components.Scaffold
+import io.element.android.libraries.designsystem.theme.components.SearchBarResultState
 import io.element.android.libraries.designsystem.theme.components.Text
 import io.element.android.libraries.designsystem.theme.components.TopAppBar
 import io.element.android.libraries.matrix.api.core.RoomId
@@ -165,23 +166,25 @@ private fun CreateRoomActionButtonsList(
                 onClick = onInvitePeopleClick,
             )
         }
-        if (state.userListState.recentDirectRooms.isNotEmpty()) {
-            item {
-                ListSectionHeader(
-                    title = stringResource(id = CommonStrings.common_suggestions),
-                    hasDivider = false,
-                )
-            }
-            state.userListState.recentDirectRooms.forEach { recentDirectRoom ->
-                item {
-                    MatrixUserRow(
-                        modifier = Modifier.clickable(
-                            onClick = {
-                                onDmClick(recentDirectRoom.roomId)
-                            }
-                        ),
-                        matrixUser = recentDirectRoom.matrixUser,
-                    )
+        item {
+            ListSectionHeader(
+                title = "Vero connections",
+                hasDivider = false,
+            )
+        }
+        when (val searchResults = state.userListState.searchResults) {
+            is SearchBarResultState.Initial -> {}
+            is SearchBarResultState.NoResultsFound -> {}
+            is SearchBarResultState.Results -> {
+                searchResults.results.forEach {
+                    item {
+                        MatrixUserRow(
+                            modifier = Modifier.clickable {
+                                state.eventSink(CreateRoomRootEvents.StartDM(it.matrixUser))
+                            },
+                            matrixUser = it.matrixUser
+                        )
+                    }
                 }
             }
         }
