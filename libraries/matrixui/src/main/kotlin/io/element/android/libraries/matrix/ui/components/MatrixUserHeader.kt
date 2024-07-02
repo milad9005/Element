@@ -89,7 +89,7 @@ private fun MatrixUserHeaderContent(
                 color = ElementTheme.materialColors.primary,
             )
             // Id
-            if (matrixUser.displayName.isNullOrEmpty().not()) {
+            /*if (matrixUser.displayName.isNullOrEmpty().not()) {
                 Text(
                     text = matrixUser.userId.value,
                     style = ElementTheme.typography.fontBodyMdRegular,
@@ -97,7 +97,7 @@ private fun MatrixUserHeaderContent(
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
-            }
+            }*/
         }
     }
 }
