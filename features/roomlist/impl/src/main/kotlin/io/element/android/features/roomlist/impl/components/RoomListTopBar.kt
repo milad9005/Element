@@ -93,6 +93,7 @@ fun RoomListTopBar(
     scrollBehavior: TopAppBarScrollBehavior,
     displayMenuItems: Boolean,
     displayFilters: Boolean,
+    displaySearchItem: Boolean,
     filtersState: RoomListFiltersState,
     modifier: Modifier = Modifier,
 ) {
@@ -106,6 +107,7 @@ fun RoomListTopBar(
         scrollBehavior = scrollBehavior,
         displayMenuItems = displayMenuItems,
         displayFilters = displayFilters,
+        displaySearchItem = displaySearchItem,
         filtersState = filtersState,
         modifier = modifier,
     )
@@ -123,6 +125,7 @@ private fun DefaultRoomListTopBar(
     onMenuActionClick: (RoomListMenuAction) -> Unit,
     displayMenuItems: Boolean,
     displayFilters: Boolean,
+    displaySearchItem: Boolean,
     filtersState: RoomListFiltersState,
     modifier: Modifier = Modifier,
 ) {
@@ -210,13 +213,15 @@ private fun DefaultRoomListTopBar(
                     },
                     actions = {
                         if (displayMenuItems) {
-                            IconButton(
-                                onClick = onSearchClick,
-                            ) {
-                                Icon(
-                                    imageVector = CompoundIcons.Search(),
-                                    contentDescription = stringResource(CommonStrings.action_search),
-                                )
+                            if (displaySearchItem) {
+                                IconButton(
+                                    onClick = onSearchClick,
+                                ) {
+                                    Icon(
+                                        imageVector = CompoundIcons.Search(),
+                                        contentDescription = stringResource(CommonStrings.action_search),
+                                    )
+                                }
                             }
                             if (RoomListConfig.HAS_DROP_DOWN_MENU) {
                                 var showMenu by remember { mutableStateOf(false) }
@@ -325,10 +330,11 @@ internal fun DefaultRoomListTopBarPreview() = ElementPreview {
         scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState()),
         onOpenSettings = {},
         onSearchClick = {},
+        onMenuActionClick = {},
         displayMenuItems = true,
         displayFilters = true,
         filtersState = aRoomListFiltersState(),
-        onMenuActionClick = {},
+        displaySearchItem = true,
     )
 }
 
@@ -343,9 +349,10 @@ internal fun DefaultRoomListTopBarWithIndicatorPreview() = ElementPreview {
         scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState()),
         onOpenSettings = {},
         onSearchClick = {},
+        onMenuActionClick = {},
         displayMenuItems = true,
         displayFilters = true,
         filtersState = aRoomListFiltersState(),
-        onMenuActionClick = {},
+        displaySearchItem = false,
     )
 }

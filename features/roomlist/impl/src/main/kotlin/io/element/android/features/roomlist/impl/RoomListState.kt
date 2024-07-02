@@ -44,6 +44,7 @@ data class RoomListState(
 ) {
     val displayFilters = contentState is RoomListContentState.Rooms
     val displayActions = contentState !is RoomListContentState.Migration
+    val displaySearchItem = false
 
     sealed interface ContextMenu {
         data object Hidden : ContextMenu
