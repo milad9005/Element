@@ -76,7 +76,7 @@ class LoginPasswordPresenter @Inject constructor(
 
     private fun CoroutineScope.submit(formState: LoginFormState, loggedInState: MutableState<AsyncData<SessionId>>) = launch {
         loggedInState.value = AsyncData.Loading()
-        authenticationService.login(formState.login.trim(), formState.password)
+        authenticationService.login(formState.login.trim().lowercase(), formState.password)
             .onSuccess { sessionId ->
                 // We will not navigate to the WaitList screen, so the login user story is done
                 defaultLoginUserStory.setLoginFlowIsDone(true)
