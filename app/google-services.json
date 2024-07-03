@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "427024122524",
+    "project_id": "vero-chat",
+    "storage_bucket": "vero-chat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:427024122524:android:a39d1aa15455068fac6359",
+        "android_client_info": {
+          "package_name": "io.metapolitan.chat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfkoqDYjT9vqUDSfTvHlbSKf45u11dpMs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:427024122524:android:445795f35bbf6a71ac6359",
+        "android_client_info": {
+          "package_name": "io.metapolitan.chat.debug"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfkoqDYjT9vqUDSfTvHlbSKf45u11dpMs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
