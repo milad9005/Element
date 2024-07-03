@@ -19,10 +19,10 @@ package io.element.android.libraries.vero.api.contact
 typealias VeroContacts = Collection<VeroContact>
 
 interface VeroContact {
-    val id: String
-    val firstname: String
-    val lastname: String
-    val username: String
+    val id: String?
+    val firstname: String?
+    val lastname: String?
+    val username: String?
     //val loop: String
     val picture: String?
 }

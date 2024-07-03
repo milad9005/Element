@@ -24,6 +24,7 @@ import io.element.android.libraries.di.AppScope
 import io.element.android.libraries.di.SingleIn
 import io.element.android.libraries.network.interceptors.FormattedJsonHttpLogger
 import io.element.android.libraries.network.interceptors.UserAgentInterceptor
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -45,10 +46,12 @@ object NetworkModule {
         if (buildMeta.isDebuggable) addInterceptor(providesHttpLoggingInterceptor())
     }.build()
 
+    @OptIn(ExperimentalSerializationApi::class)
     @Provides
     @SingleIn(AppScope::class)
     fun providesJson(): Json = Json {
         ignoreUnknownKeys = true
+        explicitNulls = false
     }
 }
 

@@ -10,7 +10,7 @@ selectAll:
 SELECT * FROM VeroContact;
 
 select:
-SELECT * FROM VeroContact WHERE firstname LIKE ?;
+SELECT * FROM VeroContact WHERE username LIKE ?;
 
 insertVeroContact:
 INSERT INTO VeroContact VALUES ?;

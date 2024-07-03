@@ -27,8 +27,10 @@ class VeroContactStore @Inject constructor(
 
     suspend fun insertContacts(veroContacts: VeroContacts) {
         database.transaction {
-            veroContacts.forEach {
-                database.veroDataQueries.insertVeroContact(it.toDatabaseModel())
+            veroContacts.forEach { veroContact ->
+                veroContact.takeIf { !it.id.isNullOrBlank() }
+                    ?.toDatabaseModel()
+                    ?.let { database.veroDataQueries.insertVeroContact(it) }
             }
         }
     }
@@ -37,7 +39,7 @@ class VeroContactStore @Inject constructor(
         val veroContacts = if (query.isNullOrBlank())
             database.veroDataQueries.selectAll().executeAsList()
         else
-            database.veroDataQueries.select(firstname = "%$query%").executeAsList()
+            database.veroDataQueries.select(username = "%$query%").executeAsList()
         return veroContacts.map { it.toVeroContact() }
     }
 
@@ -47,7 +49,7 @@ class VeroContactStore @Inject constructor(
 }
 
 private fun VeroContact.toVeroContact(): io.element.android.libraries.vero.api.contact.VeroContact {
-    return object : io.element.android.libraries.vero.api.contact.VeroContact{
+    return object : io.element.android.libraries.vero.api.contact.VeroContact {
         override val id: String
             get() = this@toVeroContact.id
         override val firstname: String
@@ -63,10 +65,10 @@ private fun VeroContact.toVeroContact(): io.element.android.libraries.vero.api.c
 
 private fun io.element.android.libraries.vero.api.contact.VeroContact.toDatabaseModel(): VeroContact {
     return VeroContact(
-        id = id,
-        firstname = firstname,
-        lastname = lastname,
-        username = username,
+        id = id ?: "",
+        firstname = firstname ?: "",
+        lastname = lastname ?: "",
+        username = username ?: "",
         picture = picture,
     )
 }

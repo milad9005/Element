@@ -76,7 +76,7 @@ private fun VeroContact.toUserSearchResult(): UserSearchResult {
     return UserSearchResult(
         MatrixUser(
             userId = UserId("@$id:matrix.metapolitan.io"),
-            displayName = "$firstname $lastname",
+            displayName = username ?: "$firstname $lastname",
             avatarUrl = picture
         )
     )
