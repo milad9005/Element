@@ -31,13 +31,18 @@ class VeroContactServiceImpl @Inject constructor(
     private val veroContactStore: VeroContactStore
 ) : VeroContactService {
 
-    override suspend fun syncContact(token: String) {
+    override suspend fun syncContact(token: String): VeroContacts {
         veroContactStore.deleteAllContact()
-        val contact = veroContactAPI.getContact(token.toBearerToken()).body()
-        veroContactStore.insertContacts(contact ?: return)
+        val contact = veroContactAPI.getContact(token.toBearerToken()).body() ?: listOf()
+        veroContactStore.insertContacts(contact)
+        return contact
     }
 
     override suspend fun getContact(query: String?): VeroContacts {
         return veroContactStore.getContacts(query)
+    }
+
+    override suspend fun deleteAllContact() {
+        veroContactStore.deleteAllContact()
     }
 }

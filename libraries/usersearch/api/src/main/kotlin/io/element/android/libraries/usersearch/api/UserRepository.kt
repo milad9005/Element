@@ -20,4 +20,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface UserRepository {
     fun search(query: String): Flow<UserSearchResultState>
+    fun sync(): Flow<UserSearchResultState>
 }

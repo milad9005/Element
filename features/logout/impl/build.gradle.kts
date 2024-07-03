@@ -46,6 +46,7 @@ dependencies {
     implementation(projects.libraries.testtags)
     implementation(projects.libraries.uiStrings)
     implementation(projects.libraries.dateformatter.api)
+    implementation(projects.libraries.vero.impl)
     api(projects.features.logout.api)
     ksp(libs.showkase.processor)
 

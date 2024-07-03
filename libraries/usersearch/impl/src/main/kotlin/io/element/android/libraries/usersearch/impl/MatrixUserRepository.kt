@@ -25,6 +25,8 @@ import io.element.android.libraries.usersearch.api.UserListDataSource
 import io.element.android.libraries.usersearch.api.UserRepository
 import io.element.android.libraries.usersearch.api.UserSearchResult
 import io.element.android.libraries.usersearch.api.UserSearchResultState
+import io.element.android.libraries.vero.api.auth.VeroAuthenticationDataSource
+import io.element.android.libraries.vero.api.auth.VeroAuthenticationService
 import io.element.android.libraries.vero.api.contact.VeroContact
 import io.element.android.libraries.vero.api.contact.VeroContactService
 import kotlinx.coroutines.delay
@@ -36,11 +38,25 @@ import javax.inject.Inject
 class MatrixUserRepository @Inject constructor(
     private val client: MatrixClient,
     private val dataSource: UserListDataSource,
-    private val veroContactService: VeroContactService
+    private val veroContactService: VeroContactService,
+    private val veroAuthenticationService: VeroAuthenticationService,
+    private val veroAuthenticationDataSource: VeroAuthenticationDataSource
 ) : UserRepository {
+
     override fun search(query: String): Flow<UserSearchResultState> = flow {
         val users = veroContactService.getContact(query).map { it.toUserSearchResult() }
         emit(UserSearchResultState(isSearching = false, results = users))
+    }
+
+    override fun sync(): Flow<UserSearchResultState> = flow { // todo -> temp fix !!!
+        kotlin.runCatching {
+            var list = veroContactService.getContact(null).map { it.toUserSearchResult() }
+            emit(UserSearchResultState(isSearching = true, results = list))
+            val token = veroAuthenticationDataSource.getCredential()?.let { veroAuthenticationService.login(it).token }
+            token?.let { veroContactService.syncContact(it) }
+            list = veroContactService.getContact(null).map { it.toUserSearchResult() }
+            emit(UserSearchResultState(isSearching = false, results = list))
+        }
     }
 
     private suspend fun fetchSearchResults(query: String, shouldQueryProfile: Boolean): UserSearchResultState {

@@ -32,6 +32,10 @@ class FakeUserRepository : UserRepository {
         return flow
     }
 
+    override fun sync(): Flow<UserSearchResultState> {
+        TODO("Not yet implemented")
+    }
+
     suspend fun emitState(state: UserSearchResultState) {
         flow.emit(state)
     }

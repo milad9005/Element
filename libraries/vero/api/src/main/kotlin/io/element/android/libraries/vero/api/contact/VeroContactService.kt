@@ -21,6 +21,7 @@ package io.element.android.libraries.vero.api.contact
  *
  */
 interface VeroContactService {
-    suspend fun syncContact(token: String)
+    suspend fun syncContact(token: String): VeroContacts
     suspend fun getContact(query: String?): VeroContacts
+    suspend fun deleteAllContact()
 }

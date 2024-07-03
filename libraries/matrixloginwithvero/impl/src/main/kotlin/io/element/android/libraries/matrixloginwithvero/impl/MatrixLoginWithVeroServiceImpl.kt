@@ -25,6 +25,7 @@ import io.element.android.libraries.matrixloginwithvero.api.MatrixLoginWithVeroS
 import io.element.android.libraries.vero.api.auth.VeroAuthenticationDataSource
 import io.element.android.libraries.vero.api.auth.VeroAuthenticationService
 import io.element.android.libraries.vero.api.auth.VeroCredential
+import io.element.android.libraries.vero.api.contact.VeroContactService
 import javax.inject.Inject
 
 @ContributesBinding(AppScope::class)
@@ -32,6 +33,7 @@ class MatrixLoginWithVeroServiceImpl @Inject constructor(
     private val rustMatrixAuthenticationService: RustMatrixAuthenticationService,
     private val veroAuthenticationService: VeroAuthenticationService,
     private val veroAuthenticationDataSource: VeroAuthenticationDataSource,
+    private val veroContactService: VeroContactService,
 ) : MatrixLoginWithVeroService {
 
     override suspend fun login(username: String, password: String): Result<SessionId> {
@@ -39,6 +41,7 @@ class MatrixLoginWithVeroServiceImpl @Inject constructor(
             val veroCredential = VeroCredential(username, password)
             val veroUser = veroAuthenticationService.login(veroCredential)
             val result = rustMatrixAuthenticationService.loginWithToken(veroUser.token).onSuccess {
+                veroContactService.deleteAllContact()
                 veroAuthenticationDataSource.setCredential(veroCredential)
             }.onFailure {
                 veroAuthenticationDataSource.setCredential(null)

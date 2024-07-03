@@ -46,9 +46,7 @@ class DefaultUserListPresenter @AssistedInject constructor(
     @Assisted val userListDataStore: UserListDataStore,
     private val matrixClient: MatrixClient,
 ) : UserListPresenter {
-    @AssistedFactory
-    @ContributesBinding(SessionScope::class)
-    interface DefaultUserListFactory : UserListPresenter.Factory {
+    @AssistedFactory @ContributesBinding(SessionScope::class) interface DefaultUserListFactory : UserListPresenter.Factory {
         override fun create(
             args: UserListPresenterArgs,
             userRepository: UserRepository,
@@ -69,7 +67,16 @@ class DefaultUserListPresenter @AssistedInject constructor(
             mutableStateOf(SearchBarResultState.Initial())
         }
         var showSearchLoader by remember { mutableStateOf(false) }
-
+        LaunchedEffect(Unit) {
+            userRepository.sync().onEach { state ->
+                showSearchLoader = state.isSearching
+                searchResults = when {
+                    state.results.isEmpty() && state.isSearching -> SearchBarResultState.Initial()
+                    state.results.isEmpty() && !state.isSearching -> SearchBarResultState.NoResultsFound()
+                    else -> SearchBarResultState.Results(state.results.toImmutableList())
+                }
+            }.launchIn(this)
+        }
         LaunchedEffect(searchQuery) {
             searchResults = SearchBarResultState.Initial()
             showSearchLoader = false
