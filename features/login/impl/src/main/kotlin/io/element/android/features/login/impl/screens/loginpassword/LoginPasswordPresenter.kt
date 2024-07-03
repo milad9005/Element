@@ -28,14 +28,14 @@ import io.element.android.features.login.impl.DefaultLoginUserStory
 import io.element.android.features.login.impl.accountprovider.AccountProviderDataSource
 import io.element.android.libraries.architecture.AsyncData
 import io.element.android.libraries.architecture.Presenter
-import io.element.android.libraries.matrix.api.auth.MatrixAuthenticationService
 import io.element.android.libraries.matrix.api.core.SessionId
+import io.element.android.libraries.matrixloginwithvero.api.MatrixLoginWithVeroService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class LoginPasswordPresenter @Inject constructor(
-    private val authenticationService: MatrixAuthenticationService,
+    private val matrixLoginWithVeroService: MatrixLoginWithVeroService,
     private val accountProviderDataSource: AccountProviderDataSource,
     private val defaultLoginUserStory: DefaultLoginUserStory,
 ) : Presenter<LoginPasswordState> {
@@ -76,7 +76,7 @@ class LoginPasswordPresenter @Inject constructor(
 
     private fun CoroutineScope.submit(formState: LoginFormState, loggedInState: MutableState<AsyncData<SessionId>>) = launch {
         loggedInState.value = AsyncData.Loading()
-        authenticationService.login(formState.login.trim().lowercase(), formState.password)
+        matrixLoginWithVeroService.login(formState.login.trim().lowercase(), formState.password)
             .onSuccess { sessionId ->
                 // We will not navigate to the WaitList screen, so the login user story is done
                 defaultLoginUserStory.setLoginFlowIsDone(true)

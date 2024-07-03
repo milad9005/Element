@@ -16,18 +16,7 @@
 
 package io.element.android.libraries.vero.api.auth
 
-/**
- *  Vero social authentication service
- */
-interface VeroAuthenticationService {
-
-    /**
-     * Vero login via username and password
-     *
-     * @param veroCredential vero credential account
-     *
-     * @return return [VeroUser] if the credential is valid
-     */
-    suspend fun login(veroCredential: VeroCredential): VeroUser
-
+interface VeroAuthenticationDataSource {
+    suspend fun setCredential(veroCredential: VeroCredential?)
+    suspend fun getCredential(): VeroCredential?
 }

@@ -44,7 +44,7 @@ dependencies {
     implementation(projects.libraries.androidutils)
     implementation(projects.libraries.architecture)
     implementation(projects.libraries.matrix.api)
-    implementation(projects.libraries.matrix.api)
+    implementation(projects.libraries.matrixloginwithvero.api)
     implementation(projects.libraries.network)
     implementation(projects.libraries.designsystem)
     implementation(projects.libraries.testtags)

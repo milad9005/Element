@@ -44,8 +44,6 @@ import io.element.android.libraries.sessionstorage.api.LoggedInState
 import io.element.android.libraries.sessionstorage.api.LoginType
 import io.element.android.libraries.sessionstorage.api.SessionData
 import io.element.android.libraries.sessionstorage.api.SessionStore
-import io.element.android.libraries.vero.api.auth.VeroAuthenticationService
-import io.element.android.libraries.vero.api.contact.VeroContactService
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -76,8 +74,6 @@ class RustMatrixAuthenticationService @Inject constructor(
     userCertificatesProvider: UserCertificatesProvider,
     proxyProvider: ProxyProvider,
     private val oidcConfigurationProvider: OidcConfigurationProvider,
-    private val veroAuthenticationService: VeroAuthenticationService,
-    private val veroContactService: VeroContactService,
     private val matrixLoginWithTokenService: MatrixLoginWithTokenService,
 ) : MatrixAuthenticationService {
     // Passphrase which will be used for new sessions. Existing sessions will use the passphrase
@@ -154,12 +150,17 @@ class RustMatrixAuthenticationService @Inject constructor(
     override suspend fun login(username: String, password: String): Result<SessionId> =
         withContext(coroutineDispatchers.io) {
             runCatching {
-                setHomeserver(AuthenticationConfig.DEFAULT_HOMESERVER_URL)
-                val client = veroAuthenticationService.login(username, password).onFailure {
-                    it.printStackTrace()
-                }.getOrThrow()
-                veroContactService.syncContact(client.token)
-                loginWithToken(client.token).getOrThrow()
+                val client = authService.login(username, password, "Element X Android", null)
+                val sessionData = client.use {
+                    it.session().toSessionData(
+                        isTokenValid = true,
+                        loginType = LoginType.PASSWORD,
+                        passphrase = pendingPassphrase,
+                        sessionPath = sessionPath,
+                    )
+                }
+                sessionStore.storeData(sessionData)
+                SessionId(sessionData.userId)
             }.mapFailure { failure ->
                 failure.mapAuthenticationException()
             }

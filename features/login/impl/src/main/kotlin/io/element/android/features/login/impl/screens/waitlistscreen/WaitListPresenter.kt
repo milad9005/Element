@@ -32,6 +32,7 @@ import io.element.android.libraries.architecture.Presenter
 import io.element.android.libraries.core.meta.BuildMeta
 import io.element.android.libraries.matrix.api.auth.MatrixAuthenticationService
 import io.element.android.libraries.matrix.api.core.SessionId
+import io.element.android.libraries.matrixloginwithvero.api.MatrixLoginWithVeroService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -39,6 +40,7 @@ import timber.log.Timber
 class WaitListPresenter @AssistedInject constructor(
     @Assisted private val formState: LoginFormState,
     private val buildMeta: BuildMeta,
+    private val matrixLoginWithVeroService: MatrixLoginWithVeroService,
     private val authenticationService: MatrixAuthenticationService,
     private val defaultLoginUserStory: DefaultLoginUserStory,
 ) : Presenter<WaitListState> {
@@ -85,7 +87,7 @@ class WaitListPresenter @AssistedInject constructor(
     private fun CoroutineScope.loginAttempt(formState: LoginFormState, loggedInState: MutableState<AsyncData<SessionId>>) = launch {
         Timber.w("Attempt to login...")
         loggedInState.value = AsyncData.Loading()
-        authenticationService.login(formState.login.trim(), formState.password)
+        matrixLoginWithVeroService.login(formState.login.trim(), formState.password)
             .onSuccess { sessionId ->
                 loggedInState.value = AsyncData.Success(sessionId)
             }

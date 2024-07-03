@@ -118,6 +118,7 @@ fun DependencyHandlerScope.allLibrariesImpl() {
     implementation(project(":libraries:fullscreenintent:impl"))
     implementation(project(":libraries:vero:impl"))
     implementation(project(":libraries:matrixnetwork:impl"))
+    implementation(project(":libraries:matrixloginwithvero:impl"))
 }
 
 fun DependencyHandlerScope.allServicesImpl() {

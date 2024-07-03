@@ -14,20 +14,11 @@
  * limitations under the License.
  */
 
-package io.element.android.libraries.vero.api.auth
+package io.element.android.libraries.matrixloginwithvero.api
 
-/**
- *  Vero social authentication service
- */
-interface VeroAuthenticationService {
+import io.element.android.libraries.matrix.api.core.SessionId
 
-    /**
-     * Vero login via username and password
-     *
-     * @param veroCredential vero credential account
-     *
-     * @return return [VeroUser] if the credential is valid
-     */
-    suspend fun login(veroCredential: VeroCredential): VeroUser
+interface MatrixLoginWithVeroService {
 
+    suspend fun login(username: String, password: String): Result<SessionId>
 }

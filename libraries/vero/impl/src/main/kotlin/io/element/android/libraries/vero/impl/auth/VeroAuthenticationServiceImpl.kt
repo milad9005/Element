@@ -1,9 +1,9 @@
 package io.element.android.libraries.vero.impl.auth
 
 import com.squareup.anvil.annotations.ContributesBinding
-import io.element.android.libraries.core.extensions.mapFailure
 import io.element.android.libraries.di.AppScope
 import io.element.android.libraries.vero.api.auth.VeroAuthenticationService
+import io.element.android.libraries.vero.api.auth.VeroCredential
 import io.element.android.libraries.vero.api.auth.VeroUser
 import io.element.android.libraries.vero.impl.auth.api.VeroAuthenticationAPI
 import io.element.android.libraries.vero.impl.auth.api.model.ChallengeRequest
@@ -26,35 +26,34 @@ class VeroAuthenticationServiceImpl @Inject constructor(
      *      Handle Network errors
      *      Convert exceptions and errors
      */
-    override suspend fun login(username: String, password: String): Result<VeroUser> {
-        return runCatching {
-            val challengeLoginResult = challengeLogin(username)
-            val challengeResponsePair = challengeLoginResult.getOrThrow()
-            val completeLoginResult = completeLogin(
-                session = challengeResponsePair.first,
-                email = username,
-                password = password,
-                salt = challengeResponsePair.second.salt,
-                serverPub = challengeResponsePair.second.serverPub,
-            )
-            val completeResponse = completeLoginResult.getOrThrow()
-            return Result.success(
-                VeroUser(
-                    username = username,
-                    userId = completeResponse.userId,
-                    token = completeResponse.veroPass.jwt,
-                    refreshToken = completeResponse.veroPass.refresh.tok
-                )
-            )
-        }.mapFailure { it }
+    override suspend fun login(veroCredential: VeroCredential): VeroUser {
+        val challengeLoginResult = challengeLogin(veroCredential.username)
+        val challengeResponsePair = challengeLoginResult.onFailure { throw it }.getOrThrow()
+        val completeLoginResult = completeLogin(
+            session = challengeResponsePair.first,
+            email = veroCredential.username,
+            password = veroCredential.password,
+            salt = challengeResponsePair.second.salt,
+            serverPub = challengeResponsePair.second.serverPub,
+        ).onFailure { throw it }
+        val completeResponse = completeLoginResult.getOrThrow()
+        return VeroUser(
+            username = veroCredential.username,
+            userId = completeResponse.userId,
+            token = completeResponse.veroPass.jwt,
+            refreshToken = completeResponse.veroPass.refresh.tok
+        )
     }
 
     private suspend fun challengeLogin(email: String): Result<Pair<String?, ChallengeResponse>> {
         return runCatching {
             val clientPub = manager.authToken()
-            val challenge = api.challenge(ChallengeRequest(email, clientPub))
-            val veroSession: String? = challenge.getVeroSession()
-            return Result.success(veroSession to challenge.body()!!)
+            val response = api.challenge(ChallengeRequest(email, clientPub))
+            val veroSession: String? = response.getVeroSession()
+            if (response.isSuccessful)
+                veroSession to response.body()!!
+            else
+                throw Exception(response.errorBody().toString())
         }
     }
 
@@ -75,7 +74,10 @@ class VeroAuthenticationServiceImpl @Inject constructor(
             val cookie = "vero-session=${session};"
             val request = CompleteRequest(login = email, clientProof = clientProof)
             val response = api.complete(request, veroSession = cookie)
-            return@runCatching response.body()!!
+            if (response.isSuccessful)
+                response.body()!!
+            else
+                throw Exception(response.errorBody().toString())
         }
     }
 }
