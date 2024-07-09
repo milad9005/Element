@@ -18,7 +18,10 @@ package io.element.android.libraries.vero.impl.network
 
 import io.element.android.appconfig.VeroConfiguration
 import io.element.android.libraries.network.RetrofitFactory
+import okhttp3.ResponseBody
+import retrofit2.Converter
 import retrofit2.Retrofit
+import java.lang.reflect.Type
 import javax.inject.Inject
 
 class VeroRetrofit @Inject constructor(retrofitFactory: RetrofitFactory) {
@@ -27,5 +30,9 @@ class VeroRetrofit @Inject constructor(retrofitFactory: RetrofitFactory) {
 
     fun <T> create(service: Class<T>): T {
         return retrofit.create(service)
+    }
+
+    fun <T> responseBodyConverter(type: Type): Converter<ResponseBody, T>  {
+        return retrofit.responseBodyConverter(type,  arrayOfNulls<Annotation>(0))
     }
 }

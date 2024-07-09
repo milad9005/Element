@@ -17,7 +17,6 @@
 package io.element.android.libraries.matrix.impl.auth
 
 import com.squareup.anvil.annotations.ContributesBinding
-import io.element.android.appconfig.AuthenticationConfig
 import io.element.android.libraries.core.coroutine.CoroutineDispatchers
 import io.element.android.libraries.core.extensions.mapFailure
 import io.element.android.libraries.di.AppScope
@@ -169,7 +168,7 @@ class RustMatrixAuthenticationService @Inject constructor(
     override suspend fun loginWithToken(token: String): Result<SessionId> =
         withContext(coroutineDispatchers.io) {
             runCatching {
-                val matrixUserLoginWithToken = matrixLoginWithTokenService.login(token).getOrThrow()
+                val matrixUserLoginWithToken = matrixLoginWithTokenService.login(token)
                 val sessionData = SessionData(
                     userId = matrixUserLoginWithToken.userId,
                     deviceId = matrixUserLoginWithToken.deviceId,

@@ -21,8 +21,8 @@ import dagger.Module
 import dagger.Provides
 import io.element.android.libraries.di.AppScope
 import io.element.android.libraries.vero.impl.auth.api.VeroAuthenticationAPI
-import io.element.android.libraries.vero.impl.network.VeroRetrofit
 import io.element.android.libraries.vero.impl.contact.api.VeroContactAPI
+import io.element.android.libraries.vero.impl.network.VeroRetrofit
 
 @Module
 @ContributesTo(AppScope::class)
@@ -37,5 +37,4 @@ object VeroNetworkModule {
     fun providesVeroAuthenticationAPI(veroRetrofit: VeroRetrofit): VeroAuthenticationAPI {
         return veroRetrofit.create(VeroAuthenticationAPI::class.java)
     }
-
 }

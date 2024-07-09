@@ -19,6 +19,8 @@ package io.element.android.libraries.matrix.network.api.auth
 import com.squareup.anvil.annotations.ContributesBinding
 import io.element.android.appconfig.AuthenticationConfig
 import io.element.android.libraries.di.AppScope
+import io.element.android.libraries.network.util.ApiResponse
+import io.element.android.libraries.network.util.safeExecute
 import javax.inject.Inject
 
 @ContributesBinding(AppScope::class)
@@ -28,9 +30,11 @@ class MatrixLoginWithTokenServiceImpl @Inject constructor(
 
     private val api = factory.create(AuthenticationConfig.VERO_CHAT_URL)
 
-    override suspend fun login(token: String): Result<MatrixUserLoginWithToken> {
-        return runCatching {
-            api.login(MatrixLoginTokenRequest(token = token, type = "org.matrix.login.jwt"))
+    override suspend fun login(token: String): MatrixUserLoginWithToken {
+       return when (val response = api.login(MatrixLoginTokenRequest(token = token, type = "org.matrix.login.jwt")).safeExecute()) {
+            is ApiResponse.Error -> throw response.error
+            is ApiResponse.Exception -> throw response.throwable
+            is ApiResponse.Success -> response.data
         }
     }
 }

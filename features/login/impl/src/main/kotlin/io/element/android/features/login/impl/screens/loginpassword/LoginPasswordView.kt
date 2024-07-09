@@ -41,7 +41,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.autofill.AutofillType
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
@@ -55,7 +54,6 @@ import io.element.android.compound.theme.ElementTheme
 import io.element.android.compound.tokens.generated.CompoundIcons
 import io.element.android.features.login.impl.R
 import io.element.android.features.login.impl.error.isWaitListError
-import io.element.android.features.login.impl.error.loginError
 import io.element.android.libraries.architecture.AsyncData
 import io.element.android.libraries.designsystem.atomic.molecules.ButtonColumnMolecule
 import io.element.android.libraries.designsystem.atomic.molecules.IconTitleSubtitleMolecule
@@ -112,12 +110,12 @@ fun LoginPasswordView(
 
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .imePadding()
-                .padding(padding)
-                .consumeWindowInsets(padding)
-                .verticalScroll(state = scrollState)
-                .padding(start = 20.dp, end = 20.dp, bottom = 20.dp),
+                    .fillMaxSize()
+                    .imePadding()
+                    .padding(padding)
+                    .consumeWindowInsets(padding)
+                    .verticalScroll(state = scrollState)
+                    .padding(start = 20.dp, end = 20.dp, bottom = 20.dp),
         ) {
             // Title
             IconTitleSubtitleMolecule(
@@ -152,8 +150,8 @@ fun LoginPasswordView(
                         onClick = ::submit,
                         enabled = state.submitEnabled || isLoading,
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .testTag(TestTags.loginContinue)
+                                .fillMaxWidth()
+                                .testTag(TestTags.loginContinue)
                     )
                     Spacer(modifier = Modifier.height(48.dp))
                 }
@@ -200,17 +198,17 @@ private fun LoginForm(
             value = loginFieldState,
             readOnly = isLoading,
             modifier = Modifier
-                .fillMaxWidth()
-                .onTabOrEnterKeyFocusNext(focusManager)
-                .testTag(TestTags.loginEmailUsername)
-                .autofill(
-                    autofillTypes = listOf(AutofillType.Username),
-                    onFill = {
-                        val sanitized = it.sanitize()
-                        loginFieldState = sanitized
-                        eventSink(LoginPasswordEvents.SetLogin(sanitized))
-                    }
-                ),
+                    .fillMaxWidth()
+                    .onTabOrEnterKeyFocusNext(focusManager)
+                    .testTag(TestTags.loginEmailUsername)
+                    .autofill(
+                            autofillTypes = listOf(AutofillType.Username),
+                            onFill = {
+                                val sanitized = it.sanitize()
+                                loginFieldState = sanitized
+                                eventSink(LoginPasswordEvents.SetLogin(sanitized))
+                            }
+                    ),
             placeholder = {
                 Text(text = stringResource(CommonStrings.common_username))
             },
@@ -249,17 +247,17 @@ private fun LoginForm(
             value = passwordFieldState,
             readOnly = isLoading,
             modifier = Modifier
-                .fillMaxWidth()
-                .onTabOrEnterKeyFocusNext(focusManager)
-                .testTag(TestTags.loginPassword)
-                .autofill(
-                    autofillTypes = listOf(AutofillType.Password),
-                    onFill = {
-                        val sanitized = it.sanitize()
-                        passwordFieldState = sanitized
-                        eventSink(LoginPasswordEvents.SetPassword(sanitized))
-                    }
-                ),
+                    .fillMaxWidth()
+                    .onTabOrEnterKeyFocusNext(focusManager)
+                    .testTag(TestTags.loginPassword)
+                    .autofill(
+                            autofillTypes = listOf(AutofillType.Password),
+                            onFill = {
+                                val sanitized = it.sanitize()
+                                passwordFieldState = sanitized
+                                eventSink(LoginPasswordEvents.SetPassword(sanitized))
+                            }
+                    ),
             onValueChange = {
                 val sanitized = it.sanitize()
                 passwordFieldState = sanitized
@@ -302,7 +300,7 @@ private fun String.sanitize(): String {
 private fun LoginErrorDialog(error: Throwable, onDismiss: () -> Unit) {
     ErrorDialog(
         title = stringResource(id = CommonStrings.dialog_title_error),
-        content = stringResource(loginError(error)),
+        content = error.message ?: "-",
         onDismiss = onDismiss
     )
 }

@@ -16,6 +16,19 @@
 
 package io.element.android.libraries.vero.impl.util
 
-internal fun String.toBearerToken(): String {
-    return if (startsWith("Bearer ")) this else "Bearer $this"
+import VeroApiErrorResponse
+import io.element.android.libraries.vero.impl.network.VeroRetrofit
+import retrofit2.HttpException
+import javax.inject.Inject
+
+class VeroApiErrorResponseConvertor @Inject constructor(veroRetrofit: VeroRetrofit) {
+
+    private val converter = veroRetrofit.responseBodyConverter<VeroApiErrorResponse>(VeroApiErrorResponse::class.java)
+
+    fun convert(httpException: HttpException): VeroApiErrorResponse? {
+        return httpException.response()?.errorBody()?.let { converter.convert(it) }
+    }
+
 }
+
+

@@ -39,12 +39,13 @@ class MatrixLoginWithVeroServiceImpl @Inject constructor(
     override suspend fun login(username: String, password: String): Result<SessionId> {
         return runCatching {
             val veroCredential = VeroCredential(username, password)
-            val veroUser = veroAuthenticationService.login(veroCredential)
+            val veroUser = veroAuthenticationService.login(veroCredential).onFailure { throw it }.getOrThrow()
             val result = rustMatrixAuthenticationService.loginWithToken(veroUser.token).onSuccess {
                 veroContactService.deleteAllContact()
                 veroAuthenticationDataSource.setCredential(veroCredential)
             }.onFailure {
                 veroAuthenticationDataSource.setCredential(null)
+                throw it
             }
             result.getOrThrow()
         }.mapFailure { it }

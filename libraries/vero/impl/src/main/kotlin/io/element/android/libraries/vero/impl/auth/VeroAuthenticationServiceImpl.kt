@@ -1,7 +1,11 @@
 package io.element.android.libraries.vero.impl.auth
 
 import com.squareup.anvil.annotations.ContributesBinding
+import io.element.android.libraries.core.coroutine.CoroutineDispatchers
+import io.element.android.libraries.core.extensions.mapFailure
 import io.element.android.libraries.di.AppScope
+import io.element.android.libraries.network.util.ApiResponse
+import io.element.android.libraries.network.util.safeExecute
 import io.element.android.libraries.vero.api.auth.VeroAuthenticationService
 import io.element.android.libraries.vero.api.auth.VeroCredential
 import io.element.android.libraries.vero.api.auth.VeroUser
@@ -11,85 +15,73 @@ import io.element.android.libraries.vero.impl.auth.api.model.ChallengeResponse
 import io.element.android.libraries.vero.impl.auth.api.model.CompleteRequest
 import io.element.android.libraries.vero.impl.auth.api.model.CompleteResponse
 import io.element.android.libraries.vero.impl.util.ClientSecurityManager
-import retrofit2.Response
+import io.element.android.libraries.vero.impl.util.VeroApiErrorResponseConvertor
+import io.element.android.libraries.vero.impl.util.cookies
+import io.element.android.libraries.vero.impl.util.parseVeroSession
+import io.element.android.libraries.vero.impl.util.toVeroException
+import io.element.android.libraries.vero.impl.util.toVeroSession
+import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 import javax.inject.Inject
 
 @ContributesBinding(AppScope::class)
 class VeroAuthenticationServiceImpl @Inject constructor(
     private val api: VeroAuthenticationAPI,
-    private val manager: ClientSecurityManager
+    private val manager: ClientSecurityManager,
+    private val coroutineDispatchers: CoroutineDispatchers,
+    private val convertor: VeroApiErrorResponseConvertor,
 ) : VeroAuthenticationService {
 
-    /*
-     *  todo ->
-     *      Handle Network exceptions
-     *      Handle Network errors
-     *      Convert exceptions and errors
-     */
-    override suspend fun login(veroCredential: VeroCredential): VeroUser {
-        val challengeLoginResult = challengeLogin(veroCredential.username)
-        val challengeResponsePair = challengeLoginResult.onFailure { throw it }.getOrThrow()
-        val completeLoginResult = completeLogin(
-            session = challengeResponsePair.first,
-            email = veroCredential.username,
-            password = veroCredential.password,
-            salt = challengeResponsePair.second.salt,
-            serverPub = challengeResponsePair.second.serverPub,
-        ).onFailure { throw it }
-        val completeResponse = completeLoginResult.getOrThrow()
-        return VeroUser(
-            username = veroCredential.username,
-            userId = completeResponse.userId,
-            token = completeResponse.veroPass.jwt,
-            refreshToken = completeResponse.veroPass.refresh.tok
-        )
+    override suspend fun login(veroCredential: VeroCredential): Result<VeroUser> {
+        return kotlin.runCatching {
+            withContext(coroutineDispatchers.io) {
+                val challengeResponse = challengeLogin(veroCredential.username)
+                val completeResponse = completeLogin(veroCredential, challengeResponse)
+                VeroUser(
+                    username = veroCredential.username,
+                    userId = completeResponse.userId,
+                    token = completeResponse.veroPass.jwt,
+                    refreshToken = completeResponse.veroPass.refresh.tok
+                )
+            }
+        }.mapFailure { it.mapVeroException() }
     }
 
-    private suspend fun challengeLogin(email: String): Result<Pair<String?, ChallengeResponse>> {
-        return runCatching {
-            val clientPub = manager.authToken()
-            val response = api.challenge(ChallengeRequest(email, clientPub))
-            val veroSession: String? = response.getVeroSession()
-            if (response.isSuccessful)
-                veroSession to response.body()!!
-            else
-                throw Exception(response.errorBody().toString())
+    private suspend fun challengeLogin(email: String): ChallengeResponse {
+        val clientPub = manager.authToken()
+        when (val response = api.challenge(ChallengeRequest(email, clientPub)).safeExecute()) {
+            is ApiResponse.Error -> throw response.error
+            is ApiResponse.Exception -> throw response.throwable
+            is ApiResponse.Success -> {
+                val veroSession = response.headers.cookies()?.parseVeroSession()
+                return response.data.copy(session = veroSession)
+            }
         }
     }
 
     private suspend fun completeLogin(
-        session: String?,
-        email: String,
-        password: String,
-        salt: String,
-        serverPub: String
-    ): Result<CompleteResponse> {
-        return runCatching {
-            val clientProof = manager.generateSrpAuthString(
-                email = email,
-                password = password,
-                salt = salt,
-                token = serverPub
-            )
-            val cookie = "vero-session=${session};"
-            val request = CompleteRequest(login = email, clientProof = clientProof)
-            val response = api.complete(request, veroSession = cookie)
-            if (response.isSuccessful)
-                response.body()!!
-            else
-                throw Exception(response.errorBody().toString())
+        veroCredential: VeroCredential,
+        challengeResponse: ChallengeResponse,
+    ): CompleteResponse {
+        val clientProof = manager.generateSrpAuthString(
+            email = veroCredential.username,
+            password = veroCredential.password,
+            salt = challengeResponse.salt,
+            token = challengeResponse.serverPub
+        )
+        val cookie = challengeResponse.session.toVeroSession()
+        val request = CompleteRequest(login = veroCredential.username, clientProof = clientProof)
+        when (val response = api.complete(request, veroSession = cookie).safeExecute()) {
+            is ApiResponse.Error -> throw response.error
+            is ApiResponse.Exception -> throw response.throwable
+            is ApiResponse.Success -> return response.data
         }
     }
-}
 
-fun <T> Response<T>.cookies(): Pair<String, String>? {
-    return headers().find { it.first == "set-cookie" }
-}
-
-fun Response<ChallengeResponse>.getVeroSession(): String? {
-    val cookies = cookies()
-    return cookies?.second?.split(";")
-        ?.find { it.contains("vero-session") }
-        ?.split("=")
-        ?.get(1)
+    private fun Throwable.mapVeroException(): Throwable {
+        return when (this) {
+            is HttpException -> convertor.convert(this)?.toVeroException() ?: return this
+            else -> this
+        }
+    }
 }

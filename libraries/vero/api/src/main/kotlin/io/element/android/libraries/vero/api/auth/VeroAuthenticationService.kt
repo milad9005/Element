@@ -28,6 +28,6 @@ interface VeroAuthenticationService {
      *
      * @return return [VeroUser] if the credential is valid
      */
-    suspend fun login(veroCredential: VeroCredential): VeroUser
+    suspend fun login(veroCredential: VeroCredential): Result<VeroUser>
 
 }

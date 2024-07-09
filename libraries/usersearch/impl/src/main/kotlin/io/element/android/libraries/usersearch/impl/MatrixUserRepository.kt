@@ -52,8 +52,8 @@ class MatrixUserRepository @Inject constructor(
         kotlin.runCatching {
             var list = veroContactService.getContact(null).map { it.toUserSearchResult() }
             emit(UserSearchResultState(isSearching = true, results = list))
-            val token = veroAuthenticationDataSource.getCredential()?.let { veroAuthenticationService.login(it).token }
-            token?.let { veroContactService.syncContact(it) }
+            //val token = veroAuthenticationDataSource.getCredential()?.let { veroAuthenticationService.login(it).token }
+           // token?.let { veroContactService.syncContact(it) }
             list = veroContactService.getContact(null).map { it.toUserSearchResult() }
             emit(UserSearchResultState(isSearching = false, results = list))
         }

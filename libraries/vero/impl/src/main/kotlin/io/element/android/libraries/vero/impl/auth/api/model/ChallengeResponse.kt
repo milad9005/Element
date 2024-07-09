@@ -17,9 +17,11 @@
 package io.element.android.libraries.vero.impl.auth.api.model
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 @Serializable
- data class ChallengeResponse(
+data class ChallengeResponse(
     val salt: String,
-    val serverPub: String
+    val serverPub: String,
+    @Transient val session: String? = null
 )

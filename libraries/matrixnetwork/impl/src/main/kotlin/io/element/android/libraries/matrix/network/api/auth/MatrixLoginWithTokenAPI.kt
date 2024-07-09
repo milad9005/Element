@@ -16,12 +16,12 @@
 
 package io.element.android.libraries.matrix.network.api.auth
 
+import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface MatrixLoginWithTokenAPI {
 
     @POST("_matrix/client/r0/login")
-    suspend fun login(@Body request: MatrixLoginTokenRequest): MatrixLoginWithTokenResponse
-
+    fun login(@Body request: MatrixLoginTokenRequest): Call<MatrixLoginWithTokenResponse>
 }

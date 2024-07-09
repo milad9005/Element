@@ -18,6 +18,6 @@ package io.element.android.libraries.matrix.network.api.auth
 
 interface MatrixLoginWithTokenService {
 
-    suspend fun login(token: String): Result<MatrixUserLoginWithToken>
+    suspend fun login(token: String): MatrixUserLoginWithToken
 
 }
