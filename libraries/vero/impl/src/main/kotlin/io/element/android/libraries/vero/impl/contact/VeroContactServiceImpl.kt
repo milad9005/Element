@@ -18,31 +18,38 @@ package io.element.android.libraries.vero.impl.contact
 
 import com.squareup.anvil.annotations.ContributesBinding
 import io.element.android.libraries.di.AppScope
+import io.element.android.libraries.network.util.safeExecute
 import io.element.android.libraries.vero.api.contact.VeroContactService
-import io.element.android.libraries.vero.api.contact.VeroContacts
+import io.element.android.libraries.vero.api.contact.VeroProfiles
 import io.element.android.libraries.vero.impl.contact.api.VeroContactAPI
-import io.element.android.libraries.vero.impl.contact.store.VeroContactStore
+import io.element.android.libraries.vero.impl.contact.api.VeroContacts
+import io.element.android.libraries.vero.impl.contact.store.VeroContactDataStore
 import io.element.android.libraries.vero.impl.util.toBearerToken
 import javax.inject.Inject
 
 @ContributesBinding(AppScope::class)
 class VeroContactServiceImpl @Inject constructor(
     private val veroContactAPI: VeroContactAPI,
-    private val veroContactStore: VeroContactStore
+    private val veroContactDataStore: VeroContactDataStore
 ) : VeroContactService {
 
     override suspend fun syncContact(token: String): VeroContacts {
-        veroContactStore.deleteAllContact()
-        val contact = veroContactAPI.getContact(token.toBearerToken()).body() ?: listOf()
-        veroContactStore.insertContacts(contact)
-        return contact
+        return when (val response = veroContactAPI.getContact(token.toBearerToken()).safeExecute()) {
+            is io.element.android.libraries.network.util.ApiResponse.Error -> throw response.error
+            is io.element.android.libraries.network.util.ApiResponse.Exception -> throw response.throwable
+            is io.element.android.libraries.network.util.ApiResponse.Success -> {
+                veroContactDataStore.deleteAllContact()
+                veroContactDataStore.insertContacts(response.data)
+                response.data
+            }
+        }
     }
 
-    override suspend fun getContact(query: String?): VeroContacts {
-        return veroContactStore.getContacts(query)
+    override suspend fun getContact(query: String?): VeroProfiles {
+        return veroContactDataStore.getContacts(query)
     }
 
     override suspend fun deleteAllContact() {
-        veroContactStore.deleteAllContact()
+        veroContactDataStore.deleteAllContact()
     }
 }

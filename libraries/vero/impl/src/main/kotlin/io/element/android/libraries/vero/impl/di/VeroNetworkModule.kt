@@ -23,6 +23,7 @@ import io.element.android.libraries.di.AppScope
 import io.element.android.libraries.vero.impl.auth.api.VeroAuthenticationAPI
 import io.element.android.libraries.vero.impl.contact.api.VeroContactAPI
 import io.element.android.libraries.vero.impl.network.VeroRetrofit
+import io.element.android.libraries.vero.impl.profile.api.VeroProfileAPI
 
 @Module
 @ContributesTo(AppScope::class)
@@ -36,5 +37,10 @@ object VeroNetworkModule {
     @Provides
     fun providesVeroAuthenticationAPI(veroRetrofit: VeroRetrofit): VeroAuthenticationAPI {
         return veroRetrofit.create(VeroAuthenticationAPI::class.java)
+    }
+
+    @Provides
+    fun providesVeroProfileAPI(veroRetrofit: VeroRetrofit): VeroProfileAPI {
+        return veroRetrofit.create(VeroProfileAPI::class.java)
     }
 }

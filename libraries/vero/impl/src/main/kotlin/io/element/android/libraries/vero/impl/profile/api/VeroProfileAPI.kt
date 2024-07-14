@@ -14,15 +14,21 @@
  * limitations under the License.
  */
 
-package io.element.android.libraries.vero.impl.contact.api
+package io.element.android.libraries.vero.impl.profile.api
 
+import io.element.android.libraries.vero.impl.contact.api.VeroContacts
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Query
 
-interface VeroContactAPI {
+interface VeroProfileAPI {
 
-    @GET("api/relations/contacts")
-    fun getContact(@Header("Authorization") token: String): Call<VeroContacts>
-
+    @GET("api/profiles/list")
+    fun getProfiles(@Header("Authorization") token: String, @Query("ids") vararg ids: String): Call<VeroProfileListResponse>
 }
+
+@Serializable
+data class VeroProfileListResponse(@SerialName("items") val veroContacts: VeroContacts)

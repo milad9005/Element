@@ -14,15 +14,13 @@
  * limitations under the License.
  */
 
-package io.element.android.libraries.vero.impl.contact.api
+package io.element.android.libraries.vero.api.profile
 
-import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Header
+import io.element.android.libraries.vero.api.contact.VeroProfile
+import io.element.android.libraries.vero.api.contact.VeroProfiles
 
-interface VeroContactAPI {
-
-    @GET("api/relations/contacts")
-    fun getContact(@Header("Authorization") token: String): Call<VeroContacts>
-
+interface VeroProfileService {
+    suspend fun addNewProfiles(veroProfiles: VeroProfiles)
+    suspend fun getProfileById(id: String): VeroProfile?
+    suspend fun fetchNullProfileData(token: String, vararg ids: String): VeroProfiles
 }

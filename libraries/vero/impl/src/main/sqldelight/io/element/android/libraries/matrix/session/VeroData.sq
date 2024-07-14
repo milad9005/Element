@@ -1,19 +1,36 @@
-CREATE TABLE VeroContact (
+-- Vero Profile table --
+
+CREATE TABLE IF NOT EXISTS VeroProfile (
     id TEXT NOT NULL PRIMARY KEY,
-    firstname TEXT NOT NULL,
-    lastname TEXT NOT NULL,
-    username TEXT NOT NULL,
+    firstname TEXT,
+    lastname TEXT,
+    username TEXT,
     picture TEXT
 );
 
-selectAll:
-SELECT * FROM VeroContact;
+selectNullProfile:
+SELECT * FROM VeroProfile WHERE username ISNULL OR picture ISNULL ;
 
-select:
-SELECT * FROM VeroContact WHERE username LIKE ?;
+selectProfileById:
+SELECT * FROM VeroProfile WHERE id IS ?;
+
+insertVeroProfile:
+INSERT OR REPLACE INTO VeroProfile VALUES ?;
+
+-- Connection table --
+
+CREATE TABLE Contact (
+   id TEXT NOT NULL PRIMARY KEY
+);
 
 insertVeroContact:
-INSERT INTO VeroContact VALUES ?;
+INSERT OR REPLACE INTO Contact VALUES ?;
 
-deleteAll:
-DELETE FROM VeroContact;
+selectAllContact:
+SELECT VeroProfile.* FROM VeroProfile JOIN Contact WHERE VeroProfile.id IS Contact.id;
+
+selectContact:
+SELECT * FROM VeroProfile WHERE username LIKE ?;
+
+deleteAllContact:
+DELETE FROM Contact;

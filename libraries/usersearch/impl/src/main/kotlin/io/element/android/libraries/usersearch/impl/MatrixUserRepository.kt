@@ -27,8 +27,8 @@ import io.element.android.libraries.usersearch.api.UserSearchResult
 import io.element.android.libraries.usersearch.api.UserSearchResultState
 import io.element.android.libraries.vero.api.auth.VeroAuthenticationDataSource
 import io.element.android.libraries.vero.api.auth.VeroAuthenticationService
-import io.element.android.libraries.vero.api.contact.VeroContact
 import io.element.android.libraries.vero.api.contact.VeroContactService
+import io.element.android.libraries.vero.api.contact.VeroProfile
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -52,8 +52,8 @@ class MatrixUserRepository @Inject constructor(
         kotlin.runCatching {
             var list = veroContactService.getContact(null).map { it.toUserSearchResult() }
             emit(UserSearchResultState(isSearching = true, results = list))
-            //val token = veroAuthenticationDataSource.getCredential()?.let { veroAuthenticationService.login(it).token }
-           // token?.let { veroContactService.syncContact(it) }
+            val token = veroAuthenticationDataSource.getCredential()?.let { veroAuthenticationService.login(it).getOrThrow().token }
+            token?.let { veroContactService.syncContact(it) }
             list = veroContactService.getContact(null).map { it.toUserSearchResult() }
             emit(UserSearchResultState(isSearching = false, results = list))
         }
@@ -88,7 +88,7 @@ class MatrixUserRepository @Inject constructor(
     }
 }
 
-private fun VeroContact.toUserSearchResult(): UserSearchResult {
+private fun VeroProfile.toUserSearchResult(): UserSearchResult {
     return UserSearchResult(
         MatrixUser(
             userId = UserId("@$id:matrix.metapolitan.io"),

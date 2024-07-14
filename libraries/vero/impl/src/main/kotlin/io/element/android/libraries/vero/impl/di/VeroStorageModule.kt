@@ -36,7 +36,7 @@ object VeroStorageModule {
     fun provideMatrixDatabase(
         @ApplicationContext context: Context,
     ): VeroDatabase {
-        val name = "vero_database"
+        val name = "vero_database_refactored"
         val secretFile = context.getDatabasePath("$name.key")
 
         // Make sure the parent directory of the key file exists, otherwise it will crash in older Android versions

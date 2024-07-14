@@ -16,13 +16,16 @@
 
 package io.element.android.libraries.vero.api.contact
 
-typealias VeroContacts = Collection<VeroContact>
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-interface VeroContact {
-    val id: String?
-    val firstname: String?
-    val lastname: String?
-    val username: String?
-    //val loop: String
-    val picture: String?
-}
+typealias VeroProfiles = Collection<VeroProfile>
+
+@Serializable data class VeroProfile(
+    @SerialName("id") val id: String?,
+    @SerialName("firstname") val firstname: String?,
+    @SerialName("lastname") val lastname: String?,
+    @SerialName("username") val username: String?,
+    //@SerialName("loop")  val loop: String,
+    @SerialName("picture") val picture: String?
+)
