@@ -14,18 +14,19 @@
  * limitations under the License.
  */
 
-package io.element.android.libraries.matrixloginwithvero.impl
+package io.element.android.libraries.veromatrix.impl
 
 import com.squareup.anvil.annotations.ContributesBinding
 import io.element.android.libraries.core.extensions.mapFailure
 import io.element.android.libraries.di.AppScope
 import io.element.android.libraries.matrix.api.core.SessionId
 import io.element.android.libraries.matrix.impl.auth.RustMatrixAuthenticationService
-import io.element.android.libraries.matrixloginwithvero.api.MatrixLoginWithVeroService
 import io.element.android.libraries.vero.api.auth.VeroAuthenticationDataSource
 import io.element.android.libraries.vero.api.auth.VeroAuthenticationService
 import io.element.android.libraries.vero.api.auth.VeroCredential
 import io.element.android.libraries.vero.api.contact.VeroContactService
+import io.element.android.libraries.veromatrix.api.MatrixLoginWithVeroService
+import io.element.android.libraries.veromatrix.api.SyncMatrixProfileWithVero
 import javax.inject.Inject
 
 @ContributesBinding(AppScope::class)
@@ -34,6 +35,7 @@ class MatrixLoginWithVeroServiceImpl @Inject constructor(
     private val veroAuthenticationService: VeroAuthenticationService,
     private val veroAuthenticationDataSource: VeroAuthenticationDataSource,
     private val veroContactService: VeroContactService,
+    private val syncMatrixProfileWithVero: SyncMatrixProfileWithVero,
 ) : MatrixLoginWithVeroService {
 
     override suspend fun login(username: String, password: String): Result<SessionId> {
@@ -43,8 +45,10 @@ class MatrixLoginWithVeroServiceImpl @Inject constructor(
             val result = rustMatrixAuthenticationService.loginWithToken(veroUser.token).onSuccess {
                 veroContactService.deleteAllContact()
                 veroAuthenticationDataSource.setCredential(veroCredential)
+                syncMatrixProfileWithVero.sync(veroUser.token)
             }.onFailure {
                 veroAuthenticationDataSource.setCredential(null)
+                rustMatrixAuthenticationService.getLatestSessionId()
                 throw it
             }
             result.getOrThrow()

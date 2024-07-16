@@ -29,3 +29,7 @@ typealias VeroProfiles = Collection<VeroProfile>
     //@SerialName("loop")  val loop: String,
     @SerialName("picture") val picture: String?
 )
+
+fun VeroProfile.getDisplayName(): String? {
+    return username ?: "$firstname $lastname".takeIf { it.isNotBlank() }
+}

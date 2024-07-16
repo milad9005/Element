@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.element.android.libraries.matrixloginwithvero.api
+package io.element.android.libraries.veromatrix.api
 
 import io.element.android.libraries.matrix.api.core.SessionId
 

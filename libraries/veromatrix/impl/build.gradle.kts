@@ -10,7 +10,7 @@ anvil {
 }
 
 android {
-    namespace = "io.element.android.libraries.matrixloginwithvero.impl"
+    namespace = "io.element.android.libraries.veromatrix.impl"
 }
 
 dependencies {
@@ -21,6 +21,6 @@ dependencies {
     implementation(projects.libraries.di)
     implementation(projects.libraries.vero.impl)
     implementation(projects.libraries.matrix.impl)
-    api(projects.libraries.matrixloginwithvero.api)
+    api(projects.libraries.veromatrix.api)
 }
 

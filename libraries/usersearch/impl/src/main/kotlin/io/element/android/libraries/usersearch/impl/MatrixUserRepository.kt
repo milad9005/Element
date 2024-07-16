@@ -29,9 +29,12 @@ import io.element.android.libraries.vero.api.auth.VeroAuthenticationDataSource
 import io.element.android.libraries.vero.api.auth.VeroAuthenticationService
 import io.element.android.libraries.vero.api.contact.VeroContactService
 import io.element.android.libraries.vero.api.contact.VeroProfile
+import io.element.android.libraries.veromatrix.api.SyncMatrixProfileWithVero
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @ContributesBinding(SessionScope::class)
@@ -39,6 +42,7 @@ class MatrixUserRepository @Inject constructor(
     private val client: MatrixClient,
     private val dataSource: UserListDataSource,
     private val veroContactService: VeroContactService,
+    private val syncMatrixProfileWithVero: SyncMatrixProfileWithVero,
     private val veroAuthenticationService: VeroAuthenticationService,
     private val veroAuthenticationDataSource: VeroAuthenticationDataSource
 ) : UserRepository {
@@ -53,7 +57,12 @@ class MatrixUserRepository @Inject constructor(
             var list = veroContactService.getContact(null).map { it.toUserSearchResult() }
             emit(UserSearchResultState(isSearching = true, results = list))
             val token = veroAuthenticationDataSource.getCredential()?.let { veroAuthenticationService.login(it).getOrThrow().token }
-            token?.let { veroContactService.syncContact(it) }
+            token?.let {
+                withContext(Dispatchers.IO) {
+                    veroContactService.syncContact(it)
+                    syncMatrixProfileWithVero.sync(it)
+                }
+            }
             list = veroContactService.getContact(null).map { it.toUserSearchResult() }
             emit(UserSearchResultState(isSearching = false, results = list))
         }

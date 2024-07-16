@@ -29,7 +29,7 @@ import io.element.android.features.login.impl.accountprovider.AccountProviderDat
 import io.element.android.libraries.architecture.AsyncData
 import io.element.android.libraries.architecture.Presenter
 import io.element.android.libraries.matrix.api.core.SessionId
-import io.element.android.libraries.matrixloginwithvero.api.MatrixLoginWithVeroService
+import io.element.android.libraries.veromatrix.api.MatrixLoginWithVeroService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject

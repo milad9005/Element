@@ -31,16 +31,33 @@ import javax.inject.Inject
 @ContributesBinding(AppScope::class)
 class VeroProfileServiceImpl @Inject constructor(
     private val veroProfileAPI: VeroProfileAPI,
-    private val veroProfileDataStore: VeroProfileDataStore
-) : VeroProfileService {
+    private val veroProfileDataStore: VeroProfileDataStore,
+
+    ) : VeroProfileService {
 
     override suspend fun fetchNullProfileData(token: String, vararg ids: String): VeroProfiles {
         val cacheIds = veroProfileDataStore.getNullProfile().map { it.id }.toTypedArray()
-        return when (val response = veroProfileAPI.getProfiles(token.toBearerToken(), *cacheIds, *ids).safeExecute()) {
+        return fetchProfilesById(token.toBearerToken(), *cacheIds, *ids).also {
+            veroProfileDataStore.insertProfiles(it)
+        }
+    }
+
+    override suspend fun fetchProfilesById(token: String, vararg usersId: String): VeroProfiles {
+        return when (val response = veroProfileAPI.getProfiles(token.toBearerToken(), *usersId).safeExecute()) {
             is ApiResponse.Error -> throw response.error
             is ApiResponse.Exception -> throw response.throwable
             is ApiResponse.Success -> {
-                response.data.veroContacts.also { veroProfileDataStore.insertProfiles(it) }
+                response.data.veroContacts
+            }
+        }
+    }
+
+    override suspend fun fetchProfilePicture(url: String): ByteArray {
+        return when (val response = veroProfileAPI.getProfilePicture(url).safeExecute()) {
+            is ApiResponse.Error -> throw response.error
+            is ApiResponse.Exception -> throw response.throwable
+            is ApiResponse.Success -> {
+                response.data.source().readByteArray()
             }
         }
     }

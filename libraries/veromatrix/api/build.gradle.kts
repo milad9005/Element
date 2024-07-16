@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "io.element.android.libraries.matrixloginwithvero.api"
+    namespace = "io.element.android.libraries.veromatrix.api"
 }
 
 anvil {

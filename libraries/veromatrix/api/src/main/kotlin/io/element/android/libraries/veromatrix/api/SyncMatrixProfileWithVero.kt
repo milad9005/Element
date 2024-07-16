@@ -14,15 +14,11 @@
  * limitations under the License.
  */
 
-package io.element.android.libraries.vero.api.profile
+package io.element.android.libraries.veromatrix.api
 
 import io.element.android.libraries.vero.api.contact.VeroProfile
-import io.element.android.libraries.vero.api.contact.VeroProfiles
 
-interface VeroProfileService {
-    suspend fun addNewProfiles(veroProfiles: VeroProfiles)
-    suspend fun getProfileById(id: String): VeroProfile?
-    suspend fun fetchNullProfileData(token: String, vararg ids: String): VeroProfiles
-    suspend fun fetchProfilesById(token: String, vararg usersId: String): VeroProfiles
-    suspend fun fetchProfilePicture(url: String): ByteArray
+interface SyncMatrixProfileWithVero {
+
+    suspend fun sync(token: String): Result<VeroProfile>
 }
