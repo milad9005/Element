@@ -23,6 +23,7 @@ import io.element.android.libraries.core.coroutine.CoroutineDispatchers
 import io.element.android.libraries.matrix.api.notificationsettings.NotificationSettingsService
 import io.element.android.libraries.matrix.api.roomlist.RoomListService
 import io.element.android.libraries.matrix.api.roomlist.RoomSummary
+import io.element.android.libraries.vero.api.profile.VeroProfileService
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.CoroutineScope
@@ -44,6 +45,7 @@ class RoomListDataSource @Inject constructor(
     private val coroutineDispatchers: CoroutineDispatchers,
     private val notificationSettingsService: NotificationSettingsService,
     private val appScope: CoroutineScope,
+    private val veroProfileService: VeroProfileService,
 ) {
     init {
         observeNotificationSettings()
@@ -92,7 +94,11 @@ class RoomListDataSource @Inject constructor(
         val roomListRoomSummaries = diffCache.indices().mapNotNull { index ->
             diffCache.get(index) ?: buildAndCacheItem(roomSummaries, index)
         }
-        _allRooms.emit(roomListRoomSummaries.toImmutableList())
+        _allRooms.emit(roomListRoomSummaries.map { summary ->
+            val profile = summary.name?.let { veroProfileService.getProfileById(it) }
+            val copy = if (summary.avatarData.url == null) summary.avatarData.copy(url = profile?.picture) else summary.avatarData
+            summary.copy(name = profile?.username?.takeIf { it.isNotBlank() } ?: summary.name, avatarData = copy)
+        }.toImmutableList())
     }
 
     private fun buildAndCacheItem(roomSummaries: List<RoomSummary>, index: Int): RoomListRoomSummary? {

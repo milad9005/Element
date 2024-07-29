@@ -119,6 +119,7 @@ fun DependencyHandlerScope.allLibrariesImpl() {
     implementation(project(":libraries:vero:impl"))
     implementation(project(":libraries:matrixnetwork:impl"))
     implementation(project(":libraries:veromatrix:impl"))
+    implementation(project(":libraries:worker"))
 }
 
 fun DependencyHandlerScope.allServicesImpl() {

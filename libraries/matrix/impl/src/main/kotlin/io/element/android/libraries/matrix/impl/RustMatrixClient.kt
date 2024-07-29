@@ -68,6 +68,7 @@ import io.element.android.libraries.matrix.impl.util.cancelAndDestroy
 import io.element.android.libraries.matrix.impl.util.mxCallbackFlow
 import io.element.android.libraries.matrix.impl.verification.RustSessionVerificationService
 import io.element.android.libraries.sessionstorage.api.SessionStore
+import io.element.android.libraries.veromatrix.api.VeroMapper
 import io.element.android.services.toolbox.api.systemclock.SystemClock
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
@@ -124,6 +125,7 @@ class RustMatrixClient(
     private val baseDirectory: File,
     baseCacheDirectory: File,
     private val clock: SystemClock,
+    veroMapper: VeroMapper,
 ) : MatrixClient {
     override val sessionId: UserId = UserId(client.userId())
     override val deviceId: String = client.deviceId()
@@ -240,6 +242,7 @@ class RustMatrixClient(
         roomContentForwarder = RoomContentForwarder(innerRoomListService),
         isKeyBackupEnabled = { client.encryption().use { it.backupState() == BackupState.ENABLED } },
         getSessionData = { sessionStore.getSession(sessionId.value)!! },
+        veroMapper = veroMapper,
     )
 
     override val mediaLoader: MatrixMediaLoader = RustMediaLoader(

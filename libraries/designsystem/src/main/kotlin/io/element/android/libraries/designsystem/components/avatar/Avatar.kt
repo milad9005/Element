@@ -87,7 +87,7 @@ private fun ImageAvatar(
         )
     } else {
         SubcomposeAsyncImage(
-            model = avatarData,
+            model = avatarData.url.takeIf { it?.startsWith("https://") == true } ?: avatarData,
             contentDescription = contentDescription,
             contentScale = ContentScale.Crop,
             modifier = modifier

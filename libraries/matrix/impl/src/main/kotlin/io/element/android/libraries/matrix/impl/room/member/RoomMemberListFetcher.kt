@@ -19,6 +19,7 @@ package io.element.android.libraries.matrix.impl.room.member
 import io.element.android.libraries.matrix.api.room.MatrixRoomMembersState
 import io.element.android.libraries.matrix.api.room.RoomMember
 import io.element.android.libraries.matrix.api.room.roomMembers
+import io.element.android.libraries.veromatrix.api.VeroMapper
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.CoroutineDispatcher
@@ -39,6 +40,7 @@ import kotlin.coroutines.coroutineContext
  * This class fetches the room members for a given room in a 'paginated' way, and taking into account previous cached values.
  */
 internal class RoomMemberListFetcher(
+    private val veroMapper: VeroMapper,
     private val room: RoomInterface,
     private val dispatcher: CoroutineDispatcher,
     private val pageSize: Int = 10_000,
@@ -48,6 +50,7 @@ internal class RoomMemberListFetcher(
         CACHE_AND_SERVER,
         SERVER,
     }
+
     private val updatedRoomMemberMutex = Mutex()
     private val roomId = room.id()
 
@@ -122,14 +125,14 @@ internal class RoomMemberListFetcher(
 
     private suspend fun parseAndEmitMembers(roomMembersIterator: RoomMembersIterator): ImmutableList<RoomMember> {
         return roomMembersIterator.use { iterator ->
-            val results = buildList(capacity = roomMembersIterator.len().toInt()) {
+            val results = buildList<RoomMember>(capacity = roomMembersIterator.len().toInt()) {
                 while (true) {
                     // Loading the whole membersIterator as a stop-gap measure.
                     // We should probably implement some sort of paging in the future.
                     coroutineContext.ensureActive()
                     val chunk = iterator.nextChunk(pageSize.toUInt())
                     // Load next chunk. If null (no more items), exit the loop
-                    val members = chunk?.map(RoomMemberMapper::map) ?: break
+                    val members = chunk?.map(RoomMemberMapper::map)?.map { veroMapper.mapRoomMember(it) } ?: break
                     addAll(members)
                     Timber.i("Loaded first $size members for room $roomId")
                 }

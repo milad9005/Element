@@ -27,6 +27,7 @@ import io.element.android.libraries.matrix.api.roomlist.awaitLoaded
 import io.element.android.libraries.matrix.impl.roomlist.fullRoomWithTimeline
 import io.element.android.libraries.matrix.impl.roomlist.roomOrNull
 import io.element.android.libraries.sessionstorage.api.SessionData
+import io.element.android.libraries.veromatrix.api.VeroMapper
 import io.element.android.services.toolbox.api.systemclock.SystemClock
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -52,12 +53,13 @@ class RustRoomFactory(
     private val innerRoomListService: InnerRoomListService,
     private val isKeyBackupEnabled: suspend () -> Boolean,
     private val getSessionData: suspend () -> SessionData,
+    val veroMapper: VeroMapper,
 ) {
     @OptIn(ExperimentalCoroutinesApi::class)
     private val createRoomDispatcher = dispatchers.io.limitedParallelism(1)
     private val mutex = Mutex()
 
-    private val matrixRoomInfoMapper = MatrixRoomInfoMapper()
+    private val matrixRoomInfoMapper = MatrixRoomInfoMapper(veroMapper)
 
     private val roomSyncSubscriber: RoomSyncSubscriber = RoomSyncSubscriber(innerRoomListService, dispatchers)
 

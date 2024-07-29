@@ -68,14 +68,8 @@ class DefaultUserListPresenter @AssistedInject constructor(
         }
         var showSearchLoader by remember { mutableStateOf(false) }
         LaunchedEffect(Unit) {
-            userRepository.sync().onEach { state ->
-                showSearchLoader = state.isSearching
-                searchResults = when {
-                    state.results.isEmpty() && state.isSearching -> SearchBarResultState.Initial()
-                    state.results.isEmpty() && !state.isSearching -> SearchBarResultState.NoResultsFound()
-                    else -> SearchBarResultState.Results(state.results.toImmutableList())
-                }
-            }.launchIn(this)
+            searchResults = SearchBarResultState.Results(userRepository.search(""))
+
         }
         LaunchedEffect(searchQuery) {
             searchResults = SearchBarResultState.Initial()

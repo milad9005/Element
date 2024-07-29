@@ -45,6 +45,7 @@ showkase = "1.0.3"
 appyx = "1.4.0"
 sqldelight = "2.0.2"
 wysiwyg = "2.37.3"
+workRuntimeKtx = "2.9.0"
 telephoto = "0.11.2"
 
 # DI
@@ -211,6 +212,7 @@ android_composeCompiler = { module = "androidx.compose.compiler:compiler", versi
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
 appcompat = "androidx.appcompat:appcompat:1.7.0"
+androidx-work-runtime-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "workRuntimeKtx" }
 
 [bundles]
 

@@ -21,6 +21,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -33,6 +34,7 @@ import io.element.android.libraries.designsystem.preview.ElementPreview
 import io.element.android.libraries.designsystem.preview.PreviewsDayNight
 import io.element.android.libraries.designsystem.theme.components.HorizontalDivider
 import io.element.android.libraries.designsystem.theme.components.ListSectionHeader
+import io.element.android.libraries.designsystem.theme.components.SearchBarResultState
 import io.element.android.libraries.matrix.api.user.MatrixUser
 import io.element.android.libraries.matrix.ui.components.CheckableUserRow
 import io.element.android.libraries.matrix.ui.components.CheckableUserRowData
@@ -84,7 +86,18 @@ fun UserListView(
                 },
             )
         }
-        if (!state.isSearchActive && state.recentDirectRooms.isNotEmpty()) {
+
+        LaunchedEffect(key1 = Unit) {
+            state.eventSink.invoke(UserListEvents.UpdateSearchQuery(""))
+        }
+        val list = when (val result = state.searchResults) {
+            is SearchBarResultState.Initial -> listOf()
+            is SearchBarResultState.NoResultsFound -> listOf()
+            is SearchBarResultState.Results -> {
+                result.results.map { it.matrixUser }
+            }
+        }
+        if (!state.isSearchActive && list.isNotEmpty() && state.isMultiSelectionEnabled) {
             LazyColumn {
                 item {
                     ListSectionHeader(
@@ -92,26 +105,26 @@ fun UserListView(
                         hasDivider = false,
                     )
                 }
-                state.recentDirectRooms.forEachIndexed { index, recentDirectRoom ->
+                list.forEachIndexed { index, matrixUser ->
                     item {
                         val isSelected = state.selectedUsers.any {
-                            recentDirectRoom.matrixUser.userId == it.userId
+                            matrixUser.userId == it.userId
                         }
                         CheckableUserRow(
                             checked = isSelected,
                             onCheckedChange = {
                                 if (isSelected) {
-                                    state.eventSink(UserListEvents.RemoveFromSelection(recentDirectRoom.matrixUser))
-                                    onDeselectUser(recentDirectRoom.matrixUser)
+                                    state.eventSink(UserListEvents.RemoveFromSelection(matrixUser))
+                                    onDeselectUser(matrixUser)
                                 } else {
-                                    state.eventSink(UserListEvents.AddToSelection(recentDirectRoom.matrixUser))
-                                    onSelectUser(recentDirectRoom.matrixUser)
+                                    state.eventSink(UserListEvents.AddToSelection(matrixUser))
+                                    onSelectUser(matrixUser)
                                 }
                             },
                             data = CheckableUserRowData.Resolved(
-                                avatarData = recentDirectRoom.matrixUser.getAvatarData(AvatarSize.UserListItem),
-                                name = recentDirectRoom.matrixUser.getBestName(),
-                                subtext = recentDirectRoom.matrixUser.userId.value,
+                                avatarData = matrixUser.getAvatarData(AvatarSize.UserListItem),
+                                name = matrixUser.getBestName(),
+                                subtext = matrixUser.userId.value,
                             ),
                         )
                         if (index < state.recentDirectRooms.lastIndex) {

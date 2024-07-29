@@ -61,6 +61,8 @@ dependencies {
     implementation(projects.features.leaveroom.api)
     implementation(projects.services.analytics.api)
     implementation(libs.androidx.datastore.preferences)
+    implementation(projects.libraries.vero.impl)
+    implementation(projects.libraries.veromatrix.impl)
     api(projects.features.roomlist.api)
     ksp(libs.showkase.processor)
 

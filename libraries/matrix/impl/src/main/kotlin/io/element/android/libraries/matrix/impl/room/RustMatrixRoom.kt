@@ -111,12 +111,14 @@ class RustMatrixRoom(
 
     override val roomInfoFlow: Flow<MatrixRoomInfo> = mxCallbackFlow {
         launch {
-            val initial = innerRoom.roomInfo().let(matrixRoomInfoMapper::map)
+            val initial = matrixRoomInfoMapper.map(innerRoom.roomInfo())
             channel.trySend(initial)
         }
         innerRoom.subscribeToRoomInfoUpdates(object : RoomInfoListener {
             override fun call(roomInfo: RoomInfo) {
-                channel.trySend(matrixRoomInfoMapper.map(roomInfo))
+                launch {
+                    channel.trySend(matrixRoomInfoMapper.map(roomInfo))
+                }
             }
         })
     }
@@ -145,7 +147,7 @@ class RustMatrixRoom(
 
     private val roomCoroutineScope = sessionCoroutineScope.childScope(coroutineDispatchers.main, "RoomScope-$roomId")
     private val _syncUpdateFlow = MutableStateFlow(0L)
-    private val roomMemberListFetcher = RoomMemberListFetcher(innerRoom, roomMembersDispatcher)
+    private val roomMemberListFetcher = RoomMemberListFetcher(matrixRoomInfoMapper.veroMapper, innerRoom, roomMembersDispatcher)
 
     private val _roomNotificationSettingsStateFlow = MutableStateFlow<MatrixRoomNotificationSettingsState>(MatrixRoomNotificationSettingsState.Unknown)
     override val roomNotificationSettingsStateFlow: StateFlow<MatrixRoomNotificationSettingsState> = _roomNotificationSettingsStateFlow

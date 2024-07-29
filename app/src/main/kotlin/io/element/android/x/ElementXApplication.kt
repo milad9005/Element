@@ -18,19 +18,26 @@ package io.element.android.x
 
 import android.app.Application
 import androidx.startup.AppInitializer
+import androidx.work.Configuration
 import io.element.android.features.cachecleaner.api.CacheCleanerInitializer
 import io.element.android.libraries.di.DaggerComponentOwner
+import io.element.android.libraries.veromatrix.impl.VeroSyncWorker
+import io.element.android.libraries.worker.DaggerWorkerFactory
 import io.element.android.x.di.AppComponent
 import io.element.android.x.di.DaggerAppComponent
 import io.element.android.x.info.logApplicationInfo
 import io.element.android.x.initializer.CrashInitializer
 import io.element.android.x.initializer.TracingInitializer
+import javax.inject.Inject
 
-class ElementXApplication : Application(), DaggerComponentOwner {
+class ElementXApplication : Application(), DaggerComponentOwner, Configuration.Provider {
     override val daggerComponent: AppComponent = DaggerAppComponent.factory().create(this)
+
+    @Inject lateinit var factory: DaggerWorkerFactory
 
     override fun onCreate() {
         super.onCreate()
+        daggerComponent.inject(this);
         AppInitializer.getInstance(this).apply {
             initializeComponent(CrashInitializer::class.java)
             initializeComponent(TracingInitializer::class.java)
@@ -38,4 +45,12 @@ class ElementXApplication : Application(), DaggerComponentOwner {
         }
         logApplicationInfo(this)
     }
+
+    override val workManagerConfiguration: Configuration
+        get() {
+            return Configuration.Builder()
+                .setWorkerFactory(factory)
+                .setMinimumLoggingLevel(android.util.Log.INFO)
+                .build()
+        }
 }

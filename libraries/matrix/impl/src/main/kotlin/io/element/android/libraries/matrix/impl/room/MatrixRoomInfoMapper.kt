@@ -23,6 +23,7 @@ import io.element.android.libraries.matrix.api.room.CurrentUserMembership
 import io.element.android.libraries.matrix.api.room.MatrixRoomInfo
 import io.element.android.libraries.matrix.api.room.RoomNotificationMode
 import io.element.android.libraries.matrix.impl.room.member.RoomMemberMapper
+import io.element.android.libraries.veromatrix.api.VeroMapper
 import kotlinx.collections.immutable.ImmutableMap
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.collections.immutable.toPersistentMap
@@ -30,9 +31,9 @@ import org.matrix.rustcomponents.sdk.Membership as RustMembership
 import org.matrix.rustcomponents.sdk.RoomInfo as RustRoomInfo
 import org.matrix.rustcomponents.sdk.RoomNotificationMode as RustRoomNotificationMode
 
-class MatrixRoomInfoMapper {
-    fun map(rustRoomInfo: RustRoomInfo): MatrixRoomInfo = rustRoomInfo.let {
-        return MatrixRoomInfo(
+class MatrixRoomInfoMapper(val veroMapper: VeroMapper) {
+    suspend fun map(rustRoomInfo: RustRoomInfo): MatrixRoomInfo = rustRoomInfo.let {
+        return veroMapper.mapMatrixRoomInfo(MatrixRoomInfo(
             id = RoomId(it.id),
             name = it.displayName,
             rawName = it.rawName,
@@ -56,7 +57,7 @@ class MatrixRoomInfoMapper {
             userDefinedNotificationMode = it.userDefinedNotificationMode?.map(),
             hasRoomCall = it.hasRoomCall,
             activeRoomCallParticipants = it.activeRoomCallParticipants.toImmutableList()
-        )
+        ))
     }
 }
 

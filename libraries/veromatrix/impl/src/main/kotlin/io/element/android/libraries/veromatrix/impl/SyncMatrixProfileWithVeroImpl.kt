@@ -16,6 +16,7 @@
 
 package io.element.android.libraries.veromatrix.impl
 
+import android.content.SharedPreferences
 import com.squareup.anvil.annotations.ContributesBinding
 import io.element.android.libraries.core.extensions.mapFailure
 import io.element.android.libraries.core.mimetype.MimeTypes
@@ -27,13 +28,16 @@ import io.element.android.libraries.vero.api.contact.VeroProfile
 import io.element.android.libraries.vero.api.contact.getDisplayName
 import io.element.android.libraries.vero.api.profile.VeroProfileService
 import io.element.android.libraries.veromatrix.api.SyncMatrixProfileWithVero
+import java.io.InputStream
+import java.security.MessageDigest
 import javax.inject.Inject
 
 @ContributesBinding(AppScope::class)
 class SyncMatrixProfileWithVeroImpl @Inject constructor(
     private val authenticationService: MatrixAuthenticationService,
     private val matrixClientProvider: MatrixClientProvider,
-    private val veroProfileService: VeroProfileService
+    private val veroProfileService: VeroProfileService,
+    private val sharedPreferences: SharedPreferences
 ) : SyncMatrixProfileWithVero {
 
     override suspend fun sync(token: String): Result<VeroProfile> {
@@ -47,8 +51,12 @@ class SyncMatrixProfileWithVeroImpl @Inject constructor(
                     profile.picture?.let { pictureUrl ->
                         //client.mediaLoader.downloadExternalMediaFile(MediaSource(url = pictureUrl), null)
                         val byteArrayPicture = veroProfileService.fetchProfilePicture(pictureUrl)
-                        client.uploadAvatar(MimeTypes.Jpeg, byteArrayPicture)
-
+                        val old = sharedPreferences.getString("avatar-md5", null)
+                        val new = md5(byteArrayPicture)
+                        if (new != old) {
+                            client.uploadAvatar(MimeTypes.Jpeg, byteArrayPicture)
+                            sharedPreferences.edit().putString("avatar-md5", new).apply()
+                        }
                     }
                 }
             } else {
@@ -60,4 +68,10 @@ class SyncMatrixProfileWithVeroImpl @Inject constructor(
 
 private fun UserId.extractVeroId(): String {
     return value.replace("@", "").split(":")[0]
+}
+
+fun md5(bytes: ByteArray): String {
+    val md = MessageDigest.getInstance("MD5")
+    val digest = md.digest(bytes)
+    return digest.joinToString("") { "%02x".format(it) }
 }

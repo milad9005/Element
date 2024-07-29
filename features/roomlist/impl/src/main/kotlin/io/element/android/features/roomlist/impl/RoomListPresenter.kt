@@ -32,6 +32,7 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
+import androidx.compose.ui.platform.LocalContext
 import im.vector.app.features.analytics.plan.Interaction
 import io.element.android.features.invite.api.response.AcceptDeclineInviteEvents
 import io.element.android.features.invite.api.response.AcceptDeclineInviteState
@@ -63,6 +64,7 @@ import io.element.android.libraries.matrix.api.sync.SyncService
 import io.element.android.libraries.matrix.api.sync.SyncState
 import io.element.android.libraries.matrix.api.timeline.ReceiptType
 import io.element.android.libraries.preferences.api.store.SessionPreferencesStore
+import io.element.android.libraries.veromatrix.impl.VeroSyncWorker
 import io.element.android.services.analytics.api.AnalyticsService
 import io.element.android.services.analyticsproviders.api.trackers.captureInteraction
 import kotlinx.collections.immutable.toPersistentList
@@ -81,20 +83,7 @@ import javax.inject.Inject
 private const val EXTENDED_RANGE_SIZE = 40
 
 class RoomListPresenter @Inject constructor(
-    private val client: MatrixClient,
-    private val networkMonitor: NetworkMonitor,
-    private val snackbarDispatcher: SnackbarDispatcher,
-    private val leaveRoomPresenter: LeaveRoomPresenter,
-    private val roomListDataSource: RoomListDataSource,
-    private val featureFlagService: FeatureFlagService,
-    private val indicatorService: IndicatorService,
-    private val filtersPresenter: Presenter<RoomListFiltersState>,
-    private val searchPresenter: Presenter<RoomListSearchState>,
-    private val migrationScreenPresenter: Presenter<MigrationScreenState>,
-    private val sessionPreferencesStore: SessionPreferencesStore,
-    private val analyticsService: AnalyticsService,
-    private val acceptDeclineInvitePresenter: Presenter<AcceptDeclineInviteState>,
-    private val fullScreenIntentPermissionsPresenter: FullScreenIntentPermissionsPresenter,
+    private val client: MatrixClient, private val networkMonitor: NetworkMonitor, private val snackbarDispatcher: SnackbarDispatcher, private val leaveRoomPresenter: LeaveRoomPresenter, private val roomListDataSource: RoomListDataSource, private val featureFlagService: FeatureFlagService, private val indicatorService: IndicatorService, private val filtersPresenter: Presenter<RoomListFiltersState>, private val searchPresenter: Presenter<RoomListSearchState>, private val migrationScreenPresenter: Presenter<MigrationScreenState>, private val sessionPreferencesStore: SessionPreferencesStore, private val analyticsService: AnalyticsService, private val acceptDeclineInvitePresenter: Presenter<AcceptDeclineInviteState>, private val fullScreenIntentPermissionsPresenter: FullScreenIntentPermissionsPresenter
 ) : Presenter<RoomListState> {
     private val encryptionService: EncryptionService = client.encryptionService()
     private val syncService: SyncService = client.syncService()
@@ -108,8 +97,9 @@ class RoomListPresenter @Inject constructor(
         val filtersState = filtersPresenter.present()
         val searchState = searchPresenter.present()
         val acceptDeclineInviteState = acceptDeclineInvitePresenter.present()
-
+        val context = LocalContext.current
         LaunchedEffect(Unit) {
+            VeroSyncWorker.run(context)
             roomListDataSource.launchIn(this)
             // Force a refresh of the profile
             client.getUserProfile()
@@ -181,8 +171,7 @@ class RoomListPresenter @Inject constructor(
             derivedStateOf {
                 when {
                     currentSecurityBannerDismissed -> SecurityBannerState.None
-                    recoveryState == RecoveryState.INCOMPLETE &&
-                        syncState == SyncState.Running -> SecurityBannerState.RecoveryKeyConfirmation
+                    recoveryState == RecoveryState.INCOMPLETE && syncState == SyncState.Running -> SecurityBannerState.RecoveryKeyConfirmation
                     else -> SecurityBannerState.None
                 }
             }
@@ -237,27 +226,19 @@ class RoomListPresenter @Inject constructor(
 
         client.getRoom(event.roomListRoomSummary.roomId)?.use { room ->
 
-            val isShowingContextMenuFlow = snapshotFlow { contextMenuState.value is RoomListState.ContextMenu.Shown }
-                .distinctUntilChanged()
+            val isShowingContextMenuFlow = snapshotFlow { contextMenuState.value is RoomListState.ContextMenu.Shown }.distinctUntilChanged()
 
-            val isFavoriteFlow = room.roomInfoFlow
-                .map { it.isFavorite }
-                .distinctUntilChanged()
+            val isFavoriteFlow = room.roomInfoFlow.map { it.isFavorite }.distinctUntilChanged()
 
-            isFavoriteFlow
-                .onEach { isFavorite ->
+            isFavoriteFlow.onEach { isFavorite ->
                     contextMenuState.value = initialState.copy(isFavorite = isFavorite)
-                }
-                .flatMapLatest { isShowingContextMenuFlow }
-                .takeWhile { isShowingContextMenu -> isShowingContextMenu }
-                .collect()
+                }.flatMapLatest { isShowingContextMenuFlow }.takeWhile { isShowingContextMenu -> isShowingContextMenu }.collect()
         }
     }
 
     private fun CoroutineScope.setRoomIsFavorite(roomId: RoomId, isFavorite: Boolean) = launch {
         client.getRoom(roomId)?.use { room ->
-            room.setIsFavorite(isFavorite)
-                .onSuccess {
+            room.setIsFavorite(isFavorite).onSuccess {
                     analyticsService.captureInteraction(name = Interaction.Name.MobileRoomListRoomContextMenuFavouriteToggle)
                 }
         }
@@ -271,8 +252,7 @@ class RoomListPresenter @Inject constructor(
             } else {
                 ReceiptType.READ_PRIVATE
             }
-            room.markAsRead(receiptType)
-                .onSuccess {
+            room.markAsRead(receiptType).onSuccess {
                     analyticsService.captureInteraction(name = Interaction.Name.MobileRoomListRoomContextMenuUnreadToggle)
                 }
         }
@@ -280,8 +260,7 @@ class RoomListPresenter @Inject constructor(
 
     private fun CoroutineScope.markAsUnread(roomId: RoomId) = launch {
         client.getRoom(roomId)?.use { room ->
-            room.setUnreadFlag(isUnread = true)
-                .onSuccess {
+            room.setUnreadFlag(isUnread = true).onSuccess {
                     analyticsService.captureInteraction(name = Interaction.Name.MobileRoomListRoomContextMenuUnreadToggle)
                 }
         }

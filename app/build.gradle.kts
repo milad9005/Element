@@ -20,8 +20,6 @@ import com.android.build.api.variant.FilterConfiguration.FilterType.ABI
 import extension.allFeaturesImpl
 import extension.allLibrariesImpl
 import extension.allServicesImpl
-import extension.gitBranchName
-import extension.gitRevision
 import extension.koverDependencies
 import extension.locales
 import extension.setupKover

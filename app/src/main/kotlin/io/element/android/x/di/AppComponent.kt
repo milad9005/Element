@@ -16,6 +16,7 @@
 
 package io.element.android.x.di
 
+import android.app.Application
 import android.content.Context
 import com.squareup.anvil.annotations.MergeComponent
 import dagger.BindsInstance
@@ -24,10 +25,14 @@ import io.element.android.libraries.architecture.NodeFactoriesBindings
 import io.element.android.libraries.di.AppScope
 import io.element.android.libraries.di.ApplicationContext
 import io.element.android.libraries.di.SingleIn
+import io.element.android.x.ElementXApplication
 
 @SingleIn(AppScope::class)
 @MergeComponent(AppScope::class)
 interface AppComponent : NodeFactoriesBindings {
+
+    fun inject(application: ElementXApplication)
+
     @Component.Factory
     interface Factory {
         fun create(

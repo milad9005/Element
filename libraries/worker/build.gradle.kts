@@ -11,18 +11,14 @@ anvil {
 }
 
 android {
-    namespace = "io.element.android.libraries.veromatrix.impl"
+    namespace = "io.element.android.libraries.worker"
 }
 
 dependencies {
     anvil(projects.anvilcodegen)
     implementation(projects.appconfig)
     implementation(libs.dagger)
-    implementation(libs.kotlinx.collections.immutable)
     implementation(projects.libraries.core)
     implementation(projects.libraries.di)
-    implementation(projects.libraries.vero.impl)
-    implementation(projects.libraries.matrix.impl)
-    implementation(projects.libraries.worker)
-    api(projects.libraries.veromatrix.api)
+    api(libs.androidx.work.runtime.ktx)
 }

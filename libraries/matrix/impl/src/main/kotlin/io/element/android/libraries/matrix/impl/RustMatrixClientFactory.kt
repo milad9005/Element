@@ -24,6 +24,8 @@ import io.element.android.libraries.matrix.impl.proxy.ProxyProvider
 import io.element.android.libraries.network.useragent.UserAgentProvider
 import io.element.android.libraries.sessionstorage.api.SessionData
 import io.element.android.libraries.sessionstorage.api.SessionStore
+import io.element.android.libraries.vero.api.profile.VeroProfileService
+import io.element.android.libraries.veromatrix.api.VeroMapper
 import io.element.android.services.toolbox.api.systemclock.SystemClock
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.withContext
@@ -44,6 +46,7 @@ class RustMatrixClientFactory @Inject constructor(
     private val proxyProvider: ProxyProvider,
     private val clock: SystemClock,
     private val utdTracker: UtdTracker,
+    private val veroMapper: VeroMapper,
 ) {
     suspend fun create(sessionData: SessionData): RustMatrixClient = withContext(coroutineDispatchers.io) {
         val client = getBaseClientBuilder(sessionData.sessionPath)
@@ -68,6 +71,7 @@ class RustMatrixClientFactory @Inject constructor(
             baseDirectory = baseDirectory,
             baseCacheDirectory = cacheDirectory,
             clock = clock,
+            veroMapper = veroMapper,
         )
     }
 

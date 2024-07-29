@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 New Vector Ltd
+ * Copyright (c) 2024 New Vector Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,14 @@
  * limitations under the License.
  */
 
-package io.element.android.libraries.usersearch.api
+package io.element.android.libraries.veromatrix.api
 
-import kotlinx.coroutines.flow.Flow
+import io.element.android.libraries.matrix.api.room.MatrixRoomInfo
+import io.element.android.libraries.matrix.api.room.RoomMember
 
-interface UserRepository {
-    fun search(query: String): Flow<UserSearchResultState>
+interface VeroMapper {
+
+    suspend fun mapRoomMember(roomMember: RoomMember): RoomMember
+
+    suspend fun mapMatrixRoomInfo(matrixRoomInfo: MatrixRoomInfo): MatrixRoomInfo
 }

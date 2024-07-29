@@ -23,11 +23,11 @@ typealias VeroProfiles = Collection<VeroProfile>
 
 @Serializable data class VeroProfile(
     @SerialName("id") val id: String?,
-    @SerialName("firstname") val firstname: String?,
-    @SerialName("lastname") val lastname: String?,
-    @SerialName("username") val username: String?,
+    @SerialName("firstname") val firstname: String? = null,
+    @SerialName("lastname") val lastname: String? = null,
+    @SerialName("username") val username: String? = null,
     //@SerialName("loop")  val loop: String,
-    @SerialName("picture") val picture: String?
+    @SerialName("picture") val picture: String? = null
 )
 
 fun VeroProfile.getDisplayName(): String? {

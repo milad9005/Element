@@ -5,6 +5,7 @@ import io.element.android.libraries.core.coroutine.CoroutineDispatchers
 import io.element.android.libraries.core.extensions.mapFailure
 import io.element.android.libraries.di.AppScope
 import io.element.android.libraries.network.util.ApiResponse
+import io.element.android.libraries.network.util.NetworkException
 import io.element.android.libraries.network.util.safeExecute
 import io.element.android.libraries.vero.api.auth.VeroAuthenticationService
 import io.element.android.libraries.vero.api.auth.VeroCredential
@@ -79,9 +80,13 @@ class VeroAuthenticationServiceImpl @Inject constructor(
     }
 
     private fun Throwable.mapVeroException(): Throwable {
-        return when (this) {
-            is HttpException -> convertor.convert(this)?.toVeroException() ?: return this
-            else -> this
+        return try {
+            when (this) {
+                is HttpException -> convertor.convert(this)?.toVeroException() ?: return this
+                else -> this
+            }
+        } catch (e: Exception) {
+            NetworkException.MalformedJsonException(e.message.toString())
         }
     }
 }
