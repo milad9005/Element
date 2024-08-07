@@ -18,36 +18,30 @@ package io.element.android.libraries.androidutils.file
 
 import android.content.Context
 import androidx.annotation.WorkerThread
-import io.element.android.libraries.core.data.tryOrNull
 import timber.log.Timber
 import java.io.File
 import java.util.UUID
 
 fun File.safeDelete() {
     if (exists().not()) return
-    tryOrNull(
-        onError = {
-            Timber.e(it, "Error, unable to delete file $path")
-        },
-        operation = {
-            if (delete().not()) {
-                Timber.w("Warning, unable to delete file $path")
-            }
+    try {
+
+        if (delete().not()) {
+            Timber.w("Warning, unable to delete file $path")
         }
-    )
+    } catch (e: Exception) {
+        Timber.e("Error, unable to delete file $path")
+        }
 }
 
 fun File.safeRenameTo(dest: File) {
-    tryOrNull(
-        onError = {
-            Timber.e(it, "Error, unable to rename file $path to ${dest.path}")
-        },
-        operation = {
-            if (renameTo(dest).not()) {
-                Timber.w("Warning, unable to rename file $path to ${dest.path}")
-            }
+    try {
+        if (renameTo(dest).not()) {
+            Timber.w("Warning, unable to rename file $path to ${dest.path}")
         }
-    )
+    } catch (e: Exception) {
+        Timber.e("Error, unable to rename file $path to ${dest.path}")
+    }
 }
 
 fun Context.createTmpFile(baseDir: File = cacheDir, extension: String? = null): File {

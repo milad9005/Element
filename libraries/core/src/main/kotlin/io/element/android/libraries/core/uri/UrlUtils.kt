@@ -16,12 +16,13 @@
 
 package io.element.android.libraries.core.uri
 
+import java.net.URI
 import java.net.URL
 
 fun String.isValidUrl(): Boolean {
     return try {
-        URL(this)
-        true
+        val uri = URI(this)
+        uri.scheme == "http" || uri.scheme == "https"
     } catch (t: Throwable) {
         false
     }

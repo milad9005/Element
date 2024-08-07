@@ -82,6 +82,10 @@ class FakeMatrixAuthenticationService(
         loginError?.let { Result.failure(it) } ?: Result.success(A_USER_ID)
     }
 
+    override suspend fun loginWithToken(token: String): Result<SessionId> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun getOidcUrl(): Result<OidcDetails> = simulateLongTask {
         oidcError?.let { Result.failure(it) } ?: Result.success(A_OIDC_DATA)
     }

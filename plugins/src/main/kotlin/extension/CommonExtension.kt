@@ -19,9 +19,46 @@ package extension
 import Versions
 import com.android.build.api.dsl.CommonExtension
 import org.gradle.accessors.dm.LibrariesForLibs
-import org.gradle.api.JavaVersion
 import org.gradle.api.Project
+import org.gradle.api.publish.maven.MavenPublication
+import org.gradle.kotlin.dsl.create
 import java.io.File
+
+fun CommonExtension<*, *, *, *, *, *>.publishConfig(project: Project) {
+    project.afterEvaluate { // Ensure the configuration is applied after project evaluation
+        project.extensions.configure(org.gradle.api.publish.PublishingExtension::class.java) {
+            publications {
+                create<MavenPublication>("DebugAar") {
+                    println(projectDir.name + " PATh")
+                    println(path + " name")
+
+                    groupId = path
+                    artifactId = name
+                    version = "1.0.0-SNAPSHOT"
+
+                    // Ensure the task exists before referencing it
+                    artifact(project.tasks.getByName("bundleDebugAar"))
+
+                    pom.withXml {
+                        val dependenciesNode = asNode().appendNode("dependencies")
+
+                        project.configurations.getByName("implementation").allDependencies.forEach { dependency ->
+                            val dependencyNode = dependenciesNode.appendNode("dependency")
+                            dependencyNode.appendNode("groupId", dependency.group)
+                            dependencyNode.appendNode("artifactId", dependency.name)
+                            dependencyNode.appendNode("version", dependency.version)
+                        }
+                    }
+                }
+            }
+
+            repositories {
+                mavenLocal() // Publish to local Maven repository
+            }
+        }
+    }
+}
+
 
 fun CommonExtension<*, *, *, *, *, *>.androidConfig(project: Project) {
     defaultConfig {
@@ -33,11 +70,7 @@ fun CommonExtension<*, *, *, *, *, *>.androidConfig(project: Project) {
             useSupportLibrary = true
             generatedDensities()
         }
-    }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
     }
 
     testOptions {

@@ -28,6 +28,7 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
     id("com.autonomousapps.dependency-analysis")
+
 }
 
 android {
@@ -35,6 +36,13 @@ android {
     composeConfig(libs)
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
+    }
+
+    kotlin{
+        jvmToolchain(17)
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 }
 

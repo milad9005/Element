@@ -19,6 +19,8 @@
  */
 import extension.androidConfig
 import extension.commonDependencies
+import extension.publishConfig
+import gradle.kotlin.dsl.accessors._657459398ba5892cee813230acbeff5a.kotlinOptions
 import org.gradle.accessors.dm.LibrariesForLibs
 
 val libs = the<LibrariesForLibs>()
@@ -26,12 +28,21 @@ plugins {
     id("com.android.library")
     id("kotlin-android")
     id("com.autonomousapps.dependency-analysis")
+    id("maven-publish")
 }
 
 android {
     androidConfig(project)
+    publishConfig(project)
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
+    }
+
+    kotlin{
+        jvmToolchain(21)
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_21.toString()
     }
 }
 
@@ -39,3 +50,4 @@ dependencies {
     commonDependencies(libs)
     coreLibraryDesugaring(libs.android.desugar)
 }
+

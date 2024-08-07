@@ -33,6 +33,7 @@ import javax.inject.Inject
 class ElementXApplication : Application(), DaggerComponentOwner, Configuration.Provider {
     override val daggerComponent: AppComponent = DaggerAppComponent.factory().create(this)
 
+
     @Inject lateinit var factory: DaggerWorkerFactory
 
     override fun onCreate() {

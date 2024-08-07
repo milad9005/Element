@@ -1,5 +1,7 @@
 import java.net.URI
 
+include(":app")
+
 /*
  * Copyright (c) 2022 New Vector Ltd
  *
@@ -17,6 +19,8 @@ import java.net.URI
  */
 
 pluginManagement {
+
+
     repositories {
         includeBuild("plugins")
         gradlePluginPortal()
@@ -52,16 +56,20 @@ dependencyResolutionManagement {
                 includeModule("com.github.matrix-org", "matrix-analytics-events")
             }
         }
+        mavenLocal()
         flatDir {
             dirs("libraries/matrix/libs")
         }
     }
 }
+plugins {
+    id ("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
+}
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 rootProject.name = "ElementX"
-include(":app")
+include(":veroChat")
 include(":appnav")
 include(":appconfig")
 include(":tests:konsist")

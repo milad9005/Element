@@ -1,3 +1,5 @@
+
+
 /*
  * Copyright (c) 2023 New Vector Ltd
  *
@@ -24,6 +26,7 @@ android {
     buildFeatures {
         buildConfig = true
     }
+
 }
 
 anvil {

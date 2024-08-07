@@ -32,7 +32,7 @@ class FakeUserRepository : UserRepository {
         return flow
     }
 
-    override fun sync(): Flow<UserSearchResultState> {
+    fun sync(): Flow<UserSearchResultState> {
         TODO("Not yet implemented")
     }
 

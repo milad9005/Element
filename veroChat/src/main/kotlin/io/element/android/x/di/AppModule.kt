@@ -47,6 +47,10 @@ import java.io.File
 @Module
 @ContributesTo(AppScope::class)
 object AppModule {
+
+    const val APPLICATION_ID = "io.element.android.x"
+    const val VERSION_NAME = "1.0.0"
+
     @Provides
     fun providesBaseDirectory(@ApplicationContext context: Context): File {
         return File(context.filesDir, "sessions")
@@ -83,10 +87,10 @@ object AppModule {
         applicationName = ApplicationConfig.APPLICATION_NAME.takeIf { it.isNotEmpty() } ?: context.getString(R.string.app_name),
         productionApplicationName = ApplicationConfig.PRODUCTION_APPLICATION_NAME,
         desktopApplicationName = ApplicationConfig.DESKTOP_APPLICATION_NAME,
-        applicationId = BuildConfig.APPLICATION_ID,
+        applicationId = APPLICATION_ID,
         // TODO EAx Config.LOW_PRIVACY_LOG_ENABLE,
         lowPrivacyLoggingEnabled = false,
-        versionName = BuildConfig.VERSION_NAME,
+        versionName = VERSION_NAME,
         versionCode = context.getVersionCodeFromManifest(),
         gitRevision = BuildConfig.GIT_REVISION,
         gitBranchName = BuildConfig.GIT_BRANCH_NAME,
