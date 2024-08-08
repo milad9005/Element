@@ -30,14 +30,14 @@ anvil {
 }
 
 dependencies {
-    implementation(projects.anvilannotations)
-    anvil(projects.anvilcodegen)
-    implementation(projects.libraries.androidutils)
-    implementation(projects.libraries.architecture)
-    implementation(projects.libraries.core)
-    implementation(projects.libraries.designsystem)
-    implementation(projects.libraries.uiStrings)
-    api(projects.features.viewfolder.api)
+    implementation(libs.vero.chat.anvilannotations)
+    anvil(libs.vero.chat.anvilcodegen)
+    implementation(libs.vero.chat.libraries.androidutils)
+    implementation(libs.vero.chat.libraries.architecture)
+    implementation(libs.vero.chat.libraries.core)
+    implementation(libs.vero.chat.libraries.designsystem)
+    implementation(libs.vero.chat.libraries.ui.strings)
+    api(libs.vero.chat.features.viewfolder.api)
     ksp(libs.showkase.processor)
 
     testImplementation(libs.test.junit)
@@ -46,6 +46,6 @@ dependencies {
     testImplementation(libs.molecule.runtime)
     testImplementation(libs.test.truth)
     testImplementation(libs.test.turbine)
-    testImplementation(projects.tests.testutils)
-    testImplementation(projects.libraries.matrix.test)
+    testImplementation(libs.vero.chat.tests.testutils)
+    testImplementation(libs.vero.chat.libraries.matrix.test)
 }

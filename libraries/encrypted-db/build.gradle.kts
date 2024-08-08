@@ -34,5 +34,5 @@ dependencies {
     implementation(libs.sqlite)
     implementation(libs.androidx.security.crypto)
 
-    implementation(projects.libraries.androidutils)
+    implementation(libs.vero.chat.libraries.androidutils)
 }

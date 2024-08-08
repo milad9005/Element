@@ -25,6 +25,6 @@ dependencies {
     implementation(libs.androidx.corektx)
     implementation(libs.coroutines.core)
     implementation(libs.coil.compose)
-    implementation(projects.libraries.matrix.api)
-    implementation(projects.libraries.pushproviders.api)
+    implementation(libs.vero.chat.libraries.matrix.api)
+    implementation(libs.vero.chat.libraries.pushproviders.api)
 }

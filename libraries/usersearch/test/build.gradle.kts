@@ -23,8 +23,8 @@ android {
 }
 
 dependencies {
-    implementation(projects.libraries.architecture)
-    implementation(projects.libraries.matrixui)
-    implementation(projects.libraries.matrix.api)
-    api(projects.libraries.usersearch.api)
+    implementation(libs.vero.chat.libraries.architecture)
+    implementation(libs.vero.chat.libraries.matrixui)
+    implementation(libs.vero.chat.libraries.matrix.api)
+    api(libs.vero.chat.libraries.usersearch.api)
 }

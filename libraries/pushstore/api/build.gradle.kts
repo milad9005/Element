@@ -23,5 +23,5 @@ android {
 
 dependencies {
     implementation(libs.coroutines.core)
-    implementation(projects.libraries.matrix.api)
+    implementation(libs.vero.chat.libraries.matrix.api)
 }

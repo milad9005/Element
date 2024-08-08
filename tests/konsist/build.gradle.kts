@@ -29,8 +29,8 @@ dependencies {
     testImplementation(libs.test.junit)
     testImplementation(libs.test.konsist)
     testImplementation(libs.test.truth)
-    testImplementation(projects.libraries.architecture)
-    testImplementation(projects.libraries.designsystem)
+    testImplementation(libs.vero.chat.libraries.architecture)
+    testImplementation(libs.vero.chat.libraries.designsystem)
 }
 
 // Make sure Konsist tests run for 'check' tasks. This is needed because otherwise we'd have to either:

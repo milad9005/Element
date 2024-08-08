@@ -28,11 +28,11 @@ anvil {
 }
 
 dependencies {
-    anvil(projects.anvilcodegen)
+    anvil(libs.vero.chat.anvilcodegen)
     implementation(libs.dagger)
-    implementation(projects.anvilannotations)
-    implementation(projects.libraries.di)
-    api(projects.libraries.cryptography.api)
+    implementation(libs.vero.chat.anvilannotations)
+    implementation(libs.vero.chat.libraries.di)
+    api(libs.vero.chat.libraries.cryptography.api)
 
     testImplementation(libs.test.junit)
     testImplementation(libs.test.truth)

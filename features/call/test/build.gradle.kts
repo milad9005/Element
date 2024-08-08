@@ -24,11 +24,11 @@ android {
 }
 
 dependencies {
-    implementation(projects.libraries.architecture)
-    implementation(projects.libraries.core)
+    implementation(libs.vero.chat.libraries.architecture)
+    implementation(libs.vero.chat.libraries.core)
 
-    api(projects.features.call.api)
-    implementation(projects.features.call.impl)
-    implementation(projects.libraries.matrix.api)
-    implementation(projects.libraries.matrix.test)
+    api(libs.vero.chat.features.call.api)
+    implementation(libs.vero.chat.features.call.impl)
+    implementation(libs.vero.chat.libraries.matrix.api)
+    implementation(libs.vero.chat.libraries.matrix.test)
 }

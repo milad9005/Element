@@ -1,3 +1,5 @@
+import extension.publish
+
 /*
  * Copyright (c) 2022 New Vector Ltd
  *
@@ -16,8 +18,11 @@
 plugins {
     alias(libs.plugins.kotlin.jvm)
     id("com.android.lint")
+    id("maven-publish")
 }
 
 dependencies {
     api(libs.inject)
 }
+
+publish()

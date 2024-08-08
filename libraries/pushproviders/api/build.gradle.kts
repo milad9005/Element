@@ -22,6 +22,6 @@ android {
 }
 
 dependencies {
-    implementation(projects.libraries.core)
-    implementation(projects.libraries.matrix.api)
+    implementation(libs.vero.chat.libraries.core)
+    implementation(libs.vero.chat.libraries.matrix.api)
 }

@@ -23,9 +23,9 @@ android {
 }
 
 dependencies {
-    api(projects.libraries.matrix.api)
+    api(libs.vero.chat.libraries.matrix.api)
     api(libs.coroutines.core)
     implementation(libs.coroutines.test)
-    implementation(projects.tests.testutils)
-    implementation(projects.libraries.pushstore.api)
+    implementation(libs.vero.chat.tests.testutils)
+    implementation(libs.vero.chat.libraries.pushstore.api)
 }

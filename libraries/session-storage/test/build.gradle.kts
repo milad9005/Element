@@ -22,6 +22,6 @@ android {
 }
 
 dependencies {
-    implementation(projects.libraries.matrix.api)
-    implementation(projects.libraries.sessionStorage.api)
+    implementation(libs.vero.chat.libraries.matrix.api)
+    implementation(libs.vero.chat.libraries.session.storage.api)
 }

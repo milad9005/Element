@@ -24,8 +24,8 @@ android {
 
 dependencies {
     implementation(libs.coroutines.core)
-    implementation(projects.libraries.matrix.api)
-    implementation(projects.libraries.matrix.test)
-    implementation(projects.libraries.architecture)
-    api(projects.features.createroom.api)
+    implementation(libs.vero.chat.libraries.matrix.api)
+    implementation(libs.vero.chat.libraries.matrix.test)
+    implementation(libs.vero.chat.libraries.architecture)
+    api(libs.vero.chat.features.createroom.api)
 }

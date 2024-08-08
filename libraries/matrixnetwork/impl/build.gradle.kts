@@ -34,15 +34,15 @@ anvil {
 }
 
 dependencies {
-    api(projects.libraries.matrixnetwork.api)
-    implementation(projects.appconfig)
-    implementation(projects.libraries.di)
+    api(libs.vero.chat.libraries.matrixnetwork.api)
+    implementation(libs.vero.chat.appconfig)
+    implementation(libs.vero.chat.libraries.di)
     implementation(libs.dagger)
-    implementation(projects.libraries.androidutils)
-    implementation(projects.libraries.core)
-    implementation(projects.services.analytics.api)
+    implementation(libs.vero.chat.libraries.androidutils)
+    implementation(libs.vero.chat.libraries.core)
+    implementation(libs.vero.chat.services.analytics.api)
     implementation(libs.serialization.json)
-    implementation(projects.libraries.network)
+    implementation(libs.vero.chat.libraries.network)
 
     implementation(platform(libs.network.okhttp.bom))
     implementation(libs.network.okhttp)
@@ -54,5 +54,5 @@ dependencies {
 
     testImplementation(libs.test.junit)
     testImplementation(libs.test.truth)
-    testImplementation(projects.libraries.matrix.test)
+    testImplementation(libs.vero.chat.libraries.matrix.test)
 }

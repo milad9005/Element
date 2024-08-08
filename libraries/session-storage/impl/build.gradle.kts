@@ -29,15 +29,15 @@ anvil {
 
 dependencies {
     implementation(libs.dagger)
-    implementation(projects.libraries.androidutils)
-    implementation(projects.libraries.core)
-    implementation(projects.libraries.encryptedDb)
-    api(projects.libraries.sessionStorage.api)
+    implementation(libs.vero.chat.libraries.androidutils)
+    implementation(libs.vero.chat.libraries.core)
+    implementation(libs.vero.chat.libraries.encrypteddb)
+    api(libs.vero.chat.libraries.session.storage.api)
     implementation(libs.sqldelight.driver.android)
     implementation(libs.sqlcipher)
     implementation(libs.sqlite)
     implementation(libs.androidx.security.crypto)
-    implementation(projects.libraries.di)
+    implementation(libs.vero.chat.libraries.di)
     implementation(libs.sqldelight.coroutines)
 
     testImplementation(libs.test.junit)
@@ -45,7 +45,7 @@ dependencies {
     testImplementation(libs.test.turbine)
     testImplementation(libs.coroutines.test)
     testImplementation(libs.sqldelight.driver.jvm)
-    testImplementation(projects.tests.testutils)
+    testImplementation(libs.vero.chat.tests.testutils)
 }
 
 sqldelight {

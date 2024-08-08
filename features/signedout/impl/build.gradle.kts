@@ -30,24 +30,24 @@ anvil {
 }
 
 dependencies {
-    implementation(projects.anvilannotations)
-    anvil(projects.anvilcodegen)
-    api(projects.features.signedout.api)
-    implementation(projects.libraries.core)
-    implementation(projects.libraries.architecture)
-    implementation(projects.libraries.matrix.api)
-    implementation(projects.libraries.matrixui)
-    implementation(projects.libraries.designsystem)
-    implementation(projects.libraries.uiStrings)
+    implementation(libs.vero.chat.anvilannotations)
+    anvil(libs.vero.chat.anvilcodegen)
+    api(libs.vero.chat.features.signedout.api)
+    implementation(libs.vero.chat.libraries.core)
+    implementation(libs.vero.chat.libraries.architecture)
+    implementation(libs.vero.chat.libraries.matrix.api)
+    implementation(libs.vero.chat.libraries.matrixui)
+    implementation(libs.vero.chat.libraries.designsystem)
+    implementation(libs.vero.chat.libraries.ui.strings)
 
     testImplementation(libs.test.junit)
     testImplementation(libs.coroutines.test)
     testImplementation(libs.molecule.runtime)
     testImplementation(libs.test.truth)
     testImplementation(libs.test.turbine)
-    testImplementation(projects.libraries.matrix.test)
-    testImplementation(projects.libraries.sessionStorage.implMemory)
-    testImplementation(projects.tests.testutils)
+    testImplementation(libs.vero.chat.libraries.matrix.test)
+    testImplementation(libs.vero.chat.libraries.session.storage.impl.memory)
+    testImplementation(libs.vero.chat.tests.testutils)
 
     ksp(libs.showkase.processor)
 }

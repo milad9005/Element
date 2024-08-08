@@ -30,8 +30,8 @@ anvil {
 }
 
 dependencies {
-    implementation(projects.anvilannotations)
-    anvil(projects.anvilcodegen)
-    implementation(projects.libraries.designsystem)
+    implementation(libs.vero.chat.anvilannotations)
+    anvil(libs.vero.chat.anvilcodegen)
+    implementation(libs.vero.chat.libraries.designsystem)
     ksp(libs.showkase.processor)
 }

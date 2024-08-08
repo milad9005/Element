@@ -35,32 +35,32 @@ anvil {
 }
 
 dependencies {
-    anvil(projects.anvilcodegen)
-    implementation(projects.anvilannotations)
+    anvil(libs.vero.chat.anvilcodegen)
+    implementation(libs.vero.chat.anvilannotations)
 
     implementation(libs.accompanist.permission)
     implementation(libs.androidx.datastore.preferences)
 
-    implementation(projects.libraries.core)
-    implementation(projects.libraries.androidutils)
-    implementation(projects.libraries.architecture)
-    implementation(projects.libraries.matrix.api)
-    implementation(projects.libraries.matrixui)
-    implementation(projects.libraries.troubleshoot.api)
-    implementation(projects.libraries.designsystem)
-    implementation(projects.libraries.uiStrings)
-    implementation(projects.services.toolbox.api)
-    api(projects.libraries.permissions.api)
+    implementation(libs.vero.chat.libraries.core)
+    implementation(libs.vero.chat.libraries.androidutils)
+    implementation(libs.vero.chat.libraries.architecture)
+    implementation(libs.vero.chat.libraries.matrix.api)
+    implementation(libs.vero.chat.libraries.matrixui)
+    implementation(libs.vero.chat.libraries.troubleshoot.api)
+    implementation(libs.vero.chat.libraries.designsystem)
+    implementation(libs.vero.chat.libraries.ui.strings)
+    implementation(libs.vero.chat.services.toolbox.api)
+    api(libs.vero.chat.libraries.permissions.api)
 
     testImplementation(libs.test.junit)
     testImplementation(libs.coroutines.test)
     testImplementation(libs.molecule.runtime)
     testImplementation(libs.test.truth)
     testImplementation(libs.test.turbine)
-    testImplementation(projects.libraries.matrix.test)
-    testImplementation(projects.libraries.permissions.test)
-    testImplementation(projects.services.toolbox.test)
-    testImplementation(projects.tests.testutils)
+    testImplementation(libs.vero.chat.libraries.matrix.test)
+    testImplementation(libs.vero.chat.libraries.permissions.test)
+    testImplementation(libs.vero.chat.services.toolbox.test)
+    testImplementation(libs.vero.chat.tests.testutils)
 
     ksp(libs.showkase.processor)
 }

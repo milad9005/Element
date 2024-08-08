@@ -41,7 +41,7 @@ dependencies {
 
 //    implementation("co.vero.chat:vero-chat:1.0.0-SNAPSHOT")
 
-    implementation(projects.veroChat)
+    implementation(libs.vero.chat.veroChat)
 
     implementation(libs.androidx.corektx)
     implementation(libs.androidx.lifecycle.runtime)

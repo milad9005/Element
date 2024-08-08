@@ -28,11 +28,11 @@ anvil {
 }
 
 dependencies {
-    api(projects.libraries.preferences.api)
+    api(libs.vero.chat.libraries.preferences.api)
     implementation(libs.dagger)
     implementation(libs.androidx.datastore.preferences)
-    implementation(projects.libraries.androidutils)
-    implementation(projects.libraries.di)
-    implementation(projects.libraries.core)
-    implementation(projects.libraries.matrix.api)
+    implementation(libs.vero.chat.libraries.androidutils)
+    implementation(libs.vero.chat.libraries.di)
+    implementation(libs.vero.chat.libraries.core)
+    implementation(libs.vero.chat.libraries.matrix.api)
 }

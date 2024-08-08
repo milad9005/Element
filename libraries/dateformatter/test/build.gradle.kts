@@ -22,7 +22,7 @@ android {
     namespace = "io.element.android.libraries.dateformatter.test"
 
     dependencies {
-        api(projects.libraries.dateformatter.api)
+        api(libs.vero.chat.libraries.dateformatter.api)
         api(libs.datetime)
     }
 }

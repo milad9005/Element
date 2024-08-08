@@ -35,9 +35,9 @@ anvil {
 
 dependencies {
     implementation(libs.dagger)
-    implementation(projects.libraries.core)
-    implementation(projects.libraries.di)
-    implementation(projects.libraries.matrix.api)
+    implementation(libs.vero.chat.libraries.core)
+    implementation(libs.vero.chat.libraries.di)
+    implementation(libs.vero.chat.libraries.matrix.api)
     implementation(platform(libs.network.okhttp.bom))
     implementation(libs.network.okhttp)
     implementation(libs.network.okhttp.logging)

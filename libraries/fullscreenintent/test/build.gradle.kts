@@ -23,6 +23,6 @@ android {
 }
 
 dependencies {
-    api(projects.libraries.fullscreenintent.api)
-    implementation(projects.libraries.architecture)
+    api(libs.vero.chat.libraries.fullscreenintent.api)
+    implementation(libs.vero.chat.libraries.architecture)
 }

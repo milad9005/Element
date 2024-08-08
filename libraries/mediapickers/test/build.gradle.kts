@@ -23,9 +23,9 @@ android {
     namespace = "io.element.android.libraries.mediapickers.test"
 
     dependencies {
-        implementation(projects.libraries.core)
-        implementation(projects.libraries.di)
+        implementation(libs.vero.chat.libraries.core)
+        implementation(libs.vero.chat.libraries.di)
         implementation(libs.inject)
-        api(projects.libraries.mediapickers.api)
+        api(libs.vero.chat.libraries.mediapickers.api)
     }
 }

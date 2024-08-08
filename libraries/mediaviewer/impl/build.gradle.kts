@@ -28,21 +28,21 @@ anvil {
 }
 
 dependencies {
-    anvil(projects.anvilcodegen)
-    implementation(projects.anvilannotations)
+    anvil(libs.vero.chat.anvilcodegen)
+    implementation(libs.vero.chat.anvilannotations)
 
     implementation(libs.coroutines.core)
     implementation(libs.dagger)
 
-    api(projects.libraries.mediaviewer.api)
-    implementation(projects.libraries.androidutils)
-    implementation(projects.libraries.core)
-    implementation(projects.libraries.di)
-    implementation(projects.libraries.matrix.api)
+    api(libs.vero.chat.libraries.mediaviewer.api)
+    implementation(libs.vero.chat.libraries.androidutils)
+    implementation(libs.vero.chat.libraries.core)
+    implementation(libs.vero.chat.libraries.di)
+    implementation(libs.vero.chat.libraries.matrix.api)
 
-    testImplementation(projects.libraries.matrix.test)
-    testImplementation(projects.libraries.mediaviewer.test)
-    testImplementation(projects.tests.testutils)
+    testImplementation(libs.vero.chat.libraries.matrix.test)
+    testImplementation(libs.vero.chat.libraries.mediaviewer.test)
+    testImplementation(libs.vero.chat.tests.testutils)
     testImplementation(libs.test.junit)
     testImplementation(libs.test.truth)
     testImplementation(libs.test.mockk)

@@ -28,19 +28,19 @@ android {
 }
 
 dependencies {
-    anvil(projects.anvilcodegen)
+    anvil(libs.vero.chat.anvilcodegen)
     implementation(libs.dagger)
-    implementation(projects.libraries.di)
-    implementation(projects.libraries.featureflag.api)
-    implementation(projects.libraries.matrix.api)
-    implementation(projects.anvilannotations)
+    implementation(libs.vero.chat.libraries.di)
+    implementation(libs.vero.chat.libraries.featureflag.api)
+    implementation(libs.vero.chat.libraries.matrix.api)
+    implementation(libs.vero.chat.anvilannotations)
 
     implementation(libs.coroutines.core)
 
-    api(projects.libraries.indicator.api)
+    api(libs.vero.chat.libraries.indicator.api)
 
-    testImplementation(projects.libraries.featureflag.test)
-    testImplementation(projects.libraries.matrix.test)
+    testImplementation(libs.vero.chat.libraries.featureflag.test)
+    testImplementation(libs.vero.chat.libraries.matrix.test)
     testImplementation(libs.test.junit)
     testImplementation(libs.coroutines.test)
     testImplementation(libs.test.turbine)

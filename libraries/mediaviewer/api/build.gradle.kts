@@ -34,8 +34,8 @@ anvil {
 }
 
 dependencies {
-    anvil(projects.anvilcodegen)
-    implementation(projects.anvilannotations)
+    anvil(libs.vero.chat.anvilcodegen)
+    implementation(libs.vero.chat.anvilannotations)
 
     implementation(libs.coil.compose)
     implementation(libs.androidx.media3.exoplayer)
@@ -46,18 +46,18 @@ dependencies {
     implementation(libs.vanniktech.blurhash)
     implementation(libs.telephoto.flick)
 
-    implementation(projects.libraries.androidutils)
-    implementation(projects.libraries.architecture)
-    implementation(projects.libraries.core)
-    implementation(projects.libraries.di)
-    implementation(projects.libraries.designsystem)
-    implementation(projects.libraries.matrix.api)
-    implementation(projects.libraries.matrixui)
-    implementation(projects.libraries.uiStrings)
+    implementation(libs.vero.chat.libraries.androidutils)
+    implementation(libs.vero.chat.libraries.architecture)
+    implementation(libs.vero.chat.libraries.core)
+    implementation(libs.vero.chat.libraries.di)
+    implementation(libs.vero.chat.libraries.designsystem)
+    implementation(libs.vero.chat.libraries.matrix.api)
+    implementation(libs.vero.chat.libraries.matrixui)
+    implementation(libs.vero.chat.libraries.ui.strings)
 
-    testImplementation(projects.libraries.matrix.test)
-    testImplementation(projects.libraries.mediaviewer.test)
-    testImplementation(projects.tests.testutils)
+    testImplementation(libs.vero.chat.libraries.matrix.test)
+    testImplementation(libs.vero.chat.libraries.mediaviewer.test)
+    testImplementation(libs.vero.chat.tests.testutils)
     testImplementation(libs.test.junit)
     testImplementation(libs.test.truth)
     testImplementation(libs.test.mockk)

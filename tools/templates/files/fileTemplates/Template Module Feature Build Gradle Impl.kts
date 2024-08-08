@@ -14,21 +14,21 @@ anvil {
 }
 
 dependencies {
-    implementation(projects.anvilannotations)
-    anvil(projects.anvilcodegen)
-    api(projects.features.${MODULE_NAME}.api)
-    implementation(projects.libraries.core)
-    implementation(projects.libraries.architecture)
-    implementation(projects.libraries.matrix.api)
-    implementation(projects.libraries.matrixui)
-    implementation(projects.libraries.designsystem)
+    implementation(libs.vero.chat.anvilannotations)
+    anvil(libs.vero.chat.anvilcodegen)
+    api(libs.vero.chat.features.${MODULE_NAME}.api)
+    implementation(libs.vero.chat.libraries.core)
+    implementation(libs.vero.chat.libraries.architecture)
+    implementation(libs.vero.chat.libraries.matrix.api)
+    implementation(libs.vero.chat.libraries.matrixui)
+    implementation(libs.vero.chat.libraries.designsystem)
 
     testImplementation(libs.test.junit)
     testImplementation(libs.coroutines.test)
     testImplementation(libs.molecule.runtime)
     testImplementation(libs.test.truth)
     testImplementation(libs.test.turbine)
-    testImplementation(projects.libraries.matrix.test)
+    testImplementation(libs.vero.chat.libraries.matrix.test)
 
     ksp(libs.showkase.processor)
 }

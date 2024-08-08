@@ -29,7 +29,7 @@ anvil {
 dependencies {
     implementation(libs.dagger)
     implementation(libs.sentry)
-    implementation(projects.libraries.core)
-    implementation(projects.libraries.di)
-    implementation(projects.services.analyticsproviders.api)
+    implementation(libs.vero.chat.libraries.core)
+    implementation(libs.vero.chat.libraries.di)
+    implementation(libs.vero.chat.services.analyticsproviders.api)
 }

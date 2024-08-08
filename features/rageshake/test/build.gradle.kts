@@ -22,7 +22,7 @@ android {
 }
 
 dependencies {
-    implementation(projects.features.rageshake.api)
+    implementation(libs.vero.chat.features.rageshake.api)
     implementation(libs.coroutines.core)
-    implementation(projects.tests.testutils)
+    implementation(libs.vero.chat.tests.testutils)
 }

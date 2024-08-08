@@ -126,19 +126,17 @@ knit {
 
 dependencies {
 
-    implementation(kotlin("stdlib"))
-
-    allLibrariesImpl()
-    allServicesImpl()
+    allLibrariesImpl(libs)
+    allServicesImpl(libs)
     allFeaturesImpl(rootDir, logger)
-    implementation(projects.features.migration.api)
-    implementation(projects.anvilannotations)
-    implementation(projects.appnav)
-    implementation(projects.appconfig)
-    anvil(projects.anvilcodegen)
+    implementation(libs.vero.chat.features.migration.api)
+    implementation(libs.vero.chat.anvilannotations)
+    implementation(libs.vero.chat.appnav)
+    implementation(libs.vero.chat.appconfig)
+    anvil(libs.vero.chat.anvilcodegen)
 
-//    "gplayImplementation"(projects.libraries.pushproviders.firebase)
-    implementation(projects.libraries.pushproviders.unifiedpush)
+//    "gplayImplementation"(libs.vero.chat.libraries.pushproviders.firebase)
+    implementation(libs.vero.chat.libraries.pushproviders.unifiedpush)
 
     implementation(libs.appyx.core)
     implementation(libs.androidx.splash)
@@ -166,7 +164,7 @@ dependencies {
     testImplementation(libs.molecule.runtime)
     testImplementation(libs.test.truth)
     testImplementation(libs.test.turbine)
-    testImplementation(projects.libraries.matrix.test)
+    testImplementation(libs.vero.chat.libraries.matrix.test)
 
     ksp(libs.showkase.processor)
     koverDependencies()

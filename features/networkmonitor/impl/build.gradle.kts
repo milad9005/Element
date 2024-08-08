@@ -30,7 +30,7 @@ android {
 dependencies {
     implementation(libs.coroutines.core)
     implementation(libs.dagger)
-    implementation(projects.libraries.core)
-    implementation(projects.libraries.di)
-    api(projects.features.networkmonitor.api)
+    implementation(libs.vero.chat.libraries.core)
+    implementation(libs.vero.chat.libraries.di)
+    api(libs.vero.chat.features.networkmonitor.api)
 }

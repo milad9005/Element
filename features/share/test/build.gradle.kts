@@ -22,7 +22,7 @@ android {
 }
 
 dependencies {
-    implementation(projects.features.share.api)
+    implementation(libs.vero.chat.features.share.api)
     implementation(libs.coroutines.core)
-    implementation(projects.tests.testutils)
+    implementation(libs.vero.chat.tests.testutils)
 }

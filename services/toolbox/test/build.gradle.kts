@@ -22,5 +22,5 @@ android {
 }
 
 dependencies {
-    api(projects.services.toolbox.api)
+    api(libs.vero.chat.services.toolbox.api)
 }

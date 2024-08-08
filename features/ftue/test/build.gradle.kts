@@ -26,6 +26,6 @@ android {
 }
 
 dependencies {
-    implementation(projects.features.ftue.api)
-    implementation(projects.tests.testutils)
+    implementation(libs.vero.chat.features.ftue.api)
+    implementation(libs.vero.chat.tests.testutils)
 }

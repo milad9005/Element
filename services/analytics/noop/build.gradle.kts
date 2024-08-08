@@ -28,7 +28,7 @@ anvil {
 
 dependencies {
     implementation(libs.dagger)
-    implementation(projects.libraries.architecture)
-    implementation(projects.libraries.di)
-    api(projects.services.analytics.api)
+    implementation(libs.vero.chat.libraries.architecture)
+    implementation(libs.vero.chat.libraries.di)
+    api(libs.vero.chat.services.analytics.api)
 }

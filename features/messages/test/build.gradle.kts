@@ -23,6 +23,6 @@ android {
 }
 
 dependencies {
-    api(projects.features.messages.api)
-    implementation(projects.libraries.matrix.api)
+    api(libs.vero.chat.features.messages.api)
+    implementation(libs.vero.chat.libraries.matrix.api)
 }

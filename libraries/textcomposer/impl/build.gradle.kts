@@ -28,20 +28,20 @@ android {
 }
 
 dependencies {
-    implementation(projects.libraries.uiStrings)
-    implementation(projects.libraries.androidutils)
-    implementation(projects.libraries.core)
-    implementation(projects.libraries.matrix.api)
-    implementation(projects.libraries.matrixui)
-    implementation(projects.libraries.designsystem)
-    implementation(projects.libraries.testtags)
-    implementation(projects.libraries.uiUtils)
+    implementation(libs.vero.chat.libraries.ui.strings)
+    implementation(libs.vero.chat.libraries.androidutils)
+    implementation(libs.vero.chat.libraries.core)
+    implementation(libs.vero.chat.libraries.matrix.api)
+    implementation(libs.vero.chat.libraries.matrixui)
+    implementation(libs.vero.chat.libraries.designsystem)
+    implementation(libs.vero.chat.libraries.testtags)
+    implementation(libs.vero.chat.libraries.ui.utils)
 
     releaseApi(libs.matrix.richtexteditor)
     releaseApi(libs.matrix.richtexteditor.compose)
     if (file("${rootDir.path}/libraries/textcomposer/lib/library-compose.aar").exists()) {
         println("\nNote: Using local binaries of the Rich Text Editor.\n")
-        debugApi(projects.libraries.textcomposer.lib)
+        debugApi(libs.vero.chat.libraries.textcomposer.lib)
     } else {
         debugApi(libs.matrix.richtexteditor)
         debugApi(libs.matrix.richtexteditor.compose)
@@ -55,8 +55,8 @@ dependencies {
     testImplementation(libs.test.robolectric)
     testImplementation(libs.test.truth)
     testImplementation(libs.test.turbine)
-    testImplementation(projects.libraries.matrix.test)
-    testImplementation(projects.tests.testutils)
+    testImplementation(libs.vero.chat.libraries.matrix.test)
+    testImplementation(libs.vero.chat.tests.testutils)
     testImplementation(libs.androidx.compose.ui.test.junit)
     testReleaseImplementation(libs.androidx.compose.ui.test.manifest)
 }

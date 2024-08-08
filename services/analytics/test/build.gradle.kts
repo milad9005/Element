@@ -22,8 +22,8 @@ android {
 }
 
 dependencies {
-    implementation(projects.services.analytics.api)
-    implementation(projects.libraries.core)
-    implementation(projects.tests.testutils)
+    implementation(libs.vero.chat.services.analytics.api)
+    implementation(libs.vero.chat.libraries.core)
+    implementation(libs.vero.chat.tests.testutils)
     implementation(libs.coroutines.core)
 }

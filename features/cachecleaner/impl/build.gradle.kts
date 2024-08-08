@@ -28,14 +28,14 @@ anvil {
 }
 
 dependencies {
-    implementation(projects.anvilannotations)
-    anvil(projects.anvilcodegen)
-    api(projects.features.cachecleaner.api)
-    implementation(projects.libraries.core)
-    implementation(projects.libraries.architecture)
+    implementation(libs.vero.chat.anvilannotations)
+    anvil(libs.vero.chat.anvilcodegen)
+    api(libs.vero.chat.features.cachecleaner.api)
+    implementation(libs.vero.chat.libraries.core)
+    implementation(libs.vero.chat.libraries.architecture)
 
     testImplementation(libs.test.junit)
     testImplementation(libs.coroutines.test)
     testImplementation(libs.test.truth)
-    testImplementation(projects.tests.testutils)
+    testImplementation(libs.vero.chat.tests.testutils)
 }

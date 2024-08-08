@@ -22,6 +22,6 @@ android {
 }
 
 dependencies {
-    implementation(projects.libraries.sessionStorage.api)
+    implementation(libs.vero.chat.libraries.session.storage.api)
     implementation(libs.coroutines.core)
 }

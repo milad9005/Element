@@ -23,8 +23,8 @@ android {
 }
 
 dependencies {
-    api(projects.libraries.matrix.api)
-    api(projects.services.appnavstate.api)
+    api(libs.vero.chat.libraries.matrix.api)
+    api(libs.vero.chat.services.appnavstate.api)
     implementation(libs.coroutines.core)
     implementation(libs.androidx.lifecycle.runtime)
 }

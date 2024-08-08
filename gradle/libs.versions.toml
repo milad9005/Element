@@ -3,7 +3,7 @@
 
 [versions]
 # Project
-android_gradle_plugin = "8.4.1"
+android_gradle_plugin = "8.4.0"
 kotlin = "1.9.24"
 ksp = "1.9.24-1.0.20"
 firebaseAppDistribution = "5.0.0"
@@ -60,6 +60,10 @@ androidx-test-ext-junit = "1.1.5"
 espresso-core = "3.5.1"
 kover = "0.8.0"
 
+vero-chat = "1.0.0-SNAPSHOT"
+material3="1.2.1"
+okhttp3 = "4.12.0"
+retrofit2 = "2.11.0"
 [libraries]
 # Project
 android_gradle_plugin = { module = "com.android.tools.build:gradle", version.ref = "android_gradle_plugin" }
@@ -103,7 +107,7 @@ androidx_preference = "androidx.preference:preference:1.2.1"
 androidx_webkit = "androidx.webkit:webkit:1.11.0"
 
 androidx_compose_bom = { module = "androidx.compose:compose-bom", version.ref = "compose_bom" }
-androidx_compose_material3 = { module = "androidx.compose.material3:material3" }
+androidx_compose_material3 = { module = "androidx.compose.material3:material3" , version.ref ="material3" }
 androidx_compose_material3_windowsizeclass = { module = "androidx.compose.material3:material3-window-size-class" }
 androidx_compose_material3_adaptive = "androidx.compose.material3:material3-adaptive-android:1.0.0-alpha06"
 androidx_compose_ui = { module = "androidx.compose.ui:ui" }
@@ -125,14 +129,13 @@ accompanist_permission = { module = "com.google.accompanist:accompanist-permissi
 squareup_seismic = "com.squareup:seismic:1.0.3"
 
 # network
-network_okhttp_bom = "com.squareup.okhttp3:okhttp-bom:4.12.0"
-network_okhttp_logging = { module = "com.squareup.okhttp3:logging-interceptor" }
-network_okhttp_okhttp = { module = "com.squareup.okhttp3:okhttp" }
-network_okhttp = { module = "com.squareup.okhttp3:okhttp" }
+network_okhttp_bom  = { module = "com.squareup.okhttp3:okhttp-bom", version.ref = "okhttp3" }
+network_okhttp_logging = { module = "com.squareup.okhttp3:logging-interceptor", version.ref="okhttp3" }
+network_okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref="okhttp3" }
 network_mockwebserver = { module = "com.squareup.okhttp3:mockwebserver" }
-network_retrofit_bom = "com.squareup.retrofit2:retrofit-bom:2.11.0"
-network_retrofit = { module = "com.squareup.retrofit2:retrofit" }
-network_retrofit_converter_serialization = { module = "com.squareup.retrofit2:converter-kotlinx-serialization" }
+network_retrofit_bom  = { module = "com.squareup.retrofit2:retrofit-bom", version.ref = "retrofit2" }
+network_retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref="retrofit2" }
+network_retrofit_converter_serialization = { module = "com.squareup.retrofit2:converter-kotlinx-serialization",version.ref="retrofit2" }
 
 # Test
 test_core = { module = "androidx.test:core", version.ref = "test_core" }
@@ -215,6 +218,286 @@ appcompat = "androidx.appcompat:appcompat:1.7.0"
 androidx-work-runtime-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "workRuntimeKtx" }
 androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+
+
+vero-chat-anvilannotations = { group = "co.vero.chat", name = "anvilannotations" , version.ref = "vero-chat" }
+vero-chat-anvilcodegen = { group = "co.vero.chat", name = "anvilcodegen" , version.ref = "vero-chat" }
+vero-chat-appconfig = { group = "co.vero.chat", name = "appconfig" , version.ref = "vero-chat" }
+vero-chat-appnav = { group = "co.vero.chat", name = "appnav" , version.ref = "vero-chat" }
+vero-chat-features-analytics-api = { group = "co.vero.chat", name = "features-analytics-api" , version.ref = "vero-chat" }
+vero-chat-features-analytics-impl = { group = "co.vero.chat", name = "features-analytics-impl" , version.ref = "vero-chat" }
+
+vero-chat-features-cachecleaner-api = { group = "co.vero.chat", name = "features-cachecleaner-api" , version.ref = "vero-chat" }
+vero-chat-features-cachecleaner-impl = { group = "co.vero.chat", name = "features-cachecleaner-impl" , version.ref = "vero-chat" }
+
+vero-chat-features-call-api = { group = "co.vero.chat", name = "features-call-api" , version.ref = "vero-chat" }
+vero-chat-features-call-impl = { group = "co.vero.chat", name = "features-call-impl" , version.ref = "vero-chat" }
+vero-chat-features-call-test = { group = "co.vero.chat", name = "features-call-test" , version.ref = "vero-chat" }
+
+vero-chat-features-createroom-api = { group = "co.vero.chat", name = "features-createroom-api" , version.ref = "vero-chat" }
+vero-chat-features-createroom-impl = { group = "co.vero.chat", name = "features-createroom-impl" , version.ref = "vero-chat" }
+vero-chat-features-createroom-test = { group = "co.vero.chat", name = "features-createroom-test" , version.ref = "vero-chat" }
+
+vero-chat-features-ftue-api = { group = "co.vero.chat", name = "features-ftue-api" , version.ref = "vero-chat" }
+vero-chat-features-ftue-impl = { group = "co.vero.chat", name = "features-ftue-impl" , version.ref = "vero-chat" }
+vero-chat-features-ftue-test = { group = "co.vero.chat", name = "features-ftue-test" , version.ref = "vero-chat" }
+
+vero-chat-features-invite-api = { group = "co.vero.chat", name = "features-invite-api" , version.ref = "vero-chat" }
+vero-chat-features-invite-impl = { group = "co.vero.chat", name = "features-invite-impl" , version.ref = "vero-chat" }
+
+vero-chat-features-joinroom-api = { group = "co.vero.chat", name = "features-joinroom-api" , version.ref = "vero-chat" }
+vero-chat-features-joinroom-impl = { group = "co.vero.chat", name = "features-joinroom-impl" , version.ref = "vero-chat" }
+
+
+vero-chat-features-leaveroom-api = { group = "co.vero.chat", name = "features-leaveroom-api" , version.ref = "vero-chat" }
+vero-chat-features-leaveroom-impl = { group = "co.vero.chat", name = "features-leaveroom-impl" , version.ref = "vero-chat" }
+vero-chat-features-leaveroom-test = { group = "co.vero.chat", name = "features-leaveroom-test" , version.ref = "vero-chat" }
+
+vero-chat-features-location-api = { group = "co.vero.chat", name = "features-location-api" , version.ref = "vero-chat" }
+vero-chat-features-location-impl = { group = "co.vero.chat", name = "features-location-impl" , version.ref = "vero-chat" }
+
+vero-chat-features-lockscreen-api = { group = "co.vero.chat", name = "features-lockscreen-api" , version.ref = "vero-chat" }
+vero-chat-features-lockscreen-impl = { group = "co.vero.chat", name = "features-lockscreen-impl" , version.ref = "vero-chat" }
+vero-chat-features-lockscreen-test = { group = "co.vero.chat", name = "features-lockscreen-test" , version.ref = "vero-chat" }
+
+vero-chat-features-login-api = { group = "co.vero.chat", name = "features-login-api" , version.ref = "vero-chat" }
+vero-chat-features-login-impl = { group = "co.vero.chat", name = "features-login-impl" , version.ref = "vero-chat" }
+
+
+vero-chat-features-logout-api = { group = "co.vero.chat", name = "features-logout-api" , version.ref = "vero-chat" }
+vero-chat-features-logout-impl = { group = "co.vero.chat", name = "features-logout-impl" , version.ref = "vero-chat" }
+vero-chat-features-logout-test = { group = "co.vero.chat", name = "features-logout-test" , version.ref = "vero-chat" }
+
+vero-chat-features-messages-api = { group = "co.vero.chat", name = "features-messages-api" , version.ref = "vero-chat" }
+vero-chat-features-messages-impl = { group = "co.vero.chat", name = "features-messages-impl" , version.ref = "vero-chat" }
+vero-chat-features-messages-test = { group = "co.vero.chat", name = "features-messages-test" , version.ref = "vero-chat" }
+
+vero-chat-features-migration-api = { group = "co.vero.chat", name = "features-migration-api" , version.ref = "vero-chat" }
+vero-chat-features-migration-impl = { group = "co.vero.chat", name = "features-migration-impl" , version.ref = "vero-chat" }
+
+vero-chat-features-networkmonitor-api = { group = "co.vero.chat", name = "features-networkmonitor-api" , version.ref = "vero-chat" }
+vero-chat-features-networkmonitor-impl = { group = "co.vero.chat", name = "features-networkmonitor-impl" , version.ref = "vero-chat" }
+vero-chat-features-networkmonitor-test = { group = "co.vero.chat", name = "features-networkmonitor-test" , version.ref = "vero-chat" }
+
+vero-chat-features-onboarding-api = { group = "co.vero.chat", name = "features-onboarding-api" , version.ref = "vero-chat" }
+vero-chat-features-onboarding-impl = { group = "co.vero.chat", name = "features-onboarding-impl" , version.ref = "vero-chat" }
+
+vero-chat-features-poll-api = { group = "co.vero.chat", name = "features-poll-api" , version.ref = "vero-chat" }
+vero-chat-features-poll-impl = { group = "co.vero.chat", name = "features-poll-impl" , version.ref = "vero-chat" }
+vero-chat-features-poll-test = { group = "co.vero.chat", name = "features-poll-test" , version.ref = "vero-chat" }
+
+vero-chat-features-preferences-api = { group = "co.vero.chat", name = "features-preferences-api" , version.ref = "vero-chat" }
+vero-chat-features-preferences-impl = { group = "co.vero.chat", name = "features-preferences-impl" , version.ref = "vero-chat" }
+
+vero-chat-features-rageshake-api = { group = "co.vero.chat", name = "features-rageshake-api" , version.ref = "vero-chat" }
+vero-chat-features-rageshake-impl = { group = "co.vero.chat", name = "features-rageshake-impl" , version.ref = "vero-chat" }
+vero-chat-features-rageshake-test = { group = "co.vero.chat", name = "features-rageshake-test" , version.ref = "vero-chat" }
+
+vero-chat-features-roomaliasresolver-api = { group = "co.vero.chat", name = "features-roomaliasresolver-api" , version.ref = "vero-chat" }
+vero-chat-features-roomaliasresolver-impl = { group = "co.vero.chat", name = "features-roomaliasresolver-impl" , version.ref = "vero-chat" }
+
+vero-chat-features-roomdetails-api = { group = "co.vero.chat", name = "features-roomdetails-api" , version.ref = "vero-chat" }
+vero-chat-features-roomdetails-impl = { group = "co.vero.chat", name = "features-roomdetails-impl" , version.ref = "vero-chat" }
+
+vero-chat-features-roomdirectory-api = { group = "co.vero.chat", name = "features-roomdirectory-api" , version.ref = "vero-chat" }
+vero-chat-features-roomdirectory-impl = { group = "co.vero.chat", name = "features-roomdirectory-impl" , version.ref = "vero-chat" }
+
+vero-chat-features-roomlist-api = { group = "co.vero.chat", name = "features-roomlist-api" , version.ref = "vero-chat" }
+vero-chat-features-roomlist-impl = { group = "co.vero.chat", name = "features-roomlist-impl" , version.ref = "vero-chat" }
+vero-chat-features-roomlist-test = { group = "co.vero.chat", name = "features-roomlist-test" , version.ref = "vero-chat" }
+
+vero-chat-features-securebackup-api = { group = "co.vero.chat", name = "features-securebackup-api" , version.ref = "vero-chat" }
+vero-chat-features-securebackup-impl = { group = "co.vero.chat", name = "features-securebackup-impl" , version.ref = "vero-chat" }
+
+
+vero-chat-features-share-api = { group = "co.vero.chat", name = "features-share-api" , version.ref = "vero-chat" }
+vero-chat-features-share-impl = { group = "co.vero.chat", name = "features-share-impl" , version.ref = "vero-chat" }
+vero-chat-features-share-test = { group = "co.vero.chat", name = "features-share-test" , version.ref = "vero-chat" }
+
+vero-chat-features-signedout-api = { group = "co.vero.chat", name = "features-signedout-api" , version.ref = "vero-chat" }
+vero-chat-features-signedout-impl = { group = "co.vero.chat", name = "features-signedout-impl" , version.ref = "vero-chat" }
+vero-chat-features-signedout-test = { group = "co.vero.chat", name = "features-signedout-test" , version.ref = "vero-chat" }
+
+vero-chat-features-userprofile-api = { group = "co.vero.chat", name = "features-userprofile-api" , version.ref = "vero-chat" }
+vero-chat-features-userprofile-impl = { group = "co.vero.chat", name = "features-userprofile-impl" , version.ref = "vero-chat" }
+vero-chat-features-userprofile-shared = { group = "co.vero.chat", name = "features-userprofile-shared" , version.ref = "vero-chat" }
+
+vero-chat-features-verifysession-api = { group = "co.vero.chat", name = "features-verifysession-api" , version.ref = "vero-chat" }
+vero-chat-features-verifysession-impl = { group = "co.vero.chat", name = "features-verifysession-impl" , version.ref = "vero-chat" }
+vero-chat-features-verifysession-test = { group = "co.vero.chat", name = "features-verifysession-test" , version.ref = "vero-chat" }
+
+vero-chat-features-viewfolder-api = { group = "co.vero.chat", name = "features-viewfolder-api" , version.ref = "vero-chat" }
+vero-chat-features-viewfolder-impl = { group = "co.vero.chat", name = "features-viewfolder-impl" , version.ref = "vero-chat" }
+vero-chat-features-viewfolder-test = { group = "co.vero.chat", name = "features-viewfolder-test" , version.ref = "vero-chat" }
+
+vero-chat-libraries-androidutils = { group = "co.vero.chat", name = "libraries-androidutils" , version.ref = "vero-chat" }
+vero-chat-libraries-architecture = { group = "co.vero.chat", name = "libraries-architecture" , version.ref = "vero-chat" }
+vero-chat-libraries-core = { group = "co.vero.chat", name = "libraries-core" , version.ref = "vero-chat" }
+
+
+vero-chat-libraries-cryptography-api = { group = "co.vero.chat", name = "libraries-cryptography-api" , version.ref = "vero-chat" }
+vero-chat-libraries-cryptography-impl = { group = "co.vero.chat", name = "libraries-cryptography-impl" , version.ref = "vero-chat" }
+vero-chat-libraries-cryptography-test = { group = "co.vero.chat", name = "libraries-cryptography-test" , version.ref = "vero-chat" }
+
+
+vero-chat-libraries-dateformatter-api = { group = "co.vero.chat", name = "libraries-dateformatter-api" , version.ref = "vero-chat" }
+vero-chat-libraries-dateformatter-impl = { group = "co.vero.chat", name = "libraries-dateformatter-impl" , version.ref = "vero-chat" }
+vero-chat-libraries-dateformatter-test = { group = "co.vero.chat", name = "libraries-dateformatter-test" , version.ref = "vero-chat" }
+
+vero-chat-libraries-deeplink = { group = "co.vero.chat", name = "libraries-deeplink" , version.ref = "vero-chat" }
+vero-chat-libraries-designsystem = { group = "co.vero.chat", name = "libraries-designsystem" , version.ref = "vero-chat" }
+vero-chat-libraries-di = { group = "co.vero.chat", name = "libraries-di" , version.ref = "vero-chat" }
+vero-chat-libraries-encrypteddb = { group = "co.vero.chat", name = "libraries-encrypted-db" , version.ref = "vero-chat" }
+
+vero-chat-libraries-eventformatter-api = { group = "co.vero.chat", name = "libraries-eventformatter-api" , version.ref = "vero-chat" }
+vero-chat-libraries-eventformatter-impl = { group = "co.vero.chat", name = "libraries-eventformatter-impl" , version.ref = "vero-chat" }
+vero-chat-libraries-eventformatter-test = { group = "co.vero.chat", name = "libraries-eventformatter-test" , version.ref = "vero-chat" }
+
+vero-chat-libraries-featureflag-api = { group = "co.vero.chat", name = "libraries-featureflag-api" , version.ref = "vero-chat" }
+vero-chat-libraries-featureflag-impl = { group = "co.vero.chat", name = "libraries-featureflag-impl" , version.ref = "vero-chat" }
+vero-chat-libraries-featureflag-test = { group = "co.vero.chat", name = "libraries-featureflag-test" , version.ref = "vero-chat" }
+vero-chat-libraries-featureflag-ui = { group = "co.vero.chat", name = "libraries-featureflag-ui" , version.ref = "vero-chat" }
+
+
+vero-chat-libraries-fullscreenintent-api = { group = "co.vero.chat", name = "libraries-fullscreenintent-api" , version.ref = "vero-chat" }
+vero-chat-libraries-fullscreenintent-impl = { group = "co.vero.chat", name = "libraries-fullscreenintent-impl" , version.ref = "vero-chat" }
+vero-chat-libraries-fullscreenintent-test = { group = "co.vero.chat", name = "libraries-fullscreenintent-test" , version.ref = "vero-chat" }
+
+
+vero-chat-libraries-indicator-api = { group = "co.vero.chat", name = "libraries-indicator-api" , version.ref = "vero-chat" }
+vero-chat-libraries-indicator-impl = { group = "co.vero.chat", name = "libraries-indicator-impl" , version.ref = "vero-chat" }
+
+vero-chat-libraries-maplibre = { group = "co.vero.chat", name = "libraries-maplibre-compose" , version.ref = "vero-chat" }
+
+vero-chat-libraries-matrix-api = { group = "co.vero.chat", name = "libraries-matrix-api" , version.ref = "vero-chat" }
+vero-chat-libraries-matrix-impl = { group = "co.vero.chat", name = "libraries-matrix-impl" , version.ref = "vero-chat" }
+vero-chat-libraries-matrix-test = { group = "co.vero.chat", name = "libraries-matrix-test" , version.ref = "vero-chat" }
+
+vero-chat-libraries-matrixnetwork-api = { group = "co.vero.chat", name = "libraries-matrixnetwork-api" , version.ref = "vero-chat" }
+vero-chat-libraries-matrixnetwork-impl = { group = "co.vero.chat", name = "libraries-matrixnetwork-impl" , version.ref = "vero-chat" }
+
+
+vero-chat-libraries-matrixui = { group = "co.vero.chat", name = "libraries-matrixui" , version.ref = "vero-chat" }
+
+
+vero-chat-libraries-mediapickers-api = { group = "co.vero.chat", name = "libraries-mediapickers-api" , version.ref = "vero-chat" }
+vero-chat-libraries-mediapickers-impl = { group = "co.vero.chat", name = "libraries-mediapickers-impl" , version.ref = "vero-chat" }
+vero-chat-libraries-mediapickers-test = { group = "co.vero.chat", name = "libraries-mediapickers-test" , version.ref = "vero-chat" }
+
+vero-chat-libraries-mediaplayer-api = { group = "co.vero.chat", name = "libraries-mediaplayer-api" , version.ref = "vero-chat" }
+vero-chat-libraries-mediaplayer-impl = { group = "co.vero.chat", name = "libraries-mediaplayer-impl" , version.ref = "vero-chat" }
+vero-chat-libraries-mediaplayer-test = { group = "co.vero.chat", name = "libraries-mediaplayer-test" , version.ref = "vero-chat" }
+
+vero-chat-libraries-mediaupload-api = { group = "co.vero.chat", name = "libraries-mediaupload-api" , version.ref = "vero-chat" }
+vero-chat-libraries-mediaupload-impl = { group = "co.vero.chat", name = "libraries-mediaupload-impl" , version.ref = "vero-chat" }
+vero-chat-libraries-mediaupload-test = { group = "co.vero.chat", name = "libraries-mediaupload-test" , version.ref = "vero-chat" }
+
+
+vero-chat-libraries-mediaviewer-api = { group = "co.vero.chat", name = "libraries-mediaviewer-api" , version.ref = "vero-chat" }
+vero-chat-libraries-mediaviewer-impl = { group = "co.vero.chat", name = "libraries-mediaviewer-impl" , version.ref = "vero-chat" }
+vero-chat-libraries-mediaviewer-test = { group = "co.vero.chat", name = "libraries-mediaviewer-test" , version.ref = "vero-chat" }
+
+
+vero-chat-libraries-network = { group = "co.vero.chat", name = "libraries-network-api" , version.ref = "vero-chat" }
+
+
+vero-chat-libraries-permissions-api = { group = "co.vero.chat", name = "libraries-permissions-api" , version.ref = "vero-chat" }
+vero-chat-libraries-permissions-impl = { group = "co.vero.chat", name = "libraries-permissions-impl" , version.ref = "vero-chat" }
+vero-chat-libraries-permissions-test = { group = "co.vero.chat", name = "libraries-permissions-test" , version.ref = "vero-chat" }
+vero-chat-libraries-permissions-noop = { group = "co.vero.chat", name = "libraries-permissions-noop" , version.ref = "vero-chat" }
+
+vero-chat-libraries-preferences-api = { group = "co.vero.chat", name = "libraries-preferences-api" , version.ref = "vero-chat" }
+vero-chat-libraries-preferences-impl = { group = "co.vero.chat", name = "libraries-preferences-impl" , version.ref = "vero-chat" }
+vero-chat-libraries-preferences-test = { group = "co.vero.chat", name = "libraries-preferences-test" , version.ref = "vero-chat" }
+
+vero-chat-libraries-push-api = { group = "co.vero.chat", name = "libraries-push-api" , version.ref = "vero-chat" }
+vero-chat-libraries-push-impl = { group = "co.vero.chat", name = "libraries-push-impl" , version.ref = "vero-chat" }
+vero-chat-libraries-push-test = { group = "co.vero.chat", name = "libraries-push-test" , version.ref = "vero-chat" }
+
+vero-chat-libraries-pushproviders-api = { group = "co.vero.chat", name = "libraries-pushproviders-api" , version.ref = "vero-chat" }
+vero-chat-libraries-pushproviders-firebase = { group = "co.vero.chat", name = "libraries-pushproviders-firebase" , version.ref = "vero-chat" }
+vero-chat-libraries-pushproviders-test = { group = "co.vero.chat", name = "libraries-pushproviders-test" , version.ref = "vero-chat" }
+vero-chat-libraries-pushproviders-unifiedpush = { group = "co.vero.chat", name = "libraries-pushproviders-unifiedpush" , version.ref = "vero-chat" }
+
+
+vero-chat-libraries-pushstore-api = { group = "co.vero.chat", name = "libraries-pushstore-api" , version.ref = "vero-chat" }
+vero-chat-libraries-pushstore-impl = { group = "co.vero.chat", name = "libraries-pushstore-impl" , version.ref = "vero-chat" }
+vero-chat-libraries-pushstore-test = { group = "co.vero.chat", name = "libraries-pushstore-test" , version.ref = "vero-chat" }
+
+vero-chat-libraries-qrcode = { group = "co.vero.chat", name = "libraries-qrcode" , version.ref = "vero-chat" }
+vero-chat-libraries-rustsdk = { group = "co.vero.chat", name = "libraries-rustsdk" , version.ref = "vero-chat" }
+
+vero-chat-libraries-roomselect-impl = { group = "co.vero.chat", name = "libraries-roomselect-impl" , version.ref = "vero-chat" }
+vero-chat-libraries-roomselect-api = { group = "co.vero.chat", name = "libraries-roomselect-api" , version.ref = "vero-chat" }
+vero-chat-libraries-testtags = { group = "co.vero.chat", name = "libraries-testtags" , version.ref = "vero-chat" }
+
+
+vero-chat-libraries-session_storage-api = { group = "co.vero.chat", name = "libraries-session-storage-api" , version.ref = "vero-chat" }
+vero-chat-libraries-session_storage-impl = { group = "co.vero.chat", name = "libraries-session-storage-impl" , version.ref = "vero-chat" }
+vero-chat-libraries-session_storage-test = { group = "co.vero.chat", name = "libraries-session-storage-test" , version.ref = "vero-chat" }
+vero-chat-libraries-session_storage-impl_memory = { group = "co.vero.chat", name = "libraries-session-storage-impl-memory" , version.ref = "vero-chat" }
+
+
+
+vero-chat-libraries-textcomposer-impl = { group = "co.vero.chat", name = "libraries-textcomposer-impl" , version.ref = "vero-chat" }
+vero-chat-libraries-textcomposer-lib = { group = "co.vero.chat", name = "libraries-textcomposer-lib" , version.ref = "vero-chat" }
+
+
+vero-chat-libraries-troubleshoot-api = { group = "co.vero.chat", name = "libraries-troubleshoot-api" , version.ref = "vero-chat" }
+vero-chat-libraries-troubleshoot-impl = { group = "co.vero.chat", name = "libraries-troubleshoot-impl" , version.ref = "vero-chat" }
+
+
+vero-chat-libraries-ui_strings = { group = "co.vero.chat", name = "libraries-ui-strings" , version.ref = "vero-chat" }
+vero-chat-libraries-ui_utils = { group = "co.vero.chat", name = "libraries-ui-utils" , version.ref = "vero-chat" }
+
+vero-chat-libraries-usersearch-api = { group = "co.vero.chat", name = "libraries-usersearch-api" , version.ref = "vero-chat" }
+vero-chat-libraries-usersearch-impl = { group = "co.vero.chat", name = "libraries-usersearch-impl" , version.ref = "vero-chat" }
+vero-chat-libraries-usersearch-test = { group = "co.vero.chat", name = "libraries-usersearch-test" , version.ref = "vero-chat" }
+
+
+vero-chat-libraries-vero-api = { group = "co.vero.chat", name = "libraries-vero-api" , version.ref = "vero-chat" }
+vero-chat-libraries-vero-impl = { group = "co.vero.chat", name = "libraries-vero-impl" , version.ref = "vero-chat" }
+
+vero-chat-libraries-veromatrix-api = { group = "co.vero.chat", name = "libraries-veromatrix-api" , version.ref = "vero-chat" }
+vero-chat-libraries-veromatrix-impl = { group = "co.vero.chat", name = "libraries-veromatrix-impl" , version.ref = "vero-chat" }
+
+vero-chat-libraries-voicerecorder-api = { group = "co.vero.chat", name = "libraries-voicerecorder-api" , version.ref = "vero-chat" }
+vero-chat-libraries-voicerecorder-impl = { group = "co.vero.chat", name = "libraries-voicerecorder-impl" , version.ref = "vero-chat" }
+vero-chat-libraries-voicerecorder-test = { group = "co.vero.chat", name = "libraries-voicerecorder-test" , version.ref = "vero-chat" }
+
+vero-chat-libraries-worker = { group = "co.vero.chat", name = "libraries-worker" , version.ref = "vero-chat" }
+
+vero-chat-services-analytics-api = { group = "co.vero.chat", name = "services-analytics-api" , version.ref = "vero-chat" }
+vero-chat-services-analytics-impl = { group = "co.vero.chat", name = "services-analytics-impl" , version.ref = "vero-chat" }
+vero-chat-services-analytics-test = { group = "co.vero.chat", name = "services-analytics-test" , version.ref = "vero-chat" }
+vero-chat-services-analytics-noop = { group = "co.vero.chat", name = "services-analytics-noop" , version.ref = "vero-chat" }
+
+vero-chat-services-analyticsproviders-api = { group = "co.vero.chat", name = "services-analyticsproviders-api" , version.ref = "vero-chat" }
+vero-chat-services-analyticsproviders-posthog = { group = "co.vero.chat", name = "services-analyticsproviders-posthog" , version.ref = "vero-chat" }
+vero-chat-services-analyticsproviders-test = { group = "co.vero.chat", name = "services-analyticsproviders-test" , version.ref = "vero-chat" }
+vero-chat-services-analyticsproviders-sentry = { group = "co.vero.chat", name = "services-analyticsproviders-sentry" , version.ref = "vero-chat" }
+
+vero-chat-services-appnavstate-api = { group = "co.vero.chat", name = "services-appnavstate-api" , version.ref = "vero-chat" }
+vero-chat-services-appnavstate-impl = { group = "co.vero.chat", name = "services-appnavstate-impl" , version.ref = "vero-chat" }
+vero-chat-services-appnavstate-test = { group = "co.vero.chat", name = "services-appnavstate-test" , version.ref = "vero-chat" }
+
+vero-chat-services-apperror-api = { group = "co.vero.chat", name = "services-apperror-api" , version.ref = "vero-chat" }
+vero-chat-services-apperror-impl = { group = "co.vero.chat", name = "services-apperror-impl" , version.ref = "vero-chat" }
+
+vero-chat-services-toolbox-api = { group = "co.vero.chat", name = "services-toolbox-api" , version.ref = "vero-chat" }
+vero-chat-services-toolbox-impl = { group = "co.vero.chat", name = "services-toolbox-impl" , version.ref = "vero-chat" }
+vero-chat-services-toolbox-test = { group = "co.vero.chat", name = "services-toolbox-test" , version.ref = "vero-chat" }
+
+
+vero-chat-tests-konsist = { group = "co.vero.chat", name = "tests-konsist" , version.ref = "vero-chat" }
+vero-chat-tests-testutils = { group = "co.vero.chat", name = "tests-testutils" , version.ref = "vero-chat" }
+vero-chat-tests-uitests = { group = "co.vero.chat", name = "tests-uitests" , version.ref = "vero-chat" }
+
+vero-chat-veroChat = { group = "co.vero.chat", name = "veroChat" , version.ref = "vero-chat" }
+
+
+
+
 
 [bundles]
 

@@ -35,15 +35,15 @@ anvil {
 }
 
 dependencies {
-    implementation(projects.anvilannotations)
-    anvil(projects.anvilcodegen)
+    implementation(libs.vero.chat.anvilannotations)
+    anvil(libs.vero.chat.anvilcodegen)
     implementation(libs.dagger)
-    implementation(projects.libraries.architecture)
-    implementation(projects.libraries.designsystem)
-    implementation(projects.libraries.di)
-    api(projects.libraries.troubleshoot.api)
-    api(projects.libraries.push.api)
-    implementation(projects.services.analytics.api)
+    implementation(libs.vero.chat.libraries.architecture)
+    implementation(libs.vero.chat.libraries.designsystem)
+    implementation(libs.vero.chat.libraries.di)
+    api(libs.vero.chat.libraries.troubleshoot.api)
+    api(libs.vero.chat.libraries.push.api)
+    implementation(libs.vero.chat.services.analytics.api)
     ksp(libs.showkase.processor)
 
     testImplementation(libs.test.junit)
@@ -52,9 +52,9 @@ dependencies {
     testImplementation(libs.test.truth)
     testImplementation(libs.test.turbine)
     testImplementation(libs.coroutines.test)
-    testImplementation(projects.services.analytics.test)
-    testImplementation(projects.tests.testutils)
-    testImplementation(projects.libraries.push.test)
+    testImplementation(libs.vero.chat.services.analytics.test)
+    testImplementation(libs.vero.chat.tests.testutils)
+    testImplementation(libs.vero.chat.libraries.push.test)
     testImplementation(libs.androidx.compose.ui.test.junit)
     testReleaseImplementation(libs.androidx.compose.ui.test.manifest)
 }

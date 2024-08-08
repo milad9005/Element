@@ -30,22 +30,22 @@ anvil {
 }
 
 dependencies {
-    anvil(projects.anvilcodegen)
+    anvil(libs.vero.chat.anvilcodegen)
 
-    implementation(projects.libraries.androidutils)
-    implementation(projects.libraries.core)
-    implementation(projects.libraries.architecture)
-    implementation(projects.libraries.designsystem)
-    implementation(projects.libraries.sessionStorage.api)
+    implementation(libs.vero.chat.libraries.androidutils)
+    implementation(libs.vero.chat.libraries.core)
+    implementation(libs.vero.chat.libraries.architecture)
+    implementation(libs.vero.chat.libraries.designsystem)
+    implementation(libs.vero.chat.libraries.session.storage.api)
 
-    api(projects.services.analyticsproviders.api)
-    api(projects.services.analytics.api)
+    api(libs.vero.chat.services.analyticsproviders.api)
+    api(libs.vero.chat.services.analytics.api)
     implementation(libs.androidx.datastore.preferences)
 
     testImplementation(libs.coroutines.test)
     testImplementation(libs.test.junit)
     testImplementation(libs.test.truth)
-    testImplementation(projects.libraries.sessionStorage.test)
-    testImplementation(projects.services.analyticsproviders.test)
-    testImplementation(projects.tests.testutils)
+    testImplementation(libs.vero.chat.libraries.session.storage.test)
+    testImplementation(libs.vero.chat.services.analyticsproviders.test)
+    testImplementation(libs.vero.chat.tests.testutils)
 }

@@ -42,7 +42,7 @@ tasks.withType<Test> {
 dependencies {
     testImplementation(libs.test.junit)
     testImplementation(libs.test.parameter.injector)
-    testImplementation(projects.libraries.designsystem)
+    testImplementation(libs.vero.chat.libraries.designsystem)
 
     // Paparazzi 1.3.2 workaround (see https://github.com/cashapp/paparazzi/blob/master/CHANGELOG.md#132---2024-01-13)
     constraints.add("testImplementation", "com.google.guava:guava") {
@@ -65,9 +65,9 @@ dependencies {
 
     // TODO There is a Resources.NotFoundException maybe due to the mipmap, even if we have
     // `testOptions { unitTests.isIncludeAndroidResources = true }` in the app build.gradle.kts file
-    // implementation(projects.app)
-    implementation(projects.appnav)
-    allLibrariesImpl()
-    allServicesImpl()
+    // implementation(libs.vero.chat.app)
+//    implementation(libs.vero.chat.appnav)
+    allLibrariesImpl(libs)
+    allServicesImpl(libs)
     allFeaturesImpl(rootDir, logger)
 }

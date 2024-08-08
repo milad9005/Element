@@ -19,8 +19,7 @@
  */
 import extension.androidConfig
 import extension.commonDependencies
-import extension.publishConfig
-import gradle.kotlin.dsl.accessors._657459398ba5892cee813230acbeff5a.kotlinOptions
+import extension.publish
 import org.gradle.accessors.dm.LibrariesForLibs
 
 val libs = the<LibrariesForLibs>()
@@ -30,10 +29,9 @@ plugins {
     id("com.autonomousapps.dependency-analysis")
     id("maven-publish")
 }
-
+publish()
 android {
     androidConfig(project)
-    publishConfig(project)
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
     }

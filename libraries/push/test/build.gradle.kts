@@ -23,12 +23,12 @@ android {
 }
 
 dependencies {
-    api(projects.libraries.push.api)
-    implementation(projects.libraries.push.impl)
-    implementation(projects.libraries.matrix.api)
-    implementation(projects.libraries.matrixui)
-    implementation(projects.libraries.pushproviders.api)
-    implementation(projects.tests.testutils)
+    api(libs.vero.chat.libraries.push.api)
+    implementation(libs.vero.chat.libraries.push.impl)
+    implementation(libs.vero.chat.libraries.matrix.api)
+    implementation(libs.vero.chat.libraries.matrixui)
+    implementation(libs.vero.chat.libraries.pushproviders.api)
+    implementation(libs.vero.chat.tests.testutils)
     implementation(libs.androidx.core)
     implementation(libs.coil.compose)
     implementation(libs.coil.test)

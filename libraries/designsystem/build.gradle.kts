@@ -41,9 +41,9 @@ android {
         implementation(libs.androidx.compose.material3.adaptive)
         implementation(libs.coil.compose)
         implementation(libs.vanniktech.blurhash)
-        implementation(projects.libraries.architecture)
-        implementation(projects.libraries.testtags)
-        implementation(projects.libraries.uiStrings)
+        implementation(libs.vero.chat.libraries.architecture)
+        implementation(libs.vero.chat.libraries.testtags)
+        implementation(libs.vero.chat.libraries.ui.strings)
 
         ksp(libs.showkase.processor)
         kspTest(libs.showkase.processor)

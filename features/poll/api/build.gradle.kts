@@ -24,10 +24,10 @@ android {
 }
 
 dependencies {
-    implementation(projects.libraries.architecture)
-    implementation(projects.libraries.designsystem)
-    implementation(projects.libraries.uiStrings)
-    implementation(projects.libraries.matrix.api)
+    implementation(libs.vero.chat.libraries.architecture)
+    implementation(libs.vero.chat.libraries.designsystem)
+    implementation(libs.vero.chat.libraries.ui.strings)
+    implementation(libs.vero.chat.libraries.matrix.api)
 
     ksp(libs.showkase.processor)
 }

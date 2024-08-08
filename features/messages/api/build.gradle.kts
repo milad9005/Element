@@ -23,7 +23,7 @@ android {
 }
 
 dependencies {
-    implementation(projects.libraries.architecture)
-    implementation(projects.libraries.matrix.api)
-    api(projects.libraries.textcomposer.impl)
+    implementation(libs.vero.chat.libraries.architecture)
+    implementation(libs.vero.chat.libraries.matrix.api)
+    api(libs.vero.chat.libraries.textcomposer.impl)
 }

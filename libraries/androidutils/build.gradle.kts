@@ -34,12 +34,12 @@ anvil {
 }
 
 dependencies {
-    anvil(projects.anvilcodegen)
-    implementation(projects.anvilannotations)
-    implementation(projects.libraries.di)
+    anvil(libs.vero.chat.anvilcodegen)
+    implementation(libs.vero.chat.anvilannotations)
+    implementation(libs.vero.chat.libraries.di)
 
-    implementation(projects.libraries.core)
-    implementation(projects.services.toolbox.api)
+    implementation(libs.vero.chat.libraries.core)
+    implementation(libs.vero.chat.services.toolbox.api)
     implementation(libs.dagger)
     implementation(libs.timber)
     implementation(libs.androidx.corektx)
@@ -49,11 +49,11 @@ dependencies {
     implementation(libs.androidx.security.crypto)
     api(libs.androidx.browser)
 
-    testImplementation(projects.tests.testutils)
+    testImplementation(libs.vero.chat.tests.testutils)
     testImplementation(libs.test.junit)
     testImplementation(libs.test.truth)
     testImplementation(libs.test.robolectric)
     testImplementation(libs.coroutines.core)
     testImplementation(libs.coroutines.test)
-    testImplementation(projects.services.toolbox.test)
+    testImplementation(libs.vero.chat.services.toolbox.test)
 }

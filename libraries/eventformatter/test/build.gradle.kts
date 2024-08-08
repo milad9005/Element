@@ -23,6 +23,6 @@ android {
 }
 
 dependencies {
-    implementation(projects.libraries.eventformatter.api)
-    implementation(projects.libraries.matrix.api)
+    implementation(libs.vero.chat.libraries.eventformatter.api)
+    implementation(libs.vero.chat.libraries.matrix.api)
 }

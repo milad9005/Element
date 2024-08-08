@@ -23,7 +23,7 @@ android {
 }
 
 dependencies {
-    implementation(projects.libraries.matrix.api)
-    api(projects.features.poll.api)
+    implementation(libs.vero.chat.libraries.matrix.api)
+    api(libs.vero.chat.features.poll.api)
     implementation(libs.kotlinx.collections.immutable)
 }

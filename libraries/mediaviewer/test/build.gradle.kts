@@ -23,8 +23,8 @@ android {
 }
 
 dependencies {
-    api(projects.libraries.mediaviewer.impl)
-    implementation(projects.libraries.core)
-    implementation(projects.tests.testutils)
-    implementation(projects.libraries.matrix.api)
+    api(libs.vero.chat.libraries.mediaviewer.impl)
+    implementation(libs.vero.chat.libraries.core)
+    implementation(libs.vero.chat.tests.testutils)
+    implementation(libs.vero.chat.libraries.matrix.api)
 }

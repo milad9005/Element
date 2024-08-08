@@ -22,22 +22,65 @@ import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Project
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.kotlin.dsl.create
+import org.jetbrains.kotlin.util.removeSuffixIfPresent
 import java.io.File
 
+
+
+fun Project.publish(){
+        project.afterEvaluate {
+            project.extensions.configure(org.gradle.api.publish.PublishingExtension::class.java) {
+                publications {
+                    create<MavenPublication>("DebugAar") {
+                        groupId = "co.vero.chat"
+                        artifactId = project.path.removePrefix(":").replace(":","-")
+                        version = "1.0.0-SNAPSHOT"
+
+                        pom.withXml {
+                            val dependenciesNode = asNode().appendNode("dependencies")
+                            val dependencyManagementNode = asNode().appendNode("dependencyManagement").appendNode("dependencies")
+
+                            project.configurations.forEach { configuration ->
+                                configuration.allDependencies.forEach { dependency ->
+                                    val dependencyNode = dependenciesNode.appendNode("dependency")
+                                    dependencyNode.appendNode("groupId", dependency.group)
+                                    dependencyNode.appendNode("artifactId", dependency.name)
+                                    dependencyNode.appendNode("version", dependency.version)
+                                }
+                            }
+
+                            project.configurations.getByName("implementation").allDependencies.forEach { dependency ->
+                                if (dependency.name.contains("bom")) {
+                                    val bomDependencyNode = dependencyManagementNode.appendNode("dependency")
+                                    bomDependencyNode.appendNode("groupId", dependency.group)
+                                    bomDependencyNode.appendNode("artifactId", dependency.name)
+                                    bomDependencyNode.appendNode("version", dependency.version)
+                                    bomDependencyNode.appendNode("type", "pom")
+                                    bomDependencyNode.appendNode("scope", "import")
+                                }
+                            }
+                        }
+                    }
+                }
+
+                repositories {
+                    mavenLocal() // Publish to local Maven repository
+                }
+            }
+        }
+    }
+
+
+
+
 fun CommonExtension<*, *, *, *, *, *>.publishConfig(project: Project) {
-    project.afterEvaluate { // Ensure the configuration is applied after project evaluation
+    project.afterEvaluate {
         project.extensions.configure(org.gradle.api.publish.PublishingExtension::class.java) {
             publications {
                 create<MavenPublication>("DebugAar") {
-                    println(projectDir.name + " PATh")
-                    println(path + " name")
-
-                    groupId = path
-                    artifactId = name
+                    groupId = "co.vero.chat"
+                    artifactId = project.name.removePrefix(":").replace(":",".")
                     version = "1.0.0-SNAPSHOT"
-
-                    // Ensure the task exists before referencing it
-                    artifact(project.tasks.getByName("bundleDebugAar"))
 
                     pom.withXml {
                         val dependenciesNode = asNode().appendNode("dependencies")

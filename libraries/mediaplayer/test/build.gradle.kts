@@ -23,8 +23,8 @@ android {
 }
 
 dependencies {
-    api(projects.libraries.mediaplayer.api)
-    implementation(projects.tests.testutils)
+    api(libs.vero.chat.libraries.mediaplayer.api)
+    implementation(libs.vero.chat.tests.testutils)
 
     implementation(libs.coroutines.test)
     implementation(libs.test.truth)

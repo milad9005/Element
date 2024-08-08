@@ -34,16 +34,16 @@ android {
     }
 
     dependencies {
-        implementation(projects.anvilannotations)
-        anvil(projects.anvilcodegen)
+        implementation(libs.vero.chat.anvilannotations)
+        anvil(libs.vero.chat.anvilcodegen)
 
-        api(projects.libraries.mediaupload.api)
-        implementation(projects.libraries.architecture)
-        implementation(projects.libraries.androidutils)
-        implementation(projects.libraries.core)
-        implementation(projects.libraries.di)
-        implementation(projects.libraries.matrix.api)
-        implementation(projects.services.toolbox.api)
+        api(libs.vero.chat.libraries.mediaupload.api)
+        implementation(libs.vero.chat.libraries.architecture)
+        implementation(libs.vero.chat.libraries.androidutils)
+        implementation(libs.vero.chat.libraries.core)
+        implementation(libs.vero.chat.libraries.di)
+        implementation(libs.vero.chat.libraries.matrix.api)
+        implementation(libs.vero.chat.services.toolbox.api)
         implementation(libs.inject)
         implementation(libs.androidx.exifinterface)
         implementation(libs.coroutines.core)
@@ -54,7 +54,7 @@ android {
         testImplementation(libs.test.robolectric)
         testImplementation(libs.coroutines.test)
         testImplementation(libs.test.truth)
-        testImplementation(projects.tests.testutils)
-        testImplementation(projects.services.toolbox.test)
+        testImplementation(libs.vero.chat.tests.testutils)
+        testImplementation(libs.vero.chat.services.toolbox.test)
     }
 }

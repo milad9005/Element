@@ -25,15 +25,15 @@ android {
 }
 
 dependencies {
-    implementation(projects.features.migration.api)
-    implementation(projects.libraries.architecture)
-    implementation(projects.libraries.preferences.impl)
+    implementation(libs.vero.chat.features.migration.api)
+    implementation(libs.vero.chat.libraries.architecture)
+    implementation(libs.vero.chat.libraries.preferences.impl)
     implementation(libs.androidx.datastore.preferences)
-    implementation(projects.features.rageshake.api)
-    implementation(projects.libraries.designsystem)
-    implementation(projects.libraries.matrix.api)
-    implementation(projects.libraries.sessionStorage.api)
-    implementation(projects.libraries.uiStrings)
+    implementation(libs.vero.chat.features.rageshake.api)
+    implementation(libs.vero.chat.libraries.designsystem)
+    implementation(libs.vero.chat.libraries.matrix.api)
+    implementation(libs.vero.chat.libraries.session.storage.api)
+    implementation(libs.vero.chat.libraries.ui.strings)
 
     ksp(libs.showkase.processor)
 
@@ -43,9 +43,9 @@ dependencies {
     testImplementation(libs.test.robolectric)
     testImplementation(libs.test.truth)
     testImplementation(libs.test.turbine)
-    testImplementation(projects.libraries.sessionStorage.implMemory)
-    testImplementation(projects.libraries.sessionStorage.test)
-    testImplementation(projects.libraries.preferences.test)
-    testImplementation(projects.tests.testutils)
-    testImplementation(projects.features.rageshake.test)
+    testImplementation(libs.vero.chat.libraries.session.storage.impl.memory)
+    testImplementation(libs.vero.chat.libraries.session.storage.test)
+    testImplementation(libs.vero.chat.libraries.preferences.test)
+    testImplementation(libs.vero.chat.tests.testutils)
+    testImplementation(libs.vero.chat.features.rageshake.test)
 }

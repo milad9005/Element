@@ -23,7 +23,7 @@ android {
 }
 
 dependencies {
-    api(projects.libraries.mediaupload.api)
-    implementation(projects.libraries.core)
-    implementation(projects.tests.testutils)
+    api(libs.vero.chat.libraries.mediaupload.api)
+    implementation(libs.vero.chat.libraries.core)
+    implementation(libs.vero.chat.tests.testutils)
 }

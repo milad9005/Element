@@ -28,16 +28,16 @@ android {
     namespace = "io.element.android.libraries.dateformatter.impl"
 
     dependencies {
-        anvil(projects.anvilcodegen)
+        anvil(libs.vero.chat.anvilcodegen)
         implementation(libs.dagger)
-        implementation(projects.libraries.di)
-        implementation(projects.anvilannotations)
+        implementation(libs.vero.chat.libraries.di)
+        implementation(libs.vero.chat.anvilannotations)
 
-        api(projects.libraries.dateformatter.api)
+        api(libs.vero.chat.libraries.dateformatter.api)
         api(libs.datetime)
 
         testImplementation(libs.test.junit)
         testImplementation(libs.test.truth)
-        testImplementation(projects.libraries.dateformatter.test)
+        testImplementation(libs.vero.chat.libraries.dateformatter.test)
     }
 }

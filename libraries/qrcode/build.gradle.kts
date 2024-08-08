@@ -22,7 +22,7 @@ android {
 }
 
 dependencies {
-    implementation(projects.libraries.designsystem)
+    implementation(libs.vero.chat.libraries.designsystem)
     implementation(libs.androidx.camera.lifecycle)
     implementation(libs.androidx.camera.view)
     implementation(libs.androidx.camera.camera2)

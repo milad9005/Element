@@ -28,8 +28,8 @@ anvil {
 
 dependencies {
     implementation(libs.dagger)
-    implementation(projects.libraries.androidutils)
-    implementation(projects.libraries.di)
-    api(projects.services.toolbox.api)
+    implementation(libs.vero.chat.libraries.androidutils)
+    implementation(libs.vero.chat.libraries.di)
+    api(libs.vero.chat.services.toolbox.api)
     implementation(libs.androidx.corektx)
 }

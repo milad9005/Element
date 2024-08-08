@@ -1,6 +1,5 @@
 import java.net.URI
 
-include(":app")
 
 /*
  * Copyright (c) 2022 New Vector Ltd
@@ -31,6 +30,8 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
+        mavenLocal()
+
         // Snapshot versions
         maven {
             url = URI("https://s01.oss.sonatype.org/content/repositories/snapshots")
@@ -49,6 +50,7 @@ dependencyResolutionManagement {
         }
         google()
         mavenCentral()
+
         maven {
             url = URI("https://www.jitpack.io")
             content {
@@ -56,7 +58,6 @@ dependencyResolutionManagement {
                 includeModule("com.github.matrix-org", "matrix-analytics-events")
             }
         }
-        mavenLocal()
         flatDir {
             dirs("libraries/matrix/libs")
         }
@@ -69,14 +70,16 @@ plugins {
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 rootProject.name = "ElementX"
-include(":veroChat")
-include(":appnav")
+//include(":veroChat")
+//include(":appnav")
 include(":appconfig")
 include(":tests:konsist")
 include(":tests:uitests")
 include(":tests:testutils")
+
 include(":anvilannotations")
 include(":anvilcodegen")
+
 
 include(":samples:minimal")
 
@@ -107,3 +110,6 @@ includeProjects(File(rootDir, "services"), ":services")
 //        substitute(module("io.element.android:compound-android")).using(project(":compound"))
 //    }
 // }
+
+
+//include(":app")

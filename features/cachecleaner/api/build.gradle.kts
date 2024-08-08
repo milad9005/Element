@@ -24,6 +24,6 @@ android {
 }
 
 dependencies {
-    implementation(projects.libraries.architecture)
+    implementation(libs.vero.chat.libraries.architecture)
     implementation(libs.androidx.startup)
 }

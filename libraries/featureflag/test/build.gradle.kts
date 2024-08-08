@@ -22,7 +22,7 @@ android {
     namespace = "io.element.android.libraries.featureflag.test"
 
     dependencies {
-        api(projects.libraries.featureflag.api)
+        api(libs.vero.chat.libraries.featureflag.api)
         implementation(libs.coroutines.core)
     }
 }

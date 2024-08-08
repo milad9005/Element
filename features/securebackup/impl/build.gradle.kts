@@ -36,20 +36,20 @@ anvil {
 }
 
 dependencies {
-    anvil(projects.anvilcodegen)
-    implementation(projects.anvilannotations)
+    anvil(libs.vero.chat.anvilcodegen)
+    implementation(libs.vero.chat.anvilannotations)
 
-    implementation(projects.appconfig)
-    implementation(projects.libraries.core)
-    implementation(projects.libraries.androidutils)
-    implementation(projects.libraries.architecture)
-    implementation(projects.libraries.matrix.api)
-    implementation(projects.libraries.matrixui)
-    implementation(projects.libraries.designsystem)
-    implementation(projects.libraries.uiStrings)
-    implementation(projects.libraries.testtags)
+    implementation(libs.vero.chat.appconfig)
+    implementation(libs.vero.chat.libraries.core)
+    implementation(libs.vero.chat.libraries.androidutils)
+    implementation(libs.vero.chat.libraries.architecture)
+    implementation(libs.vero.chat.libraries.matrix.api)
+    implementation(libs.vero.chat.libraries.matrixui)
+    implementation(libs.vero.chat.libraries.designsystem)
+    implementation(libs.vero.chat.libraries.ui.strings)
+    implementation(libs.vero.chat.libraries.testtags)
     api(libs.statemachine)
-    api(projects.features.securebackup.api)
+    api(libs.vero.chat.features.securebackup.api)
 
     testImplementation(libs.test.junit)
     testImplementation(libs.coroutines.test)
@@ -58,8 +58,8 @@ dependencies {
     testImplementation(libs.test.turbine)
     testImplementation(libs.test.robolectric)
     testImplementation(libs.androidx.compose.ui.test.junit)
-    testImplementation(projects.libraries.matrix.test)
-    testImplementation(projects.tests.testutils)
+    testImplementation(libs.vero.chat.libraries.matrix.test)
+    testImplementation(libs.vero.chat.tests.testutils)
     testReleaseImplementation(libs.androidx.compose.ui.test.manifest)
 
     ksp(libs.showkase.processor)

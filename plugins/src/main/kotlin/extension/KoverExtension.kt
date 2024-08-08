@@ -66,7 +66,7 @@ fun Project.setupKover() {
     // Create verify all task joining all existing verification tasks
     task("koverVerifyAll") {
         group = "verification"
-        description = "Verifies the code coverage of all subprojects."
+        description = "Verifies the code coverage of all sublibs.vero.chat."
         val dependencies = listOf(":app:koverVerifyGplayDebug") + koverVariants.map { ":app:koverVerify${it.capitalized()}" }
         dependsOn(dependencies)
 

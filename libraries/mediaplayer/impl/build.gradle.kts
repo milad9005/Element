@@ -27,15 +27,15 @@ anvil {
 }
 
 dependencies {
-    api(projects.libraries.mediaplayer.api)
+    api(libs.vero.chat.libraries.mediaplayer.api)
     implementation(libs.androidx.media3.exoplayer)
 
     implementation(libs.dagger)
-    implementation(projects.libraries.di)
+    implementation(libs.vero.chat.libraries.di)
 
     implementation(libs.coroutines.core)
 
-    testImplementation(projects.tests.testutils)
+    testImplementation(libs.vero.chat.tests.testutils)
     testImplementation(libs.test.junit)
     testImplementation(libs.test.truth)
     testImplementation(libs.test.mockk)

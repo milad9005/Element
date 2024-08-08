@@ -27,6 +27,6 @@ anvil {
 }
 
 dependencies {
-    implementation(projects.libraries.matrix.api)
+    implementation(libs.vero.chat.libraries.matrix.api)
     implementation(libs.coroutines.core)
 }

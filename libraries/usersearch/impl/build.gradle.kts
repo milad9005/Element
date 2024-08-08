@@ -28,21 +28,21 @@ anvil {
 }
 
 dependencies {
-    implementation(projects.libraries.core)
-    implementation(projects.libraries.architecture)
-    implementation(projects.libraries.di)
-    implementation(projects.libraries.matrixui)
-    implementation(projects.libraries.matrix.api)
-    api(projects.libraries.usersearch.api)
+    implementation(libs.vero.chat.libraries.core)
+    implementation(libs.vero.chat.libraries.architecture)
+    implementation(libs.vero.chat.libraries.di)
+    implementation(libs.vero.chat.libraries.matrixui)
+    implementation(libs.vero.chat.libraries.matrix.api)
+    api(libs.vero.chat.libraries.usersearch.api)
     implementation(libs.kotlinx.collections.immutable)
-    implementation(project(":libraries:vero:api"))
-    implementation(project(":libraries:veromatrix:api"))
+    implementation(libs.vero.chat.libraries.vero.api)
+    implementation(libs.vero.chat.libraries.veromatrix.api)
 
     testImplementation(libs.test.junit)
     testImplementation(libs.coroutines.test)
     testImplementation(libs.molecule.runtime)
     testImplementation(libs.test.truth)
     testImplementation(libs.test.turbine)
-    testImplementation(projects.libraries.matrix.test)
-    testImplementation(projects.libraries.usersearch.test)
+    testImplementation(libs.vero.chat.libraries.matrix.test)
+    testImplementation(libs.vero.chat.libraries.usersearch.test)
 }

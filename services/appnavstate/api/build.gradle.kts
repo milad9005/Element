@@ -27,5 +27,5 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.androidx.lifecycle.process)
     implementation(libs.androidx.startup)
-    implementation(projects.libraries.matrix.api)
+    implementation(libs.vero.chat.libraries.matrix.api)
 }

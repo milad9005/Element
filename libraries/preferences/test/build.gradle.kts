@@ -22,9 +22,9 @@ android {
     namespace = "io.element.android.libraries.preferences.test"
 
     dependencies {
-        api(projects.libraries.preferences.api)
-        implementation(projects.libraries.matrix.api)
-        implementation(projects.tests.testutils)
+        api(libs.vero.chat.libraries.preferences.api)
+        implementation(libs.vero.chat.libraries.matrix.api)
+        implementation(libs.vero.chat.tests.testutils)
         implementation(libs.coroutines.core)
         implementation(libs.androidx.datastore.preferences)
     }

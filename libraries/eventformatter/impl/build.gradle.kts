@@ -34,20 +34,20 @@ anvil {
 }
 
 dependencies {
-    anvil(projects.anvilcodegen)
-    implementation(projects.anvilannotations)
+    anvil(libs.vero.chat.anvilcodegen)
+    implementation(libs.vero.chat.anvilannotations)
 
-    implementation(projects.libraries.core)
-    implementation(projects.libraries.architecture)
-    implementation(projects.libraries.matrix.api)
-    implementation(projects.libraries.matrixui)
-    implementation(projects.libraries.uiStrings)
-    implementation(projects.services.toolbox.api)
-    api(projects.libraries.eventformatter.api)
+    implementation(libs.vero.chat.libraries.core)
+    implementation(libs.vero.chat.libraries.architecture)
+    implementation(libs.vero.chat.libraries.matrix.api)
+    implementation(libs.vero.chat.libraries.matrixui)
+    implementation(libs.vero.chat.libraries.ui.strings)
+    implementation(libs.vero.chat.services.toolbox.api)
+    api(libs.vero.chat.libraries.eventformatter.api)
 
-    testImplementation(projects.services.toolbox.impl)
+    testImplementation(libs.vero.chat.services.toolbox.impl)
     testImplementation(libs.test.junit)
     testImplementation(libs.test.robolectric)
     testImplementation(libs.test.truth)
-    testImplementation(projects.libraries.matrix.test)
+    testImplementation(libs.vero.chat.libraries.matrix.test)
 }

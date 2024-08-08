@@ -23,10 +23,10 @@ android {
 }
 
 dependencies {
-    api(projects.libraries.voicerecorder.api)
-    implementation(projects.tests.testutils)
+    api(libs.vero.chat.libraries.voicerecorder.api)
+    implementation(libs.vero.chat.tests.testutils)
 
     implementation(libs.coroutines.test)
     implementation(libs.test.truth)
-    implementation(projects.libraries.core)
+    implementation(libs.vero.chat.libraries.core)
 }

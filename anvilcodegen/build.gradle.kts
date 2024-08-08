@@ -1,3 +1,5 @@
+import extension.publish
+
 /*
  * Copyright (c) 2022 New Vector Ltd
  *
@@ -17,10 +19,11 @@
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kapt)
+    id("maven-publish")
 }
 
 dependencies {
-    implementation(projects.anvilannotations)
+    implementation(libs.vero.chat.anvilannotations)
     api(libs.anvil.compiler.api)
     implementation(libs.anvil.compiler.utils)
     implementation(libs.kotlinpoet)
@@ -28,3 +31,5 @@ dependencies {
     compileOnly(libs.google.autoservice.annotations)
     kapt(libs.google.autoservice)
 }
+
+publish()

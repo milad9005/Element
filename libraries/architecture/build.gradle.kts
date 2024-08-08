@@ -23,7 +23,7 @@ android {
 }
 
 dependencies {
-    api(projects.libraries.di)
+    api(libs.vero.chat.libraries.di)
     api(libs.dagger)
     api(libs.appyx.core)
     api(libs.androidx.lifecycle.runtime)

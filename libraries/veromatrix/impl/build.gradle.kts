@@ -15,14 +15,14 @@ android {
 }
 
 dependencies {
-    anvil(projects.anvilcodegen)
-    implementation(projects.appconfig)
+    anvil(libs.vero.chat.anvilcodegen)
+    implementation(libs.vero.chat.appconfig)
     implementation(libs.dagger)
     implementation(libs.kotlinx.collections.immutable)
-    implementation(projects.libraries.core)
-    implementation(projects.libraries.di)
-    implementation(projects.libraries.vero.impl)
-    implementation(projects.libraries.matrix.impl)
-    implementation(projects.libraries.worker)
-    api(projects.libraries.veromatrix.api)
+    implementation(libs.vero.chat.libraries.core)
+    implementation(libs.vero.chat.libraries.di)
+    implementation(libs.vero.chat.libraries.vero.impl)
+    implementation(libs.vero.chat.libraries.matrix.impl)
+    implementation(libs.vero.chat.libraries.worker)
+    api(libs.vero.chat.libraries.veromatrix.api)
 }

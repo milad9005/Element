@@ -23,6 +23,6 @@ android {
 }
 
 dependencies {
-    implementation(projects.libraries.architecture)
-    api(projects.libraries.permissions.api)
+    implementation(libs.vero.chat.libraries.architecture)
+    api(libs.vero.chat.libraries.permissions.api)
 }

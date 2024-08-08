@@ -23,6 +23,6 @@ android {
 }
 
 dependencies {
-    api(projects.features.networkmonitor.api)
+    api(libs.vero.chat.features.networkmonitor.api)
     api(libs.coroutines.core)
 }

@@ -24,5 +24,5 @@ android {
 
 dependencies {
     implementation(libs.coroutines.core)
-    api(projects.features.lockscreen.api)
+    api(libs.vero.chat.features.lockscreen.api)
 }

@@ -22,7 +22,7 @@ android {
 }
 
 dependencies {
-    implementation(projects.features.roomlist.api)
-    implementation(projects.libraries.matrix.api)
-    implementation(projects.tests.testutils)
+    implementation(libs.vero.chat.features.roomlist.api)
+    implementation(libs.vero.chat.libraries.matrix.api)
+    implementation(libs.vero.chat.tests.testutils)
 }

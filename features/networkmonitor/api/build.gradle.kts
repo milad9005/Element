@@ -25,8 +25,8 @@ android {
 
 dependencies {
     implementation(libs.coroutines.core)
-    implementation(projects.libraries.designsystem)
-    implementation(projects.libraries.uiStrings)
+    implementation(libs.vero.chat.libraries.designsystem)
+    implementation(libs.vero.chat.libraries.ui.strings)
 
     ksp(libs.showkase.processor)
 }

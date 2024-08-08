@@ -22,6 +22,6 @@ android {
     namespace = "io.element.android.libraries.cryptography.test"
 
     dependencies {
-        api(projects.libraries.cryptography.api)
+        api(libs.vero.chat.libraries.cryptography.api)
     }
 }

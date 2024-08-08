@@ -23,11 +23,11 @@ android {
 }
 
 dependencies {
-    api(projects.libraries.core)
-    api(projects.libraries.matrix.api)
+    api(libs.vero.chat.libraries.core)
+    api(libs.vero.chat.libraries.matrix.api)
     api(libs.coroutines.core)
     implementation(libs.coroutines.test)
-    implementation(projects.services.analytics.api)
-    implementation(projects.tests.testutils)
+    implementation(libs.vero.chat.services.analytics.api)
+    implementation(libs.vero.chat.tests.testutils)
     implementation(libs.kotlinx.collections.immutable)
 }

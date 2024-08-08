@@ -31,13 +31,13 @@ dependencies {
     implementation(libs.posthog) {
         exclude("com.android.support", "support-annotations")
     }
-    implementation(projects.libraries.core)
-    implementation(projects.libraries.di)
-    implementation(projects.services.analyticsproviders.api)
+    implementation(libs.vero.chat.libraries.core)
+    implementation(libs.vero.chat.libraries.di)
+    implementation(libs.vero.chat.services.analyticsproviders.api)
 
     testImplementation(libs.coroutines.test)
     testImplementation(libs.test.truth)
     testImplementation(libs.test.junit)
-    testImplementation(projects.tests.testutils)
+    testImplementation(libs.vero.chat.tests.testutils)
     testImplementation(libs.test.mockk)
 }

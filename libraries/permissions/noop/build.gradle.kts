@@ -23,13 +23,13 @@ android {
 }
 
 dependencies {
-    implementation(projects.libraries.architecture)
-    api(projects.libraries.permissions.api)
+    implementation(libs.vero.chat.libraries.architecture)
+    api(libs.vero.chat.libraries.permissions.api)
 
     testImplementation(libs.test.junit)
     testImplementation(libs.coroutines.test)
     testImplementation(libs.molecule.runtime)
     testImplementation(libs.test.truth)
     testImplementation(libs.test.turbine)
-    testImplementation(projects.tests.testutils)
+    testImplementation(libs.vero.chat.tests.testutils)
 }
