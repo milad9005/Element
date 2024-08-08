@@ -69,5 +69,5 @@ dependencies {
 //    implementation(libs.vero.chat.appnav)
     allLibrariesImpl(libs)
     allServicesImpl(libs)
-    allFeaturesImpl(rootDir, logger)
+    allFeaturesImpl(libs)
 }

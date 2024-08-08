@@ -134,12 +134,123 @@ fun DependencyHandlerScope.allServicesImpl(libs: LibrariesForLibs) {
     implementation(libs.vero.chat.services.toolbox.impl)
 }
 
-fun DependencyHandlerScope.allFeaturesApi(rootDir: File, logger: Logger) {
-    val featuresDir = File(rootDir, "features")
-    addImplementationProjects(featuresDir, ":features", "api", logger)
+fun DependencyHandlerScope.allFeaturesApi(libs: LibrariesForLibs) {
+    implementation(libs.vero.chat.features.analytics.api)
+
+    implementation(libs.vero.chat.features.cachecleaner.api)
+
+    implementation(libs.vero.chat.features.call.api)
+
+    implementation(libs.vero.chat.features.createroom.api)
+
+    implementation(libs.vero.chat.features.ftue.api)
+
+    implementation(libs.vero.chat.features.invite.api)
+
+
+    implementation(libs.vero.chat.features.joinroom.api)
+
+    implementation(libs.vero.chat.features.location.api)
+
+    implementation(libs.vero.chat.features.login.api)
+
+    implementation(libs.vero.chat.features.logout.impl)
+    implementation(libs.vero.chat.features.logout.api)
+
+    implementation(libs.vero.chat.features.messages.api)
+
+    implementation(libs.vero.chat.features.migration.api)
+
+    implementation(libs.vero.chat.features.networkmonitor.api)
+
+    implementation(libs.vero.chat.features.onboarding.api)
+
+    implementation(libs.vero.chat.features.poll.api)
+
+    implementation(libs.vero.chat.features.preferences.api)
+
+    implementation(libs.vero.chat.features.rageshake.api)
+
+    implementation(libs.vero.chat.features.roomaliasresolver.api)
+
+    implementation(libs.vero.chat.features.roomdetails.api)
+
+    implementation(libs.vero.chat.features.roomdirectory.api)
+
+    implementation(libs.vero.chat.features.roomlist.api)
+
+    implementation(libs.vero.chat.features.securebackup.api)
+
+    implementation(libs.vero.chat.features.share.api)
+
+    implementation(libs.vero.chat.features.signedout.api)
+
+    implementation(libs.vero.chat.features.userprofile.api)
+
+    implementation(libs.vero.chat.features.verifysession.api)
+
+    implementation(libs.vero.chat.features.viewfolder.api)
+//    addImplementationProjects(featuresDir, ":features", "api", logger)
 }
 
-fun DependencyHandlerScope.allFeaturesImpl(rootDir: File, logger: Logger) {
-    val featuresDir = File(rootDir, "features")
-    addImplementationProjects(featuresDir, ":features", "impl", logger)
+fun DependencyHandlerScope.allFeaturesImpl(libs: LibrariesForLibs) {
+//    val featuresDir = File(rootDir, "features")
+//    addImplementationProjects(featuresDir, ":features", "impl", logger)
+
+    implementation(libs.vero.chat.features.analytics.impl)
+
+    implementation(libs.vero.chat.features.cachecleaner.impl)
+
+    implementation(libs.vero.chat.features.call.impl)
+
+    implementation(libs.vero.chat.features.createroom.impl)
+
+    implementation(libs.vero.chat.features.ftue.impl)
+
+    implementation(libs.vero.chat.features.invite.impl)
+
+
+    implementation(libs.vero.chat.features.joinroom.impl)
+
+    implementation(libs.vero.chat.features.location.impl)
+
+    implementation(libs.vero.chat.features.login.impl)
+
+    implementation(libs.vero.chat.features.logout.impl)
+
+    implementation(libs.vero.chat.features.messages.impl)
+
+    implementation(libs.vero.chat.features.migration.impl)
+
+    implementation(libs.vero.chat.features.networkmonitor.impl)
+
+    implementation(libs.vero.chat.features.onboarding.impl)
+
+    implementation(libs.vero.chat.features.poll.impl)
+
+    implementation(libs.vero.chat.features.preferences.impl)
+
+    implementation(libs.vero.chat.features.rageshake.impl)
+
+    implementation(libs.vero.chat.features.roomaliasresolver.impl)
+
+    implementation(libs.vero.chat.features.roomdetails.impl)
+
+    implementation(libs.vero.chat.features.roomdirectory.impl)
+
+    implementation(libs.vero.chat.features.roomlist.impl)
+
+    implementation(libs.vero.chat.features.securebackup.impl)
+
+    implementation(libs.vero.chat.features.share.impl)
+
+    implementation(libs.vero.chat.features.signedout.impl)
+
+    implementation(libs.vero.chat.features.userprofile.impl)
+
+    implementation(libs.vero.chat.features.verifysession.impl)
+
+    implementation(libs.vero.chat.features.viewfolder.impl)
+
+
 }

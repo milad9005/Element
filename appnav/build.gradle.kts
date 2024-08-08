@@ -36,7 +36,7 @@ dependencies {
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)
 
-    allFeaturesApi(rootDir, logger)
+    allFeaturesApi(libs)
 
     implementation(libs.vero.chat.libraries.core)
     implementation(libs.vero.chat.libraries.androidutils)

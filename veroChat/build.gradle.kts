@@ -128,7 +128,7 @@ dependencies {
 
     allLibrariesImpl(libs)
     allServicesImpl(libs)
-    allFeaturesImpl(rootDir, logger)
+    allFeaturesImpl(libs)
     implementation(libs.vero.chat.features.migration.api)
     implementation(libs.vero.chat.anvilannotations)
     implementation(libs.vero.chat.appnav)
@@ -169,31 +169,3 @@ dependencies {
     ksp(libs.showkase.processor)
     koverDependencies()
 }
-
-//publishing {
-//    publications {
-//        create<MavenPublication>("DebugAar") {
-//            groupId = "co.vero.chat"
-//            artifactId = "vero-chat"
-//            version = "1.0.0-SNAPSHOT"
-//            afterEvaluate {
-//                artifact(tasks.getByName("bundleDebugAar"))
-//            }
-//
-//            pom.withXml {
-//                val dependenciesNode = asNode().appendNode("dependencies")
-//
-//                configurations["implementation"].allDependencies.forEach { dependency ->
-//                    val dependencyNode = dependenciesNode.appendNode("dependency")
-//                    dependencyNode.appendNode("groupId", dependency.group)
-//                    dependencyNode.appendNode("artifactId", dependency.name)
-//                    dependencyNode.appendNode("version", dependency.version)
-//                }
-//            }
-//        }
-//    }
-//
-//    repositories {
-//        mavenLocal()
-//    }
-//}
