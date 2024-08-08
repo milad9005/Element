@@ -37,15 +37,15 @@ dependencies {
     implementation(libs.vero.chat.libraries.testtags)
     implementation(libs.vero.chat.libraries.ui.utils)
 
-    releaseApi(libs.matrix.richtexteditor)
-    releaseApi(libs.matrix.richtexteditor.compose)
-    if (file("${rootDir.path}/libraries/textcomposer/lib/library-compose.aar").exists()) {
-        println("\nNote: Using local binaries of the Rich Text Editor.\n")
-        debugApi(libs.vero.chat.libraries.textcomposer.lib)
-    } else {
-        debugApi(libs.matrix.richtexteditor)
-        debugApi(libs.matrix.richtexteditor.compose)
-    }
+    api(libs.matrix.richtexteditor)
+    api(libs.matrix.richtexteditor.compose)
+//    if (file("${rootDir.path}/libraries/textcomposer/lib/library-compose.aar").exists()) {
+//        println("\nNote: Using local binaries of the Rich Text Editor.\n")
+//        debugApi(libs.vero.chat.libraries.textcomposer.lib)
+//    } else {
+//        debugApi(libs.matrix.richtexteditor)
+//        debugApi(libs.matrix.richtexteditor.compose)
+//    }
 
     ksp(libs.showkase.processor)
 

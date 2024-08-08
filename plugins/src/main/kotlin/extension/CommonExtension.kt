@@ -36,6 +36,17 @@ fun Project.publish(){
                         artifactId = project.path.removePrefix(":").replace(":","-")
                         version = "1.0.0-SNAPSHOT"
 
+                        if (plugins.hasPlugin("com.android.library")) {
+                            artifact("${layout.buildDirectory.get()}/outputs/aar/${project.name}-debug.aar") {
+                                builtBy(tasks.named("assembleDebug"))
+                            }
+                        } else {
+                            artifact("${layout.buildDirectory.get()}/libs/${project.name}.jar") {
+                                builtBy(tasks.named("jar"))
+                            }
+                        }
+
+
                         pom.withXml {
                             val dependenciesNode = asNode().appendNode("dependencies")
                             val dependencyManagementNode = asNode().appendNode("dependencyManagement").appendNode("dependencies")
@@ -79,7 +90,7 @@ fun CommonExtension<*, *, *, *, *, *>.publishConfig(project: Project) {
                     groupId = "co.vero.chat"
                     artifactId = project.name.removePrefix(":").replace(":",".")
                     version = "1.0.0-SNAPSHOT"
-
+                    artifact(project.tasks.getByName("bundleDebugAar"))
                     pom.withXml {
                         val dependenciesNode = asNode().appendNode("dependencies")
 

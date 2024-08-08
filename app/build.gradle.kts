@@ -36,7 +36,11 @@ android {
         }
     }
 }
-
+configurations {
+    all {
+        exclude (group= "net.java.dev.jna", module= "jna")
+    }
+}
 dependencies {
 
 

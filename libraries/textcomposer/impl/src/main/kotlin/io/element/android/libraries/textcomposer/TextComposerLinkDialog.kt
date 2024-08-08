@@ -102,7 +102,7 @@ private fun CreateLinkWithTextDialog(
     ) {
         item {
             TextFieldListItem(
-                placeholder = stringResource(id = CommonStrings.common_text),
+                placeholder = stringResource(id = R.string.rich_text_editor_create_link),
                 text = linkText,
                 onTextChange = { linkText = it },
             )

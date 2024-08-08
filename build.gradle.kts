@@ -183,7 +183,7 @@ tasks.register("runQualityChecks") {
         tasks.findByName("ktlintCheck")?.let { dependsOn(it) }
         // tasks.findByName("buildHealth")?.let { dependsOn(it) }
     }
-    dependsOn(":app:knitCheck")
+    dependsOn(":veroChat:knitCheck")
 }
 
 // Make sure to delete old screenshots before recording new ones
@@ -238,4 +238,83 @@ subprojects {
             }
         }
     }
+}
+
+
+
+
+tasks.register("publishAllModules") {
+    group = "publishing"
+    description = "Builds and publishes all modules in the correct order"
+
+    doLast {
+        val projectDir = project.rootDir
+        val moduleDirs = getAllModuleDirs(projectDir).toMutableList()
+        val builtModules = mutableSetOf<String>()
+        val failedModules = mutableSetOf<String>()
+
+        while (moduleDirs.isNotEmpty()) {
+            val iterator = moduleDirs.iterator()
+            var moduleBuiltInThisIteration = false
+            val remainingModules = moduleDirs.map { it.relativeTo(projectDir).path.replace(File.separator, ":") }
+
+            while (iterator.hasNext()) {
+                val moduleDir = iterator.next()
+                val moduleName = moduleDir.relativeTo(projectDir).path.replace(File.separator, ":")
+
+                try {
+                    println("Attempting to build and publish module: $moduleName")
+                    exec {
+                        workingDir = rootDir
+                        commandLine = listOf("./gradlew", "${moduleName}:publishToMavenLocal")
+                    }
+                    builtModules.add(moduleName)
+                    iterator.remove()
+                    moduleBuiltInThisIteration = true
+                    println("Successfully built and published module: $moduleName")
+                } catch (e: Exception) {
+                    println("Failed to build module: $moduleName. Will try again later.")
+                    failedModules.add(moduleName)
+                    e.printStackTrace()
+                }
+            }
+
+            if (!moduleBuiltInThisIteration) {
+                println("No modules were built in this iteration. Re-attempting remaining modules...")
+//                println("Remaining modules: ${remainingModules.joinToString(", ")}")
+                if (failedModules.size == remainingModules.size) {
+                    break
+                }
+            }
+        }
+
+        if (moduleDirs.isNotEmpty()) {
+            throw GradleException("Could not resolve dependencies for all modules. Remaining modules: ${moduleDirs.joinToString(", ") { it.relativeTo(projectDir).path.replace(File.separator, ":") }}")
+        } else {
+            println("All modules have been successfully built and published.")
+        }
+
+        if (failedModules.isNotEmpty()) {
+            println("The following modules failed to build and publish:")
+            failedModules.forEach { println(it) }
+        }
+    }
+}
+
+fun getAllModuleDirs(rootDir: File): List<File> {
+    val moduleDirs = mutableListOf<File>()
+
+    rootDir.walk().forEach { file ->
+        if (file.isDirectory && File(file, "build.gradle.kts").exists()) {
+            moduleDirs.add(file)
+        }
+    }
+
+    return moduleDirs
+}
+
+fun ExecSpec.exec(exec: ExecSpec.() -> Unit) {
+    project.tasks.create("tempExec", Exec::class.java) {
+        exec()
+    }.exec()
 }

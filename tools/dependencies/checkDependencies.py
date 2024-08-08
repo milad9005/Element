@@ -7,7 +7,7 @@ import subprocess
 def getProjectDependencies():
     print("=> Computing dependencies...")
     command = subprocess.run(
-        ["./gradlew :app:dependencies"],
+        ["./gradlew :veroChat:dependencies"],
         shell=True,
         capture_output=True,
         text=True,

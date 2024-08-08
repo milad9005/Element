@@ -66,7 +66,7 @@ dependencies {
     // TODO There is a Resources.NotFoundException maybe due to the mipmap, even if we have
     // `testOptions { unitTests.isIncludeAndroidResources = true }` in the app build.gradle.kts file
     // implementation(libs.vero.chat.app)
-//    implementation(libs.vero.chat.appnav)
+    implementation(libs.vero.chat.appnav)
     allLibrariesImpl(libs)
     allServicesImpl(libs)
     allFeaturesImpl(libs)

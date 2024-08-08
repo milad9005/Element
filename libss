@@ -1,0 +1,17 @@
+ appnav,
+
+  veroChat,
+
+ features:messages:impl,
+
+ features:messages:test,
+
+ features:messages:api,
+
+  features:location:impl,
+
+   features:poll:impl,
+
+   libraries:rustsdk,
+
+   libraries:textcomposer:lib !

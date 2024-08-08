@@ -41,7 +41,7 @@ val localAarProjects = listOf(
 )
 
 val excludedKoverSubProjects = listOf(
-    ":app",
+    ":veroChat",
     ":samples",
     ":anvilannotations",
     ":anvilcodegen",
@@ -67,7 +67,7 @@ fun Project.setupKover() {
     task("koverVerifyAll") {
         group = "verification"
         description = "Verifies the code coverage of all sublibs.vero.chat."
-        val dependencies = listOf(":app:koverVerifyGplayDebug") + koverVariants.map { ":app:koverVerify${it.capitalized()}" }
+        val dependencies = listOf(":veroChat:koverVerifyGplayDebug") + koverVariants.map { ":veroChat:koverVerify${it.capitalized()}" }
         dependsOn(dependencies)
 
     }
