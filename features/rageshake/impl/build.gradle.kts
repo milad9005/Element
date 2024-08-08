@@ -51,7 +51,7 @@ dependencies {
     api(libs.squareup.seismic)
     api(libs.vero.chat.features.rageshake.api)
     implementation(libs.androidx.datastore.preferences)
-    implementation(platform(libs.network.okhttp.bom))
+
     implementation(libs.network.okhttp)
     implementation(libs.coil)
     implementation(libs.coil.compose)

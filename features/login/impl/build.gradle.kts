@@ -52,7 +52,7 @@ dependencies {
     implementation(libs.vero.chat.libraries.permissions.api)
     implementation(libs.vero.chat.libraries.qrcode)
     implementation(libs.androidx.browser)
-    implementation(platform(libs.network.retrofit.bom))
+
     implementation(libs.network.retrofit)
     implementation(libs.serialization.json)
     api(libs.vero.chat.features.login.api)

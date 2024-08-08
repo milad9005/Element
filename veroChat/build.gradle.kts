@@ -149,7 +149,7 @@ dependencies {
     implementation(libs.androidx.preference)
     implementation(libs.coil)
 
-    implementation(platform(libs.network.okhttp.bom))
+
     implementation(libs.network.okhttp.logging)
     implementation(libs.serialization.json)
 

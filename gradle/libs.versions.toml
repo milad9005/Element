@@ -132,7 +132,7 @@ squareup_seismic = "com.squareup:seismic:1.0.3"
 network_okhttp_bom  = { module = "com.squareup.okhttp3:okhttp-bom", version.ref = "okhttp3" }
 network_okhttp_logging = { module = "com.squareup.okhttp3:logging-interceptor", version.ref="okhttp3" }
 network_okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref="okhttp3" }
-network_mockwebserver = { module = "com.squareup.okhttp3:mockwebserver" }
+network_mockwebserver = { module = "com.squareup.okhttp3:mockwebserver", version.ref="okhttp3" }
 network_retrofit_bom  = { module = "com.squareup.retrofit2:retrofit-bom", version.ref = "retrofit2" }
 network_retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref="retrofit2" }
 network_retrofit_converter_serialization = { module = "com.squareup.retrofit2:converter-kotlinx-serialization",version.ref="retrofit2" }
@@ -398,7 +398,7 @@ vero-chat-libraries-mediaviewer-impl = { group = "co.vero.chat", name = "librari
 vero-chat-libraries-mediaviewer-test = { group = "co.vero.chat", name = "libraries-mediaviewer-test" , version.ref = "vero-chat" }
 
 
-vero-chat-libraries-network = { group = "co.vero.chat", name = "libraries-network-api" , version.ref = "vero-chat" }
+vero-chat-libraries-network = { group = "co.vero.chat", name = "libraries-network" , version.ref = "vero-chat" }
 
 
 vero-chat-libraries-permissions-api = { group = "co.vero.chat", name = "libraries-permissions-api" , version.ref = "vero-chat" }

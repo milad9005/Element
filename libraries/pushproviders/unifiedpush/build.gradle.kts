@@ -43,9 +43,9 @@ dependencies {
     implementation(libs.vero.chat.services.toolbox.api)
 
     implementation(libs.vero.chat.libraries.network)
-    implementation(platform(libs.network.okhttp.bom))
+
     implementation(libs.network.okhttp)
-    implementation(platform(libs.network.retrofit.bom))
+
     implementation(libs.network.retrofit)
 
     implementation(libs.serialization.json)
