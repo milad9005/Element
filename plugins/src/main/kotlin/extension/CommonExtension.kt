@@ -19,6 +19,7 @@ package extension
 import Versions
 import com.android.build.api.dsl.CommonExtension
 import org.gradle.accessors.dm.LibrariesForLibs
+import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.kotlin.dsl.create
@@ -51,7 +52,7 @@ fun Project.publish(){
                             val dependenciesNode = asNode().appendNode("dependencies")
                             val dependencyManagementNode = asNode().appendNode("dependencyManagement").appendNode("dependencies")
 
-                            listOf("implementation", "api", "compileOnly", "runtimeOnly","releaseApi","debugApi").forEach { configName ->
+                            listOf("implementation", "api", "compileOnly", "runtimeOnly","releaseApi","debugApi","kapt","anvil","ksp").forEach { configName ->
                                 project.configurations.findByName(configName)?.allDependencies?.forEach { dependency ->
                                     val dependencyNode = dependenciesNode.appendNode("dependency")
                                     dependencyNode.appendNode("groupId", dependency.group)
@@ -124,7 +125,11 @@ fun CommonExtension<*, *, *, *, *, *>.androidConfig(project: Project) {
             useSupportLibrary = true
             generatedDensities()
         }
+    }
 
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     testOptions {

@@ -32,6 +32,8 @@ fun logApplicationInfo(context: Context) {
         append(context.getVersionCodeFromManifest())
         append(") - ")
         append(BuildConfig.BUILD_TYPE)
+        append(" / ")
+        append("gplay")
     }
     // TODO Get SDK version somehow
     val sdkVersion = "SDK VERSION (TODO)"

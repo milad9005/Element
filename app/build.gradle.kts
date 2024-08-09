@@ -9,10 +9,9 @@ android {
 
     defaultConfig {
         applicationId = "io.element.app"
-        minSdk = 24
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        targetSdk = Versions.targetSdk
+        versionCode = Versions.versionCode
+        versionName = "1.0.0-SNAPSHOT"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

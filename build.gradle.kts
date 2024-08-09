@@ -304,7 +304,7 @@ tasks.register("publishAllModules") {
 fun getAllModuleDirs(rootDir: File): List<File> {
     val moduleDirs = mutableListOf<File>()
 
-    rootDir.walk().forEach { file ->
+    rootDir.walk().filter { it.absolutePath.contains("libraries") ||it.absolutePath.contains("services") || it.absolutePath.contains("tests")}.forEach { file ->
         if (file.isDirectory && File(file, "build.gradle.kts").exists()) {
             moduleDirs.add(file)
         }

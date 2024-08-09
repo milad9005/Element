@@ -48,8 +48,8 @@ import java.io.File
 @ContributesTo(AppScope::class)
 object AppModule {
 
-    const val APPLICATION_ID = "io.element.android.x"
-    const val VERSION_NAME = "1.0.0"
+    const val APPLICATION_ID = "io.element.app"
+    const val VERSION_NAME = "1.0.0-SNAPSHOT"
 
     @Provides
     fun providesBaseDirectory(@ApplicationContext context: Context): File {

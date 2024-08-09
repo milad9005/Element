@@ -1,6 +1,5 @@
 import java.net.URI
 
-
 /*
  * Copyright (c) 2022 New Vector Ltd
  *
@@ -50,7 +49,6 @@ dependencyResolutionManagement {
         }
         google()
         mavenCentral()
-
         maven {
             url = URI("https://www.jitpack.io")
             content {
@@ -76,10 +74,8 @@ include(":appconfig")
 include(":tests:konsist")
 include(":tests:uitests")
 include(":tests:testutils")
-
 include(":anvilannotations")
 include(":anvilcodegen")
-
 
 include(":samples:minimal")
 
