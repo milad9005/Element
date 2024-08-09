@@ -110,7 +110,6 @@ fun DependencyHandlerScope.allLibrariesImpl(libs: LibrariesForLibs) {
     implementation(libs.vero.chat.libraries.preferences.impl)
     implementation(libs.vero.chat.libraries.push.impl)
     implementation(libs.vero.chat.libraries.pushstore.impl)
-    implementation(libs.vero.chat.libraries.qrcode)
     implementation(libs.vero.chat.libraries.roomselect.impl)
     implementation(libs.vero.chat.libraries.session.storage.impl)
     implementation(libs.vero.chat.libraries.textcomposer.impl)

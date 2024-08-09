@@ -21,6 +21,7 @@ import extension.androidConfig
 import extension.commonDependencies
 import extension.composeConfig
 import extension.composeDependencies
+import gradle.kotlin.dsl.accessors._657459398ba5892cee813230acbeff5a.kotlin
 import org.gradle.accessors.dm.LibrariesForLibs
 
 val libs = the<LibrariesForLibs>()
@@ -35,6 +36,9 @@ android {
     composeConfig(libs)
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
+    }
+    kotlin{
+        jvmToolchain(17)
     }
 }
 

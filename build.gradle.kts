@@ -263,7 +263,7 @@ tasks.register("publishAllModules") {
 
                 // Determine if the library or AAR file already exists
                 val moduleOutputDir = File("${project.buildDir}/outputs/aar")
-                val aarFile = File(moduleOutputDir, "${moduleDir.name}-release.aar")
+                val aarFile = File("${moduleDir.path}/build/outputs/aar/${moduleDir.name}-debug.aar")
                 val jarFile = File("${moduleDir.path}/build/libs/${moduleDir.name}.jar")
 
                 if (aarFile.exists() || jarFile.exists()) {
@@ -314,26 +314,10 @@ tasks.register("publishAllModules") {
 
 fun getAllModuleDirs(rootDir: File): List<File> {
     val moduleDirs = mutableListOf<File>()
-    val settingsFile = File(rootDir, "settings.gradle.kts")
 
-    if (!settingsFile.exists()) {
-        throw GradleException("settings.gradle.kts not found in the root directory")
-    }
-
-    val includedModules = settingsFile.readLines()
-        .filter { it.trim().startsWith("include(") }
-        .flatMap { line ->
-            // Extract module paths, handling cases where multiple modules are included on a single line
-            line.substringAfter("include(")
-                .replace(")", "")
-                .split(",")
-                .map { it.trim().replace("'", "").replace("\"", "").replace(":", File.separator) }
-        }
-
-    includedModules.forEach { modulePath ->
-        val moduleDir = File(rootDir, modulePath)
-        if (moduleDir.isDirectory && File(moduleDir, "build.gradle.kts").exists()) {
-            moduleDirs.add(moduleDir)
+    rootDir.walk().forEach { file ->
+        if (file.isDirectory && File(file, "build.gradle.kts").exists()) {
+            moduleDirs.add(file)
         }
     }
 
