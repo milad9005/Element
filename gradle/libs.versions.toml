@@ -425,7 +425,6 @@ vero-chat-libraries-pushstore-impl = { group = "co.vero.chat", name = "libraries
 vero-chat-libraries-pushstore-test = { group = "co.vero.chat", name = "libraries-pushstore-test" , version.ref = "vero-chat" }
 
 vero-chat-libraries-qrcode = { group = "co.vero.chat", name = "libraries-qrcode" , version.ref = "vero-chat" }
-vero-chat-libraries-rustsdk = { group = "co.vero.chat", name = "libraries-rustsdk" , version.ref = "vero-chat" }
 
 vero-chat-libraries-roomselect-impl = { group = "co.vero.chat", name = "libraries-roomselect-impl" , version.ref = "vero-chat" }
 vero-chat-libraries-roomselect-api = { group = "co.vero.chat", name = "libraries-roomselect-api" , version.ref = "vero-chat" }
@@ -440,8 +439,6 @@ vero-chat-libraries-session_storage-impl_memory = { group = "co.vero.chat", name
 
 
 vero-chat-libraries-textcomposer-impl = { group = "co.vero.chat", name = "libraries-textcomposer-impl" , version.ref = "vero-chat" }
-vero-chat-libraries-textcomposer-lib = { group = "co.vero.chat", name = "libraries-textcomposer-lib" , version.ref = "vero-chat" }
-
 
 vero-chat-libraries-troubleshoot-api = { group = "co.vero.chat", name = "libraries-troubleshoot-api" , version.ref = "vero-chat" }
 vero-chat-libraries-troubleshoot-impl = { group = "co.vero.chat", name = "libraries-troubleshoot-impl" , version.ref = "vero-chat" }
@@ -493,7 +490,7 @@ vero-chat-tests-konsist = { group = "co.vero.chat", name = "tests-konsist" , ver
 vero-chat-tests-testutils = { group = "co.vero.chat", name = "tests-testutils" , version.ref = "vero-chat" }
 vero-chat-tests-uitests = { group = "co.vero.chat", name = "tests-uitests" , version.ref = "vero-chat" }
 
-vero-chat-veroChat = { group = "co.vero.chat", name = "veroChat" , version.ref = "vero-chat" }
+vero-chat-verochat = { group = "co.vero.chat", name = "verochat" , version.ref = "vero-chat" }
 
 
 

@@ -70,7 +70,7 @@ plugins {
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 rootProject.name = "ElementX"
-include(":veroChat")
+include(":verochat")
 include(":appnav")
 include(":appconfig")
 include(":tests:konsist")

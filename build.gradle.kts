@@ -183,7 +183,7 @@ tasks.register("runQualityChecks") {
         tasks.findByName("ktlintCheck")?.let { dependsOn(it) }
         // tasks.findByName("buildHealth")?.let { dependsOn(it) }
     }
-    dependsOn(":veroChat:knitCheck")
+    dependsOn(":verochat:knitCheck")
 }
 
 // Make sure to delete old screenshots before recording new ones
@@ -318,3 +318,4 @@ fun ExecSpec.exec(exec: ExecSpec.() -> Unit) {
         exec()
     }.exec()
 }
+

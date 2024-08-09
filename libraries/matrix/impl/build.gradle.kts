@@ -29,13 +29,13 @@ anvil {
 }
 
 dependencies {
-    implementation(libs.matrix.sdk)
-//    if (file("${rootDir.path}/libraries/rustsdk/matrix-rust-sdk.aar").exists()) {
-//        println("\nNote: Using local binary of the Rust SDK.\n")
-//        debugImplementation(libs.vero.chat.libraries.rustsdk)
-//    } else {
-//        debugImplementation(libs.matrix.sdk)
-//    }
+    releaseImplementation(libs.matrix.sdk)
+    if (file("${rootDir.path}/libraries/rustsdk/matrix-rust-sdk.aar").exists()) {
+        println("\nNote: Using local binary of the Rust SDK.\n")
+        debugImplementation(projects.libraries.rustsdk)
+    } else {
+        debugImplementation(libs.matrix.sdk)
+    }
     implementation(libs.vero.chat.appconfig)
     implementation(libs.vero.chat.libraries.di)
     implementation(libs.vero.chat.libraries.androidutils)

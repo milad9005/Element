@@ -51,11 +51,13 @@ fun Project.publish(){
                             val dependenciesNode = asNode().appendNode("dependencies")
                             val dependencyManagementNode = asNode().appendNode("dependencyManagement").appendNode("dependencies")
 
-                            project.configurations.getByName("implementation").allDependencies.forEach { dependency ->
-                                val dependencyNode = dependenciesNode.appendNode("dependency")
-                                dependencyNode.appendNode("groupId", dependency.group)
-                                dependencyNode.appendNode("artifactId", dependency.name)
-                                dependencyNode.appendNode("version", dependency.version)
+                            listOf("implementation", "api", "compileOnly", "runtimeOnly","releaseApi","debugApi").forEach { configName ->
+                                project.configurations.findByName(configName)?.allDependencies?.forEach { dependency ->
+                                    val dependencyNode = dependenciesNode.appendNode("dependency")
+                                    dependencyNode.appendNode("groupId", dependency.group)
+                                    dependencyNode.appendNode("artifactId", dependency.name)
+                                    dependencyNode.appendNode("version", dependency.version)
+                                }
                             }
 
                             project.configurations.getByName("implementation").allDependencies.forEach { dependency ->

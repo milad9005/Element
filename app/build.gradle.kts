@@ -36,16 +36,12 @@ android {
         }
     }
 }
-configurations {
-    all {
-        exclude (group= "net.java.dev.jna", module= "jna")
-    }
-}
+
 dependencies {
 
 
 
-    implementation(libs.vero.chat.veroChat)
+    implementation(libs.vero.chat.verochat)
 
     implementation(libs.androidx.corektx)
     implementation(libs.androidx.lifecycle.runtime)
