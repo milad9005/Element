@@ -183,7 +183,7 @@ tasks.register("runQualityChecks") {
         tasks.findByName("ktlintCheck")?.let { dependsOn(it) }
         // tasks.findByName("buildHealth")?.let { dependsOn(it) }
     }
-    dependsOn(":verochat:knitCheck")
+    dependsOn(":app:knitCheck")
 }
 
 // Make sure to delete old screenshots before recording new ones
@@ -242,7 +242,6 @@ subprojects {
 
 
 
-
 tasks.register("publishAllModules") {
     group = "publishing"
     description = "Builds and publishes all modules in the correct order"
@@ -261,6 +260,18 @@ tasks.register("publishAllModules") {
             while (iterator.hasNext()) {
                 val moduleDir = iterator.next()
                 val moduleName = moduleDir.relativeTo(projectDir).path.replace(File.separator, ":")
+
+                // Determine if the library or AAR file already exists
+                val moduleOutputDir = File("${project.buildDir}/outputs/aar")
+                val aarFile = File(moduleOutputDir, "${moduleDir.name}-release.aar")
+                val jarFile = File("${moduleDir.path}/build/libs/${moduleDir.name}.jar")
+
+                if (aarFile.exists() || jarFile.exists()) {
+                    println("Skipping module $moduleName as the AAR/JAR already exists.")
+                    builtModules.add(moduleName)
+                    iterator.remove()
+                    continue
+                }
 
                 try {
                     println("Attempting to build and publish module: $moduleName")
@@ -303,10 +314,26 @@ tasks.register("publishAllModules") {
 
 fun getAllModuleDirs(rootDir: File): List<File> {
     val moduleDirs = mutableListOf<File>()
+    val settingsFile = File(rootDir, "settings.gradle.kts")
 
-    rootDir.walk().filter { it.absolutePath.contains("libraries") ||it.absolutePath.contains("services") || it.absolutePath.contains("tests")}.forEach { file ->
-        if (file.isDirectory && File(file, "build.gradle.kts").exists()) {
-            moduleDirs.add(file)
+    if (!settingsFile.exists()) {
+        throw GradleException("settings.gradle.kts not found in the root directory")
+    }
+
+    val includedModules = settingsFile.readLines()
+        .filter { it.trim().startsWith("include(") }
+        .flatMap { line ->
+            // Extract module paths, handling cases where multiple modules are included on a single line
+            line.substringAfter("include(")
+                .replace(")", "")
+                .split(",")
+                .map { it.trim().replace("'", "").replace("\"", "").replace(":", File.separator) }
+        }
+
+    includedModules.forEach { modulePath ->
+        val moduleDir = File(rootDir, modulePath)
+        if (moduleDir.isDirectory && File(moduleDir, "build.gradle.kts").exists()) {
+            moduleDirs.add(moduleDir)
         }
     }
 

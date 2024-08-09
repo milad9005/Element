@@ -17,8 +17,6 @@ import java.net.URI
  */
 
 pluginManagement {
-
-
     repositories {
         includeBuild("plugins")
         gradlePluginPortal()
@@ -68,16 +66,19 @@ plugins {
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 rootProject.name = "ElementX"
-include(":verochat")
-include(":appnav")
-include(":appconfig")
-include(":tests:konsist")
-include(":tests:uitests")
-include(":tests:testutils")
+//include(":verochat")
+//include(":appnav")
+//include(":appconfig")
+//include(":tests:konsist")
+//include(":tests:uitests")
+//include(":tests:testutils")
 include(":anvilannotations")
 include(":anvilcodegen")
+include(":libraries:di")
+include(":libraries:core")
 
-include(":samples:minimal")
+
+//include(":samples:minimal")
 
 fun includeProjects(directory: File, path: String, maxDepth: Int = 1) {
     directory.listFiles().orEmpty().also { it.sort() }.forEach { file ->
@@ -94,9 +95,9 @@ fun includeProjects(directory: File, path: String, maxDepth: Int = 1) {
     }
 }
 
-includeProjects(File(rootDir, "features"), ":features")
-includeProjects(File(rootDir, "libraries"), ":libraries")
-includeProjects(File(rootDir, "services"), ":services")
+//includeProjects(File(rootDir, "features"), ":features")
+//includeProjects(File(rootDir, "libraries"), ":libraries")
+//includeProjects(File(rootDir, "services"), ":services")
 
 // Uncomment to include the compound-android module as a local dependency so you can work on it locally.
 // You will also need to clone it in the specified folder.
@@ -106,14 +107,6 @@ includeProjects(File(rootDir, "services"), ":services")
 //        substitute(module("io.element.android:compound-android")).using(project(":compound"))
 //    }
 // }
-
-
-include(":app")
-
-
-
-
-
 
 
 

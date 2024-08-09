@@ -110,6 +110,7 @@ fun Project.setupKover() {
                         "io.element.android.libraries.designsystem.theme.components.bottomsheet.*",
                         // Test presenters
                         "io.element.android.features.leaveroom.fake.FakeLeaveRoomPresenter",
+                        "com.sun.jna.AltCallingConvention"
                     )
                     annotatedBy(
                         "androidx.compose.ui.tooling.preview.Preview",

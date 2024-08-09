@@ -431,10 +431,10 @@ vero-chat-libraries-roomselect-api = { group = "co.vero.chat", name = "libraries
 vero-chat-libraries-testtags = { group = "co.vero.chat", name = "libraries-testtags" , version.ref = "vero-chat" }
 
 
-vero-chat-libraries-session_storage-api = { group = "co.vero.chat", name = "libraries-session-storage-api" , version.ref = "vero-chat" }
-vero-chat-libraries-session_storage-impl = { group = "co.vero.chat", name = "libraries-session-storage-impl" , version.ref = "vero-chat" }
-vero-chat-libraries-session_storage-test = { group = "co.vero.chat", name = "libraries-session-storage-test" , version.ref = "vero-chat" }
-vero-chat-libraries-session_storage-impl_memory = { group = "co.vero.chat", name = "libraries-session-storage-impl-memory" , version.ref = "vero-chat" }
+vero-chat-libraries-session-storage-api = { group = "co.vero.chat", name = "libraries-session-storage-api" , version.ref = "vero-chat" }
+vero-chat-libraries-session-storage-impl = { group = "co.vero.chat", name = "libraries-session-storage-impl" , version.ref = "vero-chat" }
+vero-chat-libraries-session-storage-test = { group = "co.vero.chat", name = "libraries-session-storage-test" , version.ref = "vero-chat" }
+vero-chat-libraries-session-storage-impl-memory = { group = "co.vero.chat", name = "libraries-session-storage-impl-memory" , version.ref = "vero-chat" }
 
 
 

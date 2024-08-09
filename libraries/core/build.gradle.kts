@@ -21,8 +21,8 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
     id("maven-publish")
 }
-
 publish()
+
 kotlin{
     jvmToolchain(17)
 }
