@@ -41,21 +41,21 @@ val localAarProjects = listOf(
 )
 
 val excludedKoverSubProjects = listOf(
-    ":verochat",
+    ":app",
     ":samples",
-    ":anvilannotations",
-    ":anvilcodegen",
+    "co.vero.chat:anvilannotations:1.0.0-SNAPSHOT",
+    "co.vero.chat:anvilcodegen:1.0.0-SNAPSHOT",
     ":samples:minimal",
-    ":tests:testutils",
+    "co.vero.chat:tests-testutils:1.0.0-SNAPSHOT",
     // Exclude `:libraries:matrix:impl` module, it contains only wrappers to access the Rust Matrix
     // SDK api, so it is not really relevant to unit test it: there is no logic to test.
-    ":libraries:matrix:impl",
+    "co.vero.chat:libraries-matrix-impl:1.0.0-SNAPSHOT",
     // Exclude modules which are not Android libraries
     // See https://github.com/Kotlin/kotlinx-kover/issues/312
-    ":appconfig",
-    ":libraries:core",
-    ":libraries:coroutines",
-    ":libraries:di",
+    "co.vero.chat:appconfig:1.0.0-SNAPSHOT",
+    "co.vero.chat:libraries-core:1.0.0-SNAPSHOT",
+    "co.vero.chat:libraries-coroutines:1.0.0-SNAPSHOT",
+    "co.vero.chat:libraries-di:1.0.0-SNAPSHOT",
 ) + localAarProjects
 
 private fun Project.kover(action: Action<KoverProjectExtension>) {
@@ -67,7 +67,7 @@ fun Project.setupKover() {
     task("koverVerifyAll") {
         group = "verification"
         description = "Verifies the code coverage of all sublibs.vero.chat."
-        val dependencies = listOf(":verochat:koverVerifyGplayDebug") + koverVariants.map { ":veroChat:koverVerify${it.capitalized()}" }
+        val dependencies = listOf(":app:koverVerifyGplayDebug") + koverVariants.map { ":app:koverVerify${it.capitalized()}" }
         dependsOn(dependencies)
 
     }
@@ -109,8 +109,7 @@ fun Project.setupKover() {
                         // Forked from compose
                         "io.element.android.libraries.designsystem.theme.components.bottomsheet.*",
                         // Test presenters
-                        "io.element.android.features.leaveroom.fake.FakeLeaveRoomPresenter",
-                        "com.sun.jna.AltCallingConvention"
+                        "io.element.android.features.leaveroom.fake.FakeLeaveRoomPresenter"
                     )
                     annotatedBy(
                         "androidx.compose.ui.tooling.preview.Preview",

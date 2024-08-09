@@ -27,4 +27,5 @@ dependencies {
     implementation(libs.androidx.camera.view)
     implementation(libs.androidx.camera.camera2)
     implementation(libs.zxing.cpp)
+    implementation ("com.google.guava:guava:31.0.1-android")
 }

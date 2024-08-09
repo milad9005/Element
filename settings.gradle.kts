@@ -59,14 +59,14 @@ dependencyResolutionManagement {
         }
     }
 }
-plugins {
-    id ("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
-}
+//plugins {
+//    id ("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
+//}
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 rootProject.name = "ElementX"
-//include(":verochat")
+include(":app")
 include(":appnav")
 include(":appconfig")
 include(":tests:konsist")
@@ -75,9 +75,7 @@ include(":tests:testutils")
 include(":anvilannotations")
 include(":anvilcodegen")
 
-
-
-//include(":samples:minimal")
+include(":samples:minimal")
 
 fun includeProjects(directory: File, path: String, maxDepth: Int = 1) {
     directory.listFiles().orEmpty().also { it.sort() }.forEach { file ->
@@ -106,6 +104,3 @@ includeProjects(File(rootDir, "services"), ":services")
 //        substitute(module("io.element.android:compound-android")).using(project(":compound"))
 //    }
 // }
-
-
-

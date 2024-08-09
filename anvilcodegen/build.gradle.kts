@@ -32,4 +32,8 @@ dependencies {
     kapt(libs.google.autoservice)
 }
 
+kotlin{
+    jvmToolchain(17)
+}
+
 publish()

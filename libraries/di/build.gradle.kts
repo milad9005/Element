@@ -22,6 +22,10 @@ plugins {
     id("maven-publish")
 }
 
+kotlin{
+    jvmToolchain(17)
+}
+
 dependencies {
     api(libs.inject)
 }

@@ -490,10 +490,6 @@ vero-chat-tests-konsist = { group = "co.vero.chat", name = "tests-konsist" , ver
 vero-chat-tests-testutils = { group = "co.vero.chat", name = "tests-testutils" , version.ref = "vero-chat" }
 vero-chat-tests-uitests = { group = "co.vero.chat", name = "tests-uitests" , version.ref = "vero-chat" }
 
-vero-chat-verochat = { group = "co.vero.chat", name = "verochat" , version.ref = "vero-chat" }
-
-
-
 
 
 [bundles]

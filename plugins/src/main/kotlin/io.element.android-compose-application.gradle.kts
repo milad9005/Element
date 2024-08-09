@@ -37,9 +37,6 @@ android {
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
     }
-    kotlin{
-        jvmToolchain(17)
-    }
 }
 
 dependencies {
